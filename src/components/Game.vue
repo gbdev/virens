@@ -74,9 +74,9 @@ export default {
     created: function() {
         self = this
         axios('/2048.gb', { responseType: 'blob' })
-            .then(function(response) {
+            .then(async function(response) {
                 console.log(response)
-                Emulator.start(binjgbPromise, response, null);
+                Emulator.start(await binjgbPromise, response, null);
             }.bind(Emulator))
 
         setInterval(() => {
