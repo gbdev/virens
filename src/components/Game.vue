@@ -225,6 +225,115 @@ export default {
     }
 }
 
+function makeWasmBuffer(module, ptr, size) {
+  return new Uint8Array(module.HEAP8.buffer, ptr, size);
+}
+
+class Audio {
+  constructor(module, e) {
+    this.module = module;
+    this.buffer = makeWasmBuffer(
+        this.module, this.module._get_audio_buffer_ptr(e),
+        this.module._get_audio_buffer_capacity(e));
+    this.startSec = 0;
+    this.resume();
+  }
+
+  get sampleRate() { return Audio.ctx.sampleRate; }
+
+  pushBuffer() {
+    const nowSec = Audio.ctx.currentTime;
+    const nowPlusLatency = nowSec + AUDIO_LATENCY_SEC;
+    const volume = vm.volume;
+    this.startSec = (this.startSec || nowPlusLatency);
+    if (this.startSec >= nowSec) {
+      const buffer = Audio.ctx.createBuffer(2, AUDIO_FRAMES, this.sampleRate);
+      const channel0 = buffer.getChannelData(0);
+      const channel1 = buffer.getChannelData(1);
+      for (let i = 0; i < AUDIO_FRAMES; i++) {
+        channel0[i] = this.buffer[2 * i] * volume / 255;
+        channel1[i] = this.buffer[2 * i + 1] * volume / 255;
+      }
+      const bufferSource = Audio.ctx.createBufferSource();
+      bufferSource.buffer = buffer;
+      bufferSource.connect(Audio.ctx.destination);
+      bufferSource.start(this.startSec);
+      const bufferSec = AUDIO_FRAMES / this.sampleRate;
+      this.startSec += bufferSec;
+    } else {
+      console.log(
+          'Resetting audio (' + this.startSec.toFixed(2) + ' < ' +
+          nowSec.toFixed(2) + ')');
+      this.startSec = nowPlusLatency;
+    }
+  }
+
+  pause() {
+    Audio.ctx.suspend();
+  }
+
+  resume() {
+    Audio.ctx.resume();
+  }
+}
+
+Audio.ctx = new AudioContext;
+
+class Video {
+  constructor(module, e, el) {
+    this.module = module;
+    try {
+      this.renderer = new WebGLRenderer(el);
+    } catch (error) {
+      console.log(`Error creating WebGLRenderer: ${error}`);
+      this.renderer = new Canvas2DRenderer(el);
+    }
+    this.buffer = makeWasmBuffer(
+        this.module, this.module._get_frame_buffer_ptr(e),
+        this.module._get_frame_buffer_size(e));
+    this.sgbBuffer = makeWasmBuffer(
+        this.module, this.module._get_sgb_frame_buffer_ptr(e),
+        this.module._get_sgb_frame_buffer_size(e));
+  }
+
+  uploadTexture() {
+    this.renderer.uploadTextures(this.buffer, this.sgbBuffer);
+  }
+
+  renderTexture() {
+    this.renderer.renderTextures();
+  }
+}
+
+class Canvas2DRenderer {
+  constructor(el) {
+    this.ctx = el.getContext('2d');
+    this.imageData = this.ctx.createImageData(SCREEN_WIDTH, SCREEN_HEIGHT);
+    this.sgbImageData =
+        this.ctx.createImageData(SGB_SCREEN_WIDTH, SGB_SCREEN_HEIGHT);
+
+    this.overlayCanvas = document.createElement('canvas');
+    this.overlayCanvas.width = SGB_SCREEN_WIDTH;
+    this.overlayCanvas.height = SGB_SCREEN_HEIGHT;
+    this.overlayCtx = this.overlayCanvas.getContext('2d');
+  }
+
+  uploadTextures(buffer, sgbBuffer) {
+    this.imageData.data.set(buffer);
+    this.sgbImageData.data.set(sgbBuffer);
+  }
+
+  renderTextures() {
+    if (vm.canvas.useSgbBorder) {
+      this.ctx.putImageData(this.imageData, SGB_SCREEN_LEFT, SGB_SCREEN_TOP);
+      this.overlayCtx.putImageData(this.sgbImageData, 0, 0);
+      this.ctx.drawImage(this.overlayCanvas, 0, 0);
+    } else {
+      this.ctx.putImageData(this.imageData, 0, 0);
+    }
+  }
+}
+
 class Emulator {
     static start(module, romBuffer, extRamBuffer) {
         Emulator.stop();
