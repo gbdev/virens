@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="test">
         {{ $route.params.slug }}
     </div>
 </template>
@@ -587,7 +587,7 @@ class Emulator {
 
         this.gamepad = new Gamepad(module, this.e);
         this.audio = new Audio(module, this.e);
-        this.video = new Video(module, this.e, $('canvas'));
+        this.video = new Video(module, this.e, test);
         this.rewind = new Rewind(module, this.e);
         this.rewindIntervalId = 0;
 
@@ -812,6 +812,140 @@ class Emulator {
         if (isKeyDown) vm.togglePause();
     }
 }
+
+class WebGLRenderer {
+  constructor(el) {
+    const gl = this.gl = el.getContext('webgl', {preserveDrawingBuffer: true});
+    if (gl === null) {
+      throw new Error('unable to create webgl context');
+    }
+
+    function compileShader(type, source) {
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, source);
+      gl.compileShader(shader);
+      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+        throw new Error(`compileShader failed: ${gl.getShaderInfoLog(shader)}`);
+      }
+      return shader;
+    }
+
+    const vertexShader = compileShader(gl.VERTEX_SHADER,
+       `attribute vec2 aPos;
+        attribute vec2 aTexCoord;
+        varying highp vec2 vTexCoord;
+        void main(void) {
+          gl_Position = vec4(aPos, 0.0, 1.0);
+          vTexCoord = aTexCoord;
+        }`);
+    const fragmentShader = compileShader(gl.FRAGMENT_SHADER,
+       `varying highp vec2 vTexCoord;
+        uniform sampler2D uSampler;
+        void main(void) {
+          gl_FragColor = texture2D(uSampler, vTexCoord);
+        }`);
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vertexShader);
+    gl.attachShader(program, fragmentShader);
+    gl.linkProgram(program);
+    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+      throw new Error(`program link failed: ${gl.getProgramInfoLog(program)}`);
+    }
+    gl.useProgram(program);
+
+    this.aPos = gl.getAttribLocation(program, 'aPos');
+    this.aTexCoord = gl.getAttribLocation(program, 'aTexCoord');
+    this.uSampler = gl.getUniformLocation(program, 'uSampler');
+
+    this.fbTexture = this.createTexture();
+    this.sgbFbTexture = this.createTexture();
+
+    const invLerpClipSpace = (x, max) => 2 * (x / max) - 1;
+    const l = invLerpClipSpace(SGB_SCREEN_LEFT, SGB_SCREEN_WIDTH);
+    const r = invLerpClipSpace(SGB_SCREEN_RIGHT, SGB_SCREEN_WIDTH);
+    const t = -invLerpClipSpace(SGB_SCREEN_TOP, SGB_SCREEN_HEIGHT);
+    const b = -invLerpClipSpace(SGB_SCREEN_BOTTOM, SGB_SCREEN_HEIGHT);
+    const w = SCREEN_WIDTH / 256, sw = SGB_SCREEN_WIDTH / 256;
+    const h = SCREEN_HEIGHT / 256, sh = SGB_SCREEN_HEIGHT / 256;
+
+    const verts = new Float32Array([
+      // fb only
+      -1, -1,  0, h,
+      +1, -1,  w, h,
+      -1, +1,  0, 0,
+      +1, +1,  w, 0,
+
+      // sgb fb
+      l, b,  0, h,
+      r, b,  w, h,
+      l, t,  0, 0,
+      r, t,  w, 0,
+
+      // sgb border
+      -1, -1,  0,  sh,
+      +1, -1,  sw, sh,
+      -1, +1,  0,  0,
+      +1, +1,  sw, 0,
+    ]);
+
+    const buffer = gl.createBuffer();
+    this.gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+
+    gl.enableVertexAttribArray(this.aPos);
+    gl.enableVertexAttribArray(this.aTexCoord);
+    gl.vertexAttribPointer(this.aPos, 2, gl.FLOAT, gl.FALSE, 16, 0);
+    gl.vertexAttribPointer(this.aTexCoord, 2, gl.FLOAT, gl.FALSE, 16, 8);
+    gl.uniform1i(this.uSampler, 0);
+  }
+
+  createTexture() {
+    const gl = this.gl;
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texImage2D(
+        gl.TEXTURE_2D, 0, gl.RGBA, 256, 256, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    return texture;
+  }
+
+  uploadTextures(buffer, sgbBuffer) {
+    const gl = this.gl;
+    gl.bindTexture(gl.TEXTURE_2D, this.fbTexture);
+    gl.texSubImage2D(
+        gl.TEXTURE_2D, 0, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, gl.RGBA,
+        gl.UNSIGNED_BYTE, buffer);
+
+    gl.bindTexture(gl.TEXTURE_2D, this.sgbFbTexture);
+    gl.texSubImage2D(
+        gl.TEXTURE_2D, 0, 0, 0, SGB_SCREEN_WIDTH, SGB_SCREEN_HEIGHT, gl.RGBA,
+        gl.UNSIGNED_BYTE, sgbBuffer);
+  }
+
+  renderTextures() {
+    const gl = this.gl;
+    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+    gl.clearColor(0.5, 0.5, 0.5, 1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    if (vm.canvas.useSgbBorder) {
+      gl.bindTexture(gl.TEXTURE_2D, this.fbTexture);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 4, 4);
+
+      gl.enable(gl.BLEND);
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      gl.bindTexture(gl.TEXTURE_2D, this.sgbFbTexture);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 8, 4);
+      gl.disable(gl.BLEND);
+    } else {
+      gl.bindTexture(gl.TEXTURE_2D, this.fbTexture);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+  }
+}
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
