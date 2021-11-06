@@ -1,21 +1,43 @@
 <template>
-  <router-view/>
+    <div>
+        <Menubar :model="items">
+            <template #start>
+                <b>Homebrew Hub</b>
+            </template>
+            <template #end>
+                <InputText placeholder="Search" type="text" />
+            </template>
+        </Menubar>
+        <router-view />
+    </div>
 </template>
-
 <script>
-
+import Menubar from 'primevue/menubar';
+import InputText from 'primevue/inputtext';
 
 export default {
-  name: 'App'
+    name: 'App',
+    data() {
+        return {
+            items: [{
+                    label: 'Games',
+                    icon: '',
+                },
+                {
+                    label: 'Demos',
+                    icon: '',
+                },
+                {
+                    label: 'gbcompo21',
+                    icon: '',
+                },
+            ]
+        }
+    }
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin-top: 60px;
+.p-menuitem-icon {
+    margin: 0 !important
 }
 </style>
