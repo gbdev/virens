@@ -1,7 +1,8 @@
 <template>
-    <div id="test">
+    <div>
         {{ $route.params.slug }}
     </div>
+    <canvas id="gamecanvas"></canvas>
 </template>
 <script>
 import Binjgb from '../../public/js/binjgb.js'
@@ -72,6 +73,7 @@ export default {
         }
     },
     created: function() {
+        window.vm = this
         self = this
         axios('/2048.gb', { responseType: 'blob' })
             .then(async function(response) {
@@ -243,7 +245,7 @@ class Audio {
   pushBuffer() {
     const nowSec = Audio.ctx.currentTime;
     const nowPlusLatency = nowSec + AUDIO_LATENCY_SEC;
-    const volume = vm.volume;
+    const volume = window.vm.volume;
     this.startSec = (this.startSec || nowPlusLatency);
     if (this.startSec >= nowSec) {
       const buffer = Audio.ctx.createBuffer(2, AUDIO_FRAMES, this.sampleRate);
@@ -323,7 +325,7 @@ class Canvas2DRenderer {
   }
 
   renderTextures() {
-    if (vm.canvas.useSgbBorder) {
+    if (window.vm.canvas.useSgbBorder) {
       this.ctx.putImageData(this.imageData, SGB_SCREEN_LEFT, SGB_SCREEN_TOP);
       this.overlayCtx.putImageData(this.sgbImageData, 0, 0);
       this.ctx.drawImage(this.overlayCanvas, 0, 0);
@@ -587,7 +589,7 @@ class Emulator {
 
         this.gamepad = new Gamepad(module, this.e);
         this.audio = new Audio(module, this.e);
-        this.video = new Video(module, this.e, test);
+        this.video = new Video(module, this.e, gamecanvas);
         this.rewind = new Rewind(module, this.e);
         this.rewindIntervalId = 0;
 
@@ -694,7 +696,7 @@ class Emulator {
                     REWIND_FACTOR * REWIND_UPDATE_MS / 1000 * CPU_TICKS_PER_SECOND;
                 const rewindTo = Math.max(oldest, start - delta);
                 this.rewindToTicks(rewindTo);
-                vm.ticks = emulator.ticks;
+                window.vm.ticks = emulator.ticks;
             }, REWIND_UPDATE_MS);
         } else {
             clearInterval(this.rewindIntervalId);
@@ -734,7 +736,7 @@ class Emulator {
             }
         }
         if (this.module._emulator_was_ext_ram_updated(this.e)) {
-            vm.extRamUpdated = true;
+            window.vm.extRamUpdated = true;
         }
     }
 
@@ -799,17 +801,17 @@ class Emulator {
     keyRewind(isKeyDown) {
         if (this.isRewinding !== isKeyDown) {
             if (isKeyDown) {
-                vm.paused = true;
+                window.vm.paused = true;
                 this.autoRewind = true;
             } else {
                 this.autoRewind = false;
-                vm.paused = false;
+                window.vm.paused = false;
             }
         }
     }
 
     keyPause(isKeyDown) {
-        if (isKeyDown) vm.togglePause();
+        if (isKeyDown) window.vm.togglePause();
     }
 }
 
@@ -930,7 +932,7 @@ class WebGLRenderer {
     gl.clearColor(0.5, 0.5, 0.5, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
-    if (vm.canvas.useSgbBorder) {
+    if (window.vm.canvas.useSgbBorder) {
       gl.bindTexture(gl.TEXTURE_2D, this.fbTexture);
       gl.drawArrays(gl.TRIANGLE_STRIP, 4, 4);
 
@@ -946,9 +948,68 @@ class WebGLRenderer {
   }
 }
 
+class Rewind {
+  constructor(module, e) {
+    this.module = module;
+    this.e = e;
+    this.joypadBufferPtr = this.module._joypad_new();
+    this.statePtr = 0;
+    this.bufferPtr = this.module._rewind_new_simple(
+        e, REWIND_FRAMES_PER_BASE_STATE, REWIND_BUFFER_CAPACITY);
+    this.module._emulator_set_default_joypad_callback(e, this.joypadBufferPtr);
+  }
+
+  destroy() {
+    this.module._rewind_delete(this.bufferPtr);
+    this.module._joypad_delete(this.joypadBufferPtr);
+  }
+
+  get oldestTicks() {
+    return this.module._rewind_get_oldest_ticks_f64(this.bufferPtr);
+  }
+
+  get newestTicks() {
+    return this.module._rewind_get_newest_ticks_f64(this.bufferPtr);
+  }
+
+  pushBuffer() {
+    if (!this.isRewinding) {
+      this.module._rewind_append(this.bufferPtr, this.e);
+    }
+  }
+
+  get isRewinding() {
+    return this.statePtr !== 0;
+  }
+
+  beginRewind() {
+    if (this.isRewinding) return;
+    this.statePtr =
+        this.module._rewind_begin(this.e, this.bufferPtr, this.joypadBufferPtr);
+  }
+
+  rewindToTicks(ticks) {
+    if (!this.isRewinding) return;
+    return this.module._rewind_to_ticks_wrapper(this.statePtr, ticks) ===
+        RESULT_OK;
+  }
+
+  endRewind() {
+    if (!this.isRewinding) return;
+    this.module._emulator_set_default_joypad_callback(
+        this.e, this.joypadBufferPtr);
+    this.module._rewind_end(this.statePtr);
+    this.statePtr = 0;
+  }
+}
+
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#gamecanvas {
+    width: 400px;
+    height: 400px;
+}
 h3 {
     margin: 40px 0 0;
 }
