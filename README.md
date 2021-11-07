@@ -6,7 +6,6 @@ The game player is powered by the [binjgb](https://github.com/binji/binjgb) emul
 
 The UI library used is PrimeVue.
 
-
 ## Run
 
 Project setup, install npm dependencies
@@ -29,8 +28,8 @@ npm run build
 Deployment to `hh2.gbdev.io` is handled by a GitHub Action:
 
 - A **CNAME** DNS record points to `gbdev.github.io`.
-- A "CNAME" file is created in the build directory by the GitHub Action, containing `hh2.gbdev.io`
-- Every time there's a push to the `master` branch, the [deploy](https://github.com/gbdev/virens/blob/master/.github/workflows/deploy.yml) GitHub Action gets triggered, running `npm run build` and uploading the result build in the `gh-pages` branch of this repository.
+- Every time there's a push to the `master` branch, the [deploy.yml](https://github.com/gbdev/virens/blob/master/.github/workflows/deploy.yml) GitHub Action gets triggered, running `npm run build` and uploading the result build in the `gh-pages` branch of this repository which in turns gets served by GitHub Pages.
+- A "CNAME" file is created in the build directory by the GitHub Action, containing "hh2.gbdev.io".
 
 ## Acknowledgements
 

@@ -1,14 +1,25 @@
 <template>
-    <div>
-        <Menubar :model="items">
-            <template #start>
-                <b>Homebrew Hub</b>
-            </template>
-            <template #end>
-                <InputText placeholder="Search" type="text" />
-            </template>
-        </Menubar>
-        <router-view />
+    <div class="p-grid">
+        <div class="p-col-10 p-offset-1">
+            <div>
+                <Menubar :model="items">
+                    <template #start>
+                        <b>Homebrew Hub</b>
+                    </template>
+                    <template #end>
+                        <InputText placeholder="Search" type="text" />
+                    </template>
+                </Menubar>
+            </div>
+        </div>
+        <div class="p-col-10 p-offset-1">
+            <router-view />
+        </div>
+        <div class="p-col-10 p-offset-1">
+            <center><small>
+              A footer
+            </small></center>
+        </div>        
     </div>
 </template>
 <script>

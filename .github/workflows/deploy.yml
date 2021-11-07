@@ -56,8 +56,8 @@ jobs:
     - name: Create CNAME file
       run: |
         echo "hh2.gbdev.io" > virens/CNAME
-    
-    - name: Deploy
+
+    - name: Deploy to hh2.gbdev.io
       working-directory: virens/
       run: |
         git config --local user.name "GitHub Action"
