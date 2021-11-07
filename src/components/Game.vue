@@ -1,6 +1,6 @@
 <template>
     <div>
-        {{ $route.params.slug }}
+        <h1>{{ $route.params.slug }}</h1>
     </div>
     <canvas id="gamecanvas"></canvas>
 </template>
@@ -69,29 +69,40 @@ export default {
                 list: []
             },
             volume: 0.5,
-            pal: 0
+            pal: 0,
+            rom_endpoint: null
         }
     },
     created: function() {
         window.vm = this
         self = this
-        axios('/2048.gb', { responseType: 'blob' })
-            .then(async function(response) {
-                self.playFile(response.data)
+        axios('http://localhost:8000/api/entry/'+self.$route.params.slug+'.json')
+            .then(function(response){
+                console.log(response.data)
+                self.rom_endpoint = 'http://localhost:8000/assets/' + self.$route.params.slug + '/' + response.data.files[0].filename
+                self.playROM()
             })
 
-        setInterval(() => {
-            this.fps = emulator ? emulator.fps : 60;
-        }, 500);
-        setInterval(() => {
-            if (this.extRamUpdated) {
-                this.updateExtRam();
-                this.extRamUpdated = false;
-            }
-        }, 1000);
+
 
     },
     methods: {
+        playROM: function() {
+            axios(this.rom_endpoint, { responseType: 'blob' })
+                .then(async function(response) {
+                    self.playFile(response.data)
+                })
+
+            setInterval(() => {
+                this.fps = emulator ? emulator.fps : 60;
+            }, 500);
+            setInterval(() => {
+                if (this.extRamUpdated) {
+                    this.updateExtRam();
+                    this.extRamUpdated = false;
+                }
+            }, 1000);
+        },
         toggleFullscreen: function() { gamecanvas.requestFullscreen(); },
         palDown: function() { this.setPal(this.pal - 1); },
         palUp: function() { this.setPal(this.pal + 1); },
@@ -1008,8 +1019,8 @@ class Rewind {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #gamecanvas {
-    width: 400px;
-    height: 400px;
+    width: 320px;
+    height: 288px;
 }
 
 h3 {
