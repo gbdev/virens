@@ -1,11 +1,11 @@
 # virens
- [![build + deploy](https://github.com/gbdev/virens/actions/workflows/deploy.yml/badge.svg)](https://github.com/gbdev/virens/actions/workflows/deploy.yml)
+[![build + deploy](https://github.com/gbdev/virens/actions/workflows/deploy.yml/badge.svg)](https://github.com/gbdev/virens/actions/workflows/deploy.yml)
  
 Experimental Homebrew Hub frontend in Vue 3, consuming the new [HHub API](https://github.com/gbdev/homebrewhub/).
 
 The game player is powered by the [binjgb](https://github.com/binji/binjgb) emulator, running in the browser via WebAssembly.
 
-The UI library used is PrimeVue.
+The UI component library used is [PrimeVue](https://www.primefaces.org/primevue).
 
 ## Run
 
@@ -35,3 +35,6 @@ Deployment to `hh2.gbdev.io` is handled by a GitHub Action:
 ## Acknowledgements
 
 [@binji](https://github.com/binji/binjgb)
+
+
+V-virens? The name of this project comes from *Flavo-virens* and *Atro-virens*, two colors from [Saccardo's chromotaxy scale](https://en.wikipedia.org/wiki/File:Saccardo%27s_chromotaxy_scale.jpg), proposed by an Italian mycologist in 1894, for standardizing color naming of plant specimens. They are similar to the shades in the original Game Boy palette.
