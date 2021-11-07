@@ -1,5 +1,6 @@
 # virens
-
+ [![build + deploy](https://github.com/gbdev/virens/actions/workflows/deploy.yml/badge.svg)](https://github.com/gbdev/virens/actions/workflows/deploy.yml)
+ 
 Experimental Homebrew Hub frontend in Vue 3, consuming the new [HHub API](https://github.com/gbdev/homebrewhub/).
 
 The game player is powered by the [binjgb](https://github.com/binji/binjgb) emulator, running in the browser via WebAssembly.
