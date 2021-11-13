@@ -60,7 +60,7 @@ export default {
     created: function() {
         window.vm = this
         self = this
-        axios('http://localhost:8000/api/all', { responseType: 'json' })
+        axios('https://hh3.gbdev.io/api/all', { responseType: 'json' })
             .then(async function(response) {
                 self.total_entries = response.data.results
                 self.entries = response.data.entries
