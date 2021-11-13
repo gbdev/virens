@@ -76,10 +76,10 @@ export default {
     created: function() {
         window.vm = this
         self = this
-        axios('http://localhost:8000/api/entry/'+self.$route.params.slug+'.json')
+        axios('https://hh3.gbdev.io/api/entry/'+self.$route.params.slug+'.json')
             .then(function(response){
                 console.log(response.data)
-                self.rom_endpoint = 'http://localhost:8000/assets/' + self.$route.params.slug + '/' + response.data.files[0].filename
+                self.rom_endpoint = 'https://hh3.gbdev.io/entries/' + self.$route.params.slug + '/' + response.data.files[0].filename
                 self.playROM()
             })
 
