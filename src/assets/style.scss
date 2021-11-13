@@ -1,0 +1,19 @@
+.p-component {
+	font-family: "Inter";
+}
+
+a {
+	color: var(--blue-500) !important;
+	text-decoration: none;
+}
+
+.p-slider {
+	width: 150px;
+}
+
+.footer {
+   position:absolute;
+   bottom:0;
+   background:#f7f7f7;
+   color: var(--gray-800);
+}
