@@ -15,11 +15,9 @@
         <div class="p-col-10 p-offset-1">
             <router-view />
         </div>
-        <div class="p-col-10 p-offset-1">
-            <center><small>
-              A footer
-            </small></center>
-        </div>        
+        <div class="p-col-10 p-offset-1 footer">
+            <Footer />
+        </div>
     </div>
 </template>
 <script>
