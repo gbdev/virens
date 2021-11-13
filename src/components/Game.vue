@@ -1,8 +1,28 @@
 <template>
     <div>
-        <h1>{{ $route.params.slug }}</h1>
+        <div class="p-grid">
+            <div class="p-col">
+                <center><canvas class=" p-shadow-1" id="gamecanvas"></canvas><br>
+                    <Button @click="toggleFullscreen" label="Fullscreen" icon="pi pi-desktop" iconPos="right" class="p-button-text" /> <br> <Slider v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{volume*100}}%
+                </center>
+            </div>
+            <div class="p-col">
+                <h1>{{ game.title }} </h1>
+                <span v-if="game.developer"> Developer: {{ game.developer }} <br></span>
+                <span v-if="game.tags"> Tags: </span>
+                <template v-if="game.tags" v-for="tag in game.tags">
+                    <Chip>{{tag}}</Chip>&nbsp;
+                </template><br>
+                <span v-if="game.license"> License: {{ game.license }}<br></span>
+
+                Type: <Chip>{{game.typetag}}</Chip> - <Chip v-tooltip="tooltip[game.platform]">{{game.platform}}</Chip> <br> <br>
+                <br>
+                <a :href="rom_endpoint"><Button  label="Download ROM" icon="pi pi-download" iconPos="right" /></a>
+                
+                <a v-if="game.repository" :href="game.repository">&nbsp;<Button class="p-button-outlined" label="Get Source Code" icon="pi pi-external-link" iconPos="right" /></a>
+            </div>
+        </div>
     </div>
-    <canvas id="gamecanvas"></canvas>
 </template>
 <script>
 import Binjgb from '../../public/js/binjgb.js'
@@ -41,6 +61,7 @@ const BUILTIN_PALETTES = 83; // See builtin-palettes.def.
 const GAMEPAD_POLLING_INTERVAL = 1000 / 60 / 4; // When activated, poll for gamepad input about ~4 times per gameboy frame (~240 times second)
 const GAMEPAD_KEYMAP_STANDARD_STR = "standard"; // Try to use "standard" HTML5 mapping config if available
 
+
 export default {
     name: 'HelloWorld',
     props: {
@@ -48,6 +69,11 @@ export default {
     },
     data() {
         return {
+            tooltip: {
+                'GB': 'The cartridge was designed to be played on the original Game Boy',
+                'GBC': 'The game supports Game Boy Color features',
+                'SGB': 'The game supports Super Game Boy features'
+            },
             fps: 60,
             ticks: 0,
             loaded: false,
@@ -70,22 +96,26 @@ export default {
             },
             volume: 0.5,
             pal: 0,
-            rom_endpoint: null
+            rom_endpoint: null,
+            game: null
         }
     },
     created: function() {
         window.vm = this
         self = this
-        axios('https://hh3.gbdev.io/api/entry/'+self.$route.params.slug+'.json')
-            .then(function(response){
-                console.log(response.data)
-                self.rom_endpoint = 'https://hh3.gbdev.io/entries/' + self.$route.params.slug + '/' + response.data.files[0].filename
+        axios(this.baseAPI + '/api/entry/' + self.$route.params.slug + '.json')
+            .then(function(response) {
+                response.data.files.forEach(function(file){
+                    if (file.playable) {
+                        self.rom_endpoint = self.baseAPI + '/entries/' + self.$route.params.slug + '/' + file.filename
+                    }
+                })
+                
+                
+                self.game = response.data
                 self.playROM()
             })
-
-
-
-    },
+        },
     methods: {
         playROM: function() {
             axios(this.rom_endpoint, { responseType: 'blob' })
@@ -1019,8 +1049,8 @@ class Rewind {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #gamecanvas {
-    width: 320px;
-    height: 288px;
+    width: 480px;
+    height: 432px;
 }
 
 h3 {
