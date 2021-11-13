@@ -19,7 +19,7 @@ import "primevue/resources/themes/mdc-light-indigo/theme.css"
 import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
 import 'primeflex/primeflex.css';
-import './assets/style.css';
+import './assets/style.scss';
 
 const routes = [
     { path: '/game/:slug', component: Game },
