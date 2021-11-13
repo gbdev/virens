@@ -11,7 +11,7 @@
                 <div class="product-item">
                     <div class="product-item-content">
                         <div class="p-mb-3">
-                            <img :src="'http://localhost:8000/assets/'+slotProps.data.slug+'/'+slotProps.data.screenshots[0]" class="product-image" />
+                            <img :src="'https://hh3.gbdev.io/entries/'+slotProps.data.slug+'/'+slotProps.data.screenshots[0]" class="product-image" />
                         </div>
                         <div>
                             <h4 class="p-mb-1"> <router-link tag="li" :to="'/game/'+slotProps.data.slug"> {{slotProps.data.title}} </router-link> </h4>
