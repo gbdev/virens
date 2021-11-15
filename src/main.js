@@ -21,6 +21,8 @@ import Button from 'primevue/button';
 import Tag from 'primevue/tag';
 import Chip from 'primevue/chip';
 import Slider from 'primevue/slider';
+import DataView from 'primevue/dataview'
+import Dropdown from 'primevue/dropdown'
 
 // Directives
 import Tooltip from 'primevue/tooltip';
@@ -65,8 +67,9 @@ app.component("Menubar", Menubar)
    .component("Chip", Chip)
    .component("Slider", Slider)
    .component("Footer", Footer)
+   .component("DataView", DataView)
    .mount('#app')
 
 // Base API endpoint
 //  Must point to an instance of the HHub-API (https://github.com/gbdev/homebrewhub)
-app.config.globalProperties.baseAPI = 'https://hh3.gbdev.io'
+app.config.globalProperties.baseAPI = 'http://hh3.gbdev.io'
