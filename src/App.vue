@@ -4,7 +4,12 @@
             <div>
                 <Menubar :model="items">
                     <template #start>
-                        <b>Homebrew Hub</b>
+                        <router-link to='/'><b class="sitetitle">Homebrew Hub</b></router-link> &nbsp;
+                    </template>
+                    <template #item="{item}">
+                        <router-link :to="item.to" custom v-slot="{href, route, navigate, isActive, isExactActive}">
+                            <a :href="href" @click="navigate" :class="{'active-link': isActive, 'active-link-exact': isExactActive}">{{item.label}}</a>&nbsp;
+                        </router-link>
                     </template>
                     <template #end>
                         <InputText placeholder="Search" type="text" />
@@ -15,8 +20,8 @@
         <div class="p-col-10 p-offset-1">
             <router-view />
         </div>
-        <div class="p-col-10 p-offset-1 footer">
-            <Footer />
+        <div class="p-col-10 p-offset-1">
+            <!--<Footer />-->
         </div>
     </div>
 </template>
@@ -31,14 +36,17 @@ export default {
             items: [{
                     label: 'Games',
                     icon: '',
+                    to: '/games/',
                 },
                 {
                     label: 'Demos',
                     icon: '',
+                    to: '/demos',
                 },
                 {
                     label: 'gbcompo21',
                     icon: '',
+                    to: '/gbcompo21',
                 },
             ]
         }
