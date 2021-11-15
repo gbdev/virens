@@ -72,4 +72,4 @@ app.component("Menubar", Menubar)
 
 // Base API endpoint
 //  Must point to an instance of the HHub-API (https://github.com/gbdev/homebrewhub)
-app.config.globalProperties.baseAPI = 'http://hh3.gbdev.io'
+app.config.globalProperties.baseAPI = 'https://hh3.gbdev.io'
