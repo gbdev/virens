@@ -2,8 +2,8 @@
     <div>
         <div class="p-grid">
             <div class="p-col">
-                <center><canvas class=" p-shadow-1" id="gamecanvas"></canvas><br>
-                    <Button @click="toggleFullscreen" label="Fullscreen" icon="pi pi-desktop" iconPos="right" class="p-button-text" /> <br> <Slider v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{volume*100}}%
+                <center><canvas class=" p-shadow-1" id="gamecanvas" :width="width" :height="height"></canvas><br>
+                    <Button @click="toggleFullscreen" label="Fullscreen" icon="pi pi-desktop" iconPos="right" class="p-button-text" /> <br> <Slider v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{Math.round(volume*100)}}%
                 </center>
             </div>
             <div class="p-col">
@@ -76,6 +76,8 @@ export default {
             },
             fps: 60,
             ticks: 0,
+            height: 432,
+            width: 480,
             loaded: false,
             loadedFile: null,
             paused: false,
@@ -1049,12 +1051,8 @@ class Rewind {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #gamecanvas {
-    width: 480px;
-    height: 432px;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    image-rendering: -moz-crisp-edges;
 }
 
 h3 {
