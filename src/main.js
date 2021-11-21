@@ -33,12 +33,15 @@ import "primevue/resources/primevue.min.css"
 import "primeicons/primeicons.css"
 import 'primeflex/primeflex.css';
 import './assets/style.scss';
+import './assets/basier_square.css';
+
 
 // Routing
 const routes = [
     { path: '/game/:slug', component: Game },
     { path: '/', component: Landing },
-    { path: '/games', component: List}
+    { path: '/games', component: List},
+    { path: '/gbcompo21', component:List , meta : {'type': 'gbcompo21'}}
 ]
 
 const router = VueRouter.createRouter({
@@ -50,7 +53,7 @@ const router = VueRouter.createRouter({
 // Set up Vue app
 
 // Returns app instance
-app = createApp(App)
+let app = createApp(App)
 
 app.directive('tooltip', Tooltip);
 
