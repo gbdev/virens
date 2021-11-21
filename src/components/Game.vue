@@ -1051,6 +1051,10 @@ class Rewind {
 #gamecanvas {
     width: 480px;
     height: 432px;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 h3 {
