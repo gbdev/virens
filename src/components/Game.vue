@@ -3,7 +3,10 @@
         <div class="p-grid">
             <div class="p-col">
                 <center><canvas class=" p-shadow-1" id="gamecanvas" :width="width" :height="height"></canvas><br>
-                    <Button @click="toggleFullscreen" label="Fullscreen" icon="pi pi-desktop" iconPos="right" class="p-button-text" /> <br> <Slider v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{Math.round(volume*100)}}%
+                    <Button @click="toggleFullscreen" label="Fullscreen" icon="pi pi-desktop" iconPos="right" class="p-button-text" /> <br>
+                    <Slider orientation="horizontal" v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{Math.round(volume*100)}}%
+                    <br>
+                    DMG Palette: <Button @click="palDown()" icon="pi pi-minus" class="p-button-rounded p-button-sm" /> {{ pal }} <Button icon="pi pi-plus" @click="palUp()" class="p-button-rounded p-button-sm" />
                 </center>
             </div>
             <div class="p-col">
@@ -19,7 +22,9 @@
                 <br>
                 <a :href="rom_endpoint"><Button  label="Download ROM" icon="pi pi-download" iconPos="right" /></a>
                 
-                <a v-if="game.repository" :href="game.repository">&nbsp;<Button class="p-button-outlined" label="Get Source Code" icon="pi pi-external-link" iconPos="right" /></a>
+                <a v-if="game.repository" :href="game.repository" target="_blank">&nbsp;<Button class="p-button-outlined" label="Get Source Code" icon="pi pi-external-link" iconPos="right" /></a>
+
+
             </div>
         </div>
     </div>
@@ -96,7 +101,7 @@ export default {
                 selected: 0,
                 list: []
             },
-            volume: 0.5,
+            volume: 0.25,
             pal: 0,
             rom_endpoint: null,
             game: null
@@ -136,8 +141,18 @@ export default {
             }, 1000);
         },
         toggleFullscreen: function() { gamecanvas.requestFullscreen(); },
-        palDown: function() { this.setPal(this.pal - 1); },
-        palUp: function() { this.setPal(this.pal + 1); },
+        palDown: function() { 
+            if (this.pal >= 0) {
+                this.pal = this.pal - 1;
+            }
+            this.setPal(this.pal); 
+        },
+        palUp: function() { 
+            if (this.pal < 100) {
+                this.pal = this.pal + 1;
+            }
+            this.setPal(this.pal); 
+        },
         readFile: function(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -147,10 +162,10 @@ export default {
                 reader.readAsArrayBuffer(file);
             });
         },
-        setPal: function(pal) {
+        setPal: function() {
+            let pal = this.pal;
             if (pal < 0) { pal = BUILTIN_PALETTES - 1; }
             if (pal >= BUILTIN_PALETTES) { pal = 0; }
-            this.pal = pal;
             if (emulator) { emulator.setBuiltinPalette(this.pal); }
         },
         updateTicks: function() {
