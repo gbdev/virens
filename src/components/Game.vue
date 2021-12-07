@@ -107,7 +107,7 @@ export default {
             rom_endpoint: null,
             game: null,
             mute: false,
-            volume_btn_icon: "pi-volume-down"
+            volume_btn_icon: "pi pi-volume-up"
         }
     },
     created: function() {
@@ -132,11 +132,13 @@ export default {
                 // If unmuting, set the old volume back
                 this.mute = false
                 this.volume = this.muted_volume
+                this.volume_btn_icon = "pi pi-volume-up"
             } else {
                 // If muting, set the volume to 0 and save the volume value
                 this.muted_volume = this.volume
                 this.volume = 0
                 this.mute = true
+                this.volume_btn_icon = "pi pi-volume-off"
             }
         },
         playROM: function() {
@@ -157,7 +159,7 @@ export default {
         },
         toggleFullscreen: function() { gamecanvas.requestFullscreen(); },
         palDown: function() { 
-            if (this.pal >= 0) {
+            if (this.pal > 0) {
                 this.pal = this.pal - 1;
             }
             this.setPal(this.pal); 
