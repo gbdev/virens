@@ -4,9 +4,9 @@
             <div class="p-col">
                 <center><canvas class=" p-shadow-1" id="gamecanvas" :width="width" :height="height"></canvas><br>
                     <Button @click="toggleFullscreen" label="Fullscreen" icon="pi pi-desktop" iconPos="right" class="p-button-text" /> <br>
-                    <Slider orientation="horizontal" v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{Math.round(volume*100)}}%
+                    <Slider orientation="horizontal" v-model="volume" :step="0.01" :min="0" :max="1" /><br> Volume: {{Math.round(volume*100)}}% <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
                     <br>
-                    DMG Palette: <Button @click="palDown()" icon="pi pi-minus" class="p-button-rounded p-button-sm" /> {{ pal }} <Button icon="pi pi-plus" @click="palUp()" class="p-button-rounded p-button-sm" />
+                    DMG Palette: <Button @click="palDown()" icon="pi pi-minus" class="p-button-outlined p-button-sm p-button-rounded" /> {{ pal }} <Button icon="pi pi-plus" @click="palUp()" class="p-button-outlined p-button-rounded p-button-sm" />
                 </center>
             </div>
             <div class="p-col">
@@ -102,9 +102,12 @@ export default {
                 list: []
             },
             volume: 0.25,
+            muted_volume: 0.25,
             pal: 0,
             rom_endpoint: null,
-            game: null
+            game: null,
+            mute: false,
+            volume_btn_icon: "pi-volume-down"
         }
     },
     created: function() {
@@ -124,6 +127,18 @@ export default {
             })
         },
     methods: {
+        togglemute: function() {
+            if (this.mute){
+                // If unmuting, set the old volume back
+                this.mute = false
+                this.volume = this.muted_volume
+            } else {
+                // If muting, set the volume to 0 and save the volume value
+                this.muted_volume = this.volume
+                this.volume = 0
+                this.mute = true
+            }
+        },
         playROM: function() {
             axios(this.rom_endpoint, { responseType: 'blob' })
                 .then(async function(response) {
