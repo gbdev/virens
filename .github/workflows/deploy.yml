@@ -2,68 +2,64 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout virens
-      uses: actions/checkout@v2
-      with:
-        path: virens
+      - name: Checkout virens
+        uses: actions/checkout@v2
+        with:
+          path: virens
 
-    - name: Install NodeJS
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
+      - name: Install NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14.x"
 
-    - name: Install npm requirements
-      run: npm install
-      working-directory: virens/
+      - name: Install npm requirements
+        run: npm install
+        working-directory: virens/
 
-    - name: Run Vue build
-      run: npm run build
-      working-directory: virens/
+      - name: Run Vue build
+        run: npm run generate --force
+        working-directory: virens/
 
-    - name: Store final build
-      uses: actions/upload-artifact@v2
-      with:
-        name: Build output
-        path: virens/dist
-        if-no-files-found: error
+      - name: Store final build
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build output
+          path: virens/.output/public
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     steps:
-    - name: Checkout virens/gh-pages
-      uses: actions/checkout@v2
-      with:
-        path: virens
-        ref: gh-pages
+      - name: Checkout virens/gh-pages
+        uses: actions/checkout@v2
+        with:
+          path: virens
+          ref: gh-pages
 
-    - name: Delete all current files
-      run: |
-        rm -vrf virens/*
+      - name: Delete all current files
+        run: |
+          rm -vrf virens/*
 
-    - name: Unpack build
-      uses: actions/download-artifact@v2
-      with:
-        name: Build output
-        path: virens/
+      - name: Unpack build
+        uses: actions/download-artifact@v2
+        with:
+          name: Build output
+          path: virens/
 
-    - name: Create CNAME file
-      run: |
-        echo "hh2.gbdev.io" > virens/CNAME
-
-    - name: Deploy to hh2.gbdev.io
-      working-directory: virens/
-      run: |
-        git config --local user.name "GitHub Action"
-        git config --global user.email "community@gbdev.io"
-        git remote -v
-        git branch -v
-        git add -A
-        git commit -am 'Update build'
-        git push -v
+      - name: Deploy to hh2.gbdev.io
+        working-directory: virens/
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --global user.email "community@gbdev.io"
+          git remote -v
+          git branch -v
+          git add -A
+          git commit -am 'Update build'
+          git push -v
