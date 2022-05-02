@@ -14,48 +14,9 @@ const romblob = await rom.blob();
   <div>
     <div class="p-grid">
       <div class="p-col">
-        <div>
-          <ClientOnly>
-            <GameEmulator :gamerom="romblob" />
-          </ClientOnly>
-          <canvas
-            class="p-shadow-1"
-            id="gamecanvas"
-            :width="width"
-            :height="height"
-          ></canvas
-          ><br />
-          <Button
-            @click="toggleFullscreen"
-            label="Fullscreen"
-            icon="pi pi-desktop"
-            iconPos="right"
-            class="p-button-text"
-          />
-          <br />
-          <Slider
-            orientation="horizontal"
-            v-model="volume"
-            :step="0.01"
-            :min="0"
-            :max="1"
-          /><br />
-          Volume: {{ Math.round(volume * 100) }}%
-          <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
-          <br />
-          DMG Palette:
-          <Button
-            @click="palDown()"
-            icon="pi pi-minus"
-            class="p-button-outlined p-button-sm p-button-rounded"
-          />
-          {{ pal }}
-          <Button
-            icon="pi pi-plus"
-            @click="palUp()"
-            class="p-button-outlined p-button-rounded p-button-sm"
-          />
-        </div>
+        <ClientOnly>
+          <GameEmulator :gamerom="romblob" />
+        </ClientOnly>
       </div>
       <div class="p-col">
         <h1>{{ game.title }}</h1>
