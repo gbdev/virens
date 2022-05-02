@@ -1,5 +1,5 @@
 <script setup>
-const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
+const { data } = await useFetch("https://hh3.gbdev.io/api/all");
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];
