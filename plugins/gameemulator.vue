@@ -1,12 +1,15 @@
 <template>
   <div>
-    <canvas
-      class="p-shadow-1"
-      ref="gamecanvas"
-      :width="width"
-      :height="height"
-    ></canvas
-    ><br />
+    <div>
+      {{ loading }}
+      <canvas
+        class="p-shadow-1"
+        ref="gamecanvas"
+        :width="width"
+        :height="height"
+      ></canvas>
+    </div>
+    <br />
     <Button
       @click="toggleFullscreen"
       label="Fullscreen"
@@ -101,6 +104,7 @@ export default {
         GBC: "The game supports Game Boy Color features",
         SGB: "The game supports Super Game Boy features",
       },
+      loading: "Loading emulator..",
       gamerom: null,
       fps: 60,
       ticks: 0,
@@ -150,6 +154,7 @@ export default {
     fetch(this.rom_endpoint).then((response) => {
       let gameblob = response.blob().then((blob) => {
         this.gamerom = blob;
+        this.loading = null;
         this.playROM();
       });
     });
@@ -160,7 +165,7 @@ export default {
     },
 
     toggleFullscreen: function () {
-      gamecanvas.requestFullscreen();
+      this.gamecanvas.requestFullscreen();
     },
     palDown: function () {
       if (this.pal > 0) {
