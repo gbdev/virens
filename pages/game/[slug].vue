@@ -58,42 +58,11 @@ export default {
   },
   data() {
     return {
-      rom: "0",
-      newRom: "0",
       tooltip: {
         GB: "The cartridge was designed to be played on the original Game Boy",
         GBC: "The game supports Game Boy Color features",
         SGB: "The game supports Super Game Boy features",
       },
-      fps: 60,
-      ticks: 0,
-      height: 432,
-      width: 480,
-      loaded: false,
-      loadedFile: null,
-      paused: false,
-      extRamUpdated: false,
-      canvas: {
-        show: false,
-        useSgbBorder: false,
-        scale: 3,
-      },
-      rewind: {
-        minTicks: 0,
-        maxTicks: 0,
-      },
-      files: {
-        show: true,
-        selected: 0,
-        list: [],
-      },
-      volume: 0.25,
-      muted_volume: 0.25,
-      pal: 0,
-      rom_endpoint: null,
-      game: null,
-      mute: false,
-      volume_btn_icon: "pi pi-volume-up",
     };
   },
 };
