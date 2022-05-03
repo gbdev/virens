@@ -56,6 +56,6 @@ Deployment to `hh2.gbdev.io` is handled by a GitHub Action:
 
 ## Acknowledgements
 
-[@binji](https://github.com/binji/binjgb),
+[@binji](https://github.com/binji/binjgb) for the emulator and the additional browser code to make the wasm build work. mrioa and [aes](https://github.com/aesdotjs) for their nuxt knowledge.
 
 V-virens? The name of this project comes from _Flavo-virens_ and _Atro-virens_, two colors from [Saccardo's chromotaxy scale](https://en.wikipedia.org/wiki/File:Saccardo%27s_chromotaxy_scale.jpg), proposed by an Italian mycologist in 1894, for standardizing color naming of plant specimens. They are similar to the shades in the original Game Boy palette.
