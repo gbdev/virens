@@ -1,5 +1,5 @@
 <script setup>
-const { data } = await useFetch("https://hh3.gbdev.io/api/all");
+const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];
@@ -102,6 +102,10 @@ export default {
 .product-name {
   font-size: 1.5rem;
   font-weight: 700;
+}
+
+.product-image {
+  width: 256px;
 }
 
 .product-description {

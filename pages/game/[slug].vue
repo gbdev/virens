@@ -2,12 +2,7 @@
 const route = useRoute();
 const url = "https://hh3.gbdev.io/api/entry/" + route.params.slug + ".json";
 const { data } = await useFetch(url);
-
 const game = data.value;
-
-const rom = await fetch("https://hh3.gbdev.io/entries/2048gb/2048.gb");
-
-const romblob = await rom.blob();
 </script>
 
 <template>
@@ -15,11 +10,11 @@ const romblob = await rom.blob();
     <div class="p-grid">
       <div class="p-col">
         <ClientOnly>
-          <GameEmulator :gamerom="romblob" />
+          <GameEmulator :gameData="game" />
         </ClientOnly>
       </div>
       <div class="p-col">
-        <h1>{{ game.title }}</h1>
+        <h1>{{ game.title }} {{ romblob }}</h1>
         <span v-if="game.developer">
           Developer: {{ game.developer }} <br
         /></span>

@@ -75,7 +75,7 @@ export default {
   name: "GameEmulator",
   props: {
     msg: String,
-    gamerom: Blob,
+    gameData: Object,
   },
   setup() {
     const gamecanvas = ref(null);
@@ -101,6 +101,7 @@ export default {
         GBC: "The game supports Game Boy Color features",
         SGB: "The game supports Super Game Boy features",
       },
+      gamerom: null,
       fps: 60,
       ticks: 0,
       height: 432,
@@ -134,7 +135,24 @@ export default {
   },
   mounted: function () {
     window.vm = this;
-    this.playROM();
+
+    this.gameData.files.forEach((file) => {
+      if (file.playable) {
+        this.rom_endpoint =
+          "https://hh3.gbdev.io" +
+          "/entries/" +
+          this.gameData.slug +
+          "/" +
+          file.filename;
+      }
+    });
+
+    fetch(this.rom_endpoint).then((response) => {
+      let gameblob = response.blob().then((blob) => {
+        this.gamerom = blob;
+        this.playROM();
+      });
+    });
   },
   methods: {
     playROM: function () {
