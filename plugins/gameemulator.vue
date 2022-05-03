@@ -2,7 +2,7 @@
   <div>
     <canvas
       class="p-shadow-1"
-      id="gamecanvas"
+      ref="gamecanvas"
       :width="width"
       :height="height"
     ></canvas
@@ -77,10 +77,25 @@ export default {
     msg: String,
     gamerom: Blob,
   },
+  setup() {
+    const gamecanvas = ref(null);
+
+    // Before the component is mounted, the value
+    // of the ref is `null` which is the default
+    // value we've specified above.
+    onMounted(() => {
+      // Logs: `Headline`
+      console.log(gamecanvas);
+    });
+
+    return {
+      // It is important to return the ref,
+      // otherwise it won't work.
+      gamecanvas,
+    };
+  },
   data() {
     return {
-      rom: "0",
-      newRom: "0",
       tooltip: {
         GB: "The cartridge was designed to be played on the original Game Boy",
         GBC: "The game supports Game Boy Color features",
@@ -703,7 +718,7 @@ class Emulator {
     }
     this.gamepad = new Gamepad(module, this.e);
     this.audio = new Audio(module, this.e);
-    this.video = new Video(module, this.e, gamecanvas);
+    this.video = new Video(module, this.e, window.vm.gamecanvas);
     this.rewind = new Rewind(module, this.e);
     this.rewindIntervalId = 0;
     this.lastRafSec = 0;
