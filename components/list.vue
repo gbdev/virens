@@ -1,3 +1,6 @@
+<!--
+  Render a paginated list of entries with a grid of cards
+-->
 <script setup>
 const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
 

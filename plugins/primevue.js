@@ -1,3 +1,7 @@
+/*
+This plugin registers all the PrimeVue component and services.
+*/
+
 import { defineNuxtPlugin } from "#app";
 import PrimeVue from "primevue/config";
 import Button from "primevue/button";
@@ -11,8 +15,6 @@ import Chip from "primevue/chip";
 import Slider from "primevue/slider";
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const nuxtApp2 = useNuxtApp();
-
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
   nuxtApp.vueApp.use(ToastService);
   nuxtApp.vueApp.component("Button", Button);
@@ -23,5 +25,4 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("DataView", DataView);
   nuxtApp.vueApp.component("Chip", Chip);
   nuxtApp.vueApp.component("Slider", Slider);
-  //other components that you need
 });

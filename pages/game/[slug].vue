@@ -1,6 +1,10 @@
+<!--
+  The main game view. Fetches metadata about the entry and renders the game details. Loads the Emulator component passing game data to it.
+-->
 <script setup>
 const route = useRoute();
 const url = "https://hh3.gbdev.io/api/entry/" + route.params.slug + ".json";
+// Fetch the requested game manifest from the API
 const { data } = await useFetch(url);
 const game = data.value;
 </script>
@@ -9,8 +13,9 @@ const game = data.value;
   <div>
     <div class="p-grid">
       <div class="p-col">
+        <!-- The Emulator component should only be loaded in a actual browser -->
         <ClientOnly>
-          <GameEmulator :gameData="game" />
+          <Emulator :gameData="game" />
         </ClientOnly>
       </div>
       <div class="p-col">

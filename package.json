@@ -11,7 +11,6 @@
     "primevue": "3.10.0"
   },
   "dependencies": {
-    "axios": "^0.27.2",
     "primeflex": "3.1.2",
     "primeicons": "5.0.0",
     "sass": "^1.51.0"

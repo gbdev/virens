@@ -1,3 +1,6 @@
+<!--
+  Emulator component. Fetches the game ROM Blob and rrepares and fires up the WASM build of the Binjgb emulator. Provides all the logic to control the emulation from the UI.
+-->
 <template>
   <div>
     <div>
@@ -75,7 +78,7 @@ const GAMEPAD_POLLING_INTERVAL = 1000 / 60 / 4; // When activated, poll for game
 const GAMEPAD_KEYMAP_STANDARD_STR = "standard"; // Try to use "standard" HTML5 mapping config if available
 
 export default {
-  name: "GameEmulator",
+  name: "Emulator",
   props: {
     msg: String,
     gameData: Object,
@@ -138,8 +141,10 @@ export default {
     };
   },
   mounted: function () {
+    // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
     window.vm = this;
 
+    // Find the first file it's playable from the game metadata
     this.gameData.files.forEach((file) => {
       if (file.playable) {
         this.rom_endpoint =
@@ -151,10 +156,13 @@ export default {
       }
     });
 
+    // Download the ROM from the found endpoint
     fetch(this.rom_endpoint).then((response) => {
       let gameblob = response.blob().then((blob) => {
+        // Get the Blob
         this.gamerom = blob;
         this.loading = null;
+        // Lesssssgooooooo
         this.playROM();
       });
     });
@@ -318,8 +326,10 @@ export default {
   },
 };
 
-console.log(window.volume);
-console.log(window.vm);
+/*
+Emulator code, adapted from
+https://github.com/binji/binjgb/blob/main/docs/demo.js
+*/
 
 function makeWasmBuffer(module, ptr, size) {
   return new Uint8Array(module.HEAP8.buffer, ptr, size);

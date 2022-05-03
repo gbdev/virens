@@ -1,3 +1,4 @@
+<!-- Main app template -->
 <template>
   <div class="p-grid">
     <div class="p-col-10 p-offset-1">
@@ -9,12 +10,19 @@
             >
             &nbsp;
           </template>
+          <span class="p-buttonset"></span>
           <template #item="{ item }">
             <router-link
               :to="item.to"
               custom
               v-slot="{ href, route, navigate, isActive, isExactActive }"
-            >
+              ><Button
+                @click="navigate"
+                :href="href"
+                :label="item.label"
+                class="p-button-text"
+              />
+              <!--
               <a
                 :href="href"
                 @click="navigate"
@@ -23,7 +31,7 @@
                   'active-link-exact': isExactActive,
                 }"
                 >{{ item.label }}</a
-              >&nbsp;
+              >-->&nbsp;
             </router-link>
           </template>
           <template #end>
@@ -33,6 +41,7 @@
       </div>
     </div>
     <div class="p-col-10 p-offset-1">
+      <!-- Render the matched page here-->
       <NuxtPage />
     </div>
     <div class="p-col-10 p-offset-1">
@@ -69,6 +78,12 @@ export default {
 };
 </script>
 <style>
+.p-button.p-button-text {
+  color: var(--gray-900);
+}
+.sitetitle {
+  text-decoration: none;
+}
 .p-menuitem-icon {
   margin: 0 !important;
 }
