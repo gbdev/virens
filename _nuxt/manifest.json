@@ -1,0 +1,83 @@
+{
+  "node_modules/nuxt/dist/app/entry.mjs": {
+    "file": "entry-496317cc.mjs",
+    "src": "node_modules/nuxt/dist/app/entry.mjs",
+    "isEntry": true,
+    "dynamicImports": [
+      "pages/developers.vue",
+      "pages/disclaimer.vue",
+      "pages/game/[slug].vue",
+      "pages/games.vue",
+      "pages/index.vue",
+      "pages/sitemap.vue"
+    ],
+    "css": [
+      "entry.89470fc4.css"
+    ],
+    "assets": [
+      "color.473bc8ca.png",
+      "primeicons.c9eaf535.eot",
+      "primeicons.788dba0a.ttf",
+      "primeicons.feb68bf6.woff",
+      "primeicons.2ab98f70.svg"
+    ]
+  },
+  "pages/developers.vue": {
+    "file": "developers-1430f258.mjs",
+    "src": "pages/developers.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/disclaimer.vue": {
+    "file": "disclaimer-0ca1fadf.mjs",
+    "src": "pages/disclaimer.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/game/[slug].vue": {
+    "file": "_slug_-14c85c97.mjs",
+    "src": "pages/game/[slug].vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs",
+      "_fetch-592432d6.mjs"
+    ]
+  },
+  "_fetch-592432d6.mjs": {
+    "file": "fetch-592432d6.mjs",
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs"
+    ]
+  },
+  "pages/games.vue": {
+    "file": "games-d6daa087.mjs",
+    "src": "pages/games.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs",
+      "_fetch-592432d6.mjs"
+    ]
+  },
+  "pages/index.vue": {
+    "file": "index-1e76507e.mjs",
+    "src": "pages/index.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs",
+      "_fetch-592432d6.mjs"
+    ]
+  },
+  "pages/sitemap.vue": {
+    "file": "sitemap-5d6946e7.mjs",
+    "src": "pages/sitemap.vue",
+    "isDynamicEntry": true,
+    "imports": [
+      "node_modules/nuxt/dist/app/entry.mjs",
+      "_fetch-592432d6.mjs"
+    ]
+  }
+}
