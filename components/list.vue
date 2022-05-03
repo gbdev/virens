@@ -10,14 +10,7 @@ const total_entries = data.value["results"];
 
 <template>
   <div class="card">
-    <DataView
-      :value="entries"
-      :layout="layout"
-      :paginator="true"
-      :rows="9"
-      :sortOrder="sortOrder"
-      :sortField="sortField"
-    >
+    <DataView :value="entries" :layout="layout" :paginator="true" :rows="9">
       <template #grid="slotProps">
         <div class="p-col-12 p-md-4">
           <div class="product-grid-item card">
