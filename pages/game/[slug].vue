@@ -11,7 +11,8 @@ const game = data.value;
 
 <template>
   <div class="grid">
-    <div class="col-12 lg:col-6 xl:col-6">
+    <div class="col-12 lg:col-0 xl:col-1"></div>
+    <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
           <div>
@@ -22,7 +23,7 @@ const game = data.value;
         </div>
       </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-6">
+    <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
           <div>
