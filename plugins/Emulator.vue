@@ -168,6 +168,20 @@ export default {
     });
   },
   methods: {
+    togglemute: function () {
+      if (this.mute) {
+        // If unmuting, set the old volume back
+        this.mute = false;
+        this.volume = this.muted_volume;
+        this.volume_btn_icon = "pi pi-volume-up";
+      } else {
+        // If muting, set the volume to 0 and save the volume value
+        this.muted_volume = this.volume;
+        this.volume = 0;
+        this.mute = true;
+        this.volume_btn_icon = "pi pi-volume-off";
+      }
+    },
     playROM: function () {
       this.playFile(this.gamerom);
     },
