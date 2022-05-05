@@ -1,7 +1,11 @@
 <template>
   <div class="layout-footer">
-    <a href="/sitemap">sitemap</a> &nbsp;-
-    <span class="font-medium ml-2">gbdev community</span>
+    <span class="font-medium ml-2">
+      <a href="/sitemap">sitemap</a> -
+      <a href="/disclaimer">disclaimer/DMCA</a> -
+      <a href="/developers">developers</a> - <a href="/credits">credits</a> -
+      <a href="https://gbdev.io">gbdev community</a></span
+    >
   </div>
 </template>
 <script>
