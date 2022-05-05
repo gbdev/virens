@@ -1,6 +1,6 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-6719f651.mjs",
+    "file": "entry-00f9b3a2.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -12,7 +12,7 @@
       "pages/sitemap.vue"
     ],
     "css": [
-      "entry.f5ad0874.css"
+      "entry.7dfa3f12.css"
     ],
     "assets": [
       "color.473bc8ca.png",
@@ -23,7 +23,7 @@
     ]
   },
   "pages/developers.vue": {
-    "file": "developers-01e4e52e.mjs",
+    "file": "developers-fd8b44fd.mjs",
     "src": "pages/developers.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -31,7 +31,7 @@
     ]
   },
   "pages/disclaimer.vue": {
-    "file": "disclaimer-a86bebfd.mjs",
+    "file": "disclaimer-a3666907.mjs",
     "src": "pages/disclaimer.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -39,45 +39,45 @@
     ]
   },
   "pages/game/[slug].vue": {
-    "file": "_slug_-d7870200.mjs",
+    "file": "_slug_-52902365.mjs",
     "src": "pages/game/[slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-13d9ea57.mjs"
+      "_fetch-7aba07d5.mjs"
     ]
   },
-  "_fetch-13d9ea57.mjs": {
-    "file": "fetch-13d9ea57.mjs",
+  "_fetch-7aba07d5.mjs": {
+    "file": "fetch-7aba07d5.mjs",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/games.vue": {
-    "file": "games-60ea0548.mjs",
+    "file": "games-4d433c39.mjs",
     "src": "pages/games.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-13d9ea57.mjs"
+      "_fetch-7aba07d5.mjs"
     ]
   },
   "pages/index.vue": {
-    "file": "index-fb8a63ce.mjs",
+    "file": "index-508c8bda.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-13d9ea57.mjs"
+      "_fetch-7aba07d5.mjs"
     ]
   },
   "pages/sitemap.vue": {
-    "file": "sitemap-7b18a088.mjs",
+    "file": "sitemap-01de819f.mjs",
     "src": "pages/sitemap.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-13d9ea57.mjs"
+      "_fetch-7aba07d5.mjs"
     ]
   }
 }
