@@ -6,7 +6,7 @@
     <div>
       {{ loading }}
       <canvas
-        class="p-shadow-1"
+        class="shadow-3"
         ref="gamecanvas"
         :width="width"
         :height="height"

@@ -13,6 +13,7 @@ import Menubar from "primevue/menubar";
 import DataView from "primevue/dataview";
 import Chip from "primevue/chip";
 import Slider from "primevue/slider";
+import "../assets/styles/layout.scss";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });

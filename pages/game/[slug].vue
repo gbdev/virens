@@ -10,43 +10,63 @@ const game = data.value;
 </script>
 
 <template>
+  <div class="grid">
+    <div class="col-12 lg:col-6 xl:col-6">
+      <div class="card mb-0">
+        <div class="flex justify-content-between mb-6">
+          <div>
+            <ClientOnly>
+              <Emulator :gameData="game" />
+            </ClientOnly>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 lg:col-6 xl:col-6">
+      <div class="card mb-0">
+        <div class="flex justify-content-between mb-6">
+          <div>
+            <h1>{{ game.title }} {{ romblob }}</h1>
+            <span v-if="game.developer">
+              Developer: {{ game.developer }} <br
+            /></span>
+            <span v-if="game.tags"> Tags: </span>
+            <template v-if="game.tags" v-for="tag in game.tags">
+              <Chip>{{ tag }}</Chip
+              >&nbsp; </template
+            ><br />
+            <span v-if="game.license"> License: {{ game.license }}<br /></span>
+
+            Type: <Chip>{{ game.typetag }}</Chip> -
+            <Chip v-tooltip="tooltip[game.platform]">{{ game.platform }}</Chip>
+            <br />
+            <br />
+            <br />
+            <a :href="rom_endpoint"
+              ><Button
+                label="Download ROM"
+                icon="pi pi-download"
+                iconPos="right"
+            /></a>
+
+            <a v-if="game.repository" :href="game.repository" target="_blank"
+              >&nbsp;<Button
+                class="p-button-outlined"
+                label="Get Source Code"
+                icon="pi pi-external-link"
+                iconPos="right"
+            /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div>
     <div class="p-grid">
       <div class="p-col">
         <!-- The Emulator component should only be loaded in a actual browser -->
-        <ClientOnly>
-          <Emulator :gameData="game" />
-        </ClientOnly>
       </div>
-      <div class="p-col">
-        <h1>{{ game.title }} {{ romblob }}</h1>
-        <span v-if="game.developer">
-          Developer: {{ game.developer }} <br
-        /></span>
-        <span v-if="game.tags"> Tags: </span>
-        <template v-if="game.tags" v-for="tag in game.tags">
-          <Chip>{{ tag }}</Chip
-          >&nbsp; </template
-        ><br />
-        <span v-if="game.license"> License: {{ game.license }}<br /></span>
-
-        Type: <Chip>{{ game.typetag }}</Chip> -
-        <Chip v-tooltip="tooltip[game.platform]">{{ game.platform }}</Chip>
-        <br />
-        <br />
-        <br />
-        <a :href="rom_endpoint"
-          ><Button label="Download ROM" icon="pi pi-download" iconPos="right"
-        /></a>
-
-        <a v-if="game.repository" :href="game.repository" target="_blank"
-          >&nbsp;<Button
-            class="p-button-outlined"
-            label="Get Source Code"
-            icon="pi pi-external-link"
-            iconPos="right"
-        /></a>
-      </div>
+      <div class="p-col"></div>
     </div>
   </div>
 </template>

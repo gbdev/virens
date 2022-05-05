@@ -1,59 +1,27 @@
 <!-- Main app template -->
 <template>
-  <div class="p-grid">
-    <div class="p-col-10 p-offset-1">
-      <div>
-        <Menubar :model="items">
-          <template #start>
-            <router-link to="/"
-              ><b class="sitetitle">Homebrew Hub</b></router-link
-            >
-            &nbsp;
-          </template>
-          <span class="p-buttonset"></span>
-          <template #item="{ item }">
-            <router-link
-              :to="item.to"
-              custom
-              v-slot="{ href, route, navigate, isActive, isExactActive }"
-              ><Button
-                @click="navigate"
-                :href="href"
-                :label="item.label"
-                class="p-button-text"
-              />
-              <!--
-              <a
-                :href="href"
-                @click="navigate"
-                :class="{
-                  'active-link': isActive,
-                  'active-link-exact': isExactActive,
-                }"
-                >{{ item.label }}</a
-              >-->&nbsp;
-            </router-link>
-          </template>
-          <template #end>
-            <InputText placeholder="Search" type="text" />
-          </template>
-        </Menubar>
-      </div>
-    </div>
-    <div class="p-col-10 p-offset-1">
-      <!-- Render the matched page here-->
-      <NuxtPage />
-    </div>
-    <div class="p-col-10 p-offset-1">
+  <div class="layout-static">
+    <Topbar />
+    <div class="layout-main-container">
+      <div class="layout-main"><NuxtPage /></div>
       <Footer />
     </div>
   </div>
 </template>
 <script>
-import Footer from "./components/footer";
+import Footer from "./components/footer.vue";
+import Topbar from "./components/topbar.vue";
 
 export default {
   name: "App",
+  methods: {
+    onWrapperClick() {
+      return true;
+    },
+    onSidebarClick() {
+      return true;
+    },
+  },
   data() {
     return {
       items: [

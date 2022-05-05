@@ -1,0 +1,35 @@
+<template>
+  <div class="layout-topbar">
+    <span class="layout-topbar-logo"><a href="/">Homebrew Hub</a></span>
+
+    <button
+      class="p-link layout-topbar-menu-button layout-topbar-button"
+      v-styleclass="{
+        selector: '@next',
+        enterClass: 'hidden',
+        enterActiveClass: 'scalein',
+        leaveToClass: 'hidden',
+        leaveActiveClass: 'fadeout',
+        hideOnOutsideClick: true,
+      }"
+    >
+      <i class="pi pi-ellipsis-v"></i>
+    </button>
+    <ul class="layout-topbar-menu hidden lg:flex origin-top">
+      <li>
+        <a href="/games"><Button label="Games" class="mr-2 mb-2" /></a>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Topbar",
+};
+</script>
+<style>
+.layout-topbar-logo a {
+  color: black;
+}
+</style>
