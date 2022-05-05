@@ -17,7 +17,19 @@
     </button>
     <ul class="layout-topbar-menu hidden lg:flex origin-top">
       <li>
-        <a href="/games"><Button label="Games" class="mr-2 mb-2" /></a>
+        <a href="/games"
+          ><Button label="Games" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
+      <li>
+        <a href="/demos"
+          ><Button label="Demo" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
+      <li>
+        <a href="/music"
+          ><Button label="Music" class="p-button-text mr-2 mb-2"
+        /></a>
       </li>
     </ul>
   </div>

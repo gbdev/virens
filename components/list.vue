@@ -2,52 +2,60 @@
   Render a paginated list of entries with a grid of cards
 -->
 <script setup>
-const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
+const route = useRoute();
+const a = route.params;
+
+let url = "https://hh3.gbdev.io/api/all?results=1000";
+
+if (route.name == "music") {
+  url = "https://hh3.gbdev.io/api/search?type=music";
+} else if (route.name == "demos") {
+  url = "https://hh3.gbdev.io/api/search?type=demo";
+} else {
+  url = "https://hh3.gbdev.io/api/all?results=1000";
+}
+const { data } = await useFetch(url);
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];
 </script>
 
 <template>
-  <div class="card">
-    <DataView :value="entries" :layout="layout" :paginator="true" :rows="9">
-      <template #grid="slotProps">
-        <div class="p-col-12 p-md-4">
-          <div class="product-grid-item card">
-            <div class="product-grid-item-top">
-              <div>
-                <i class="pi pi-tag product-category-icon"></i>
-                <span class="product-category">{{
-                  slotProps.data.typetag
-                }}</span>
-              </div>
+  <DataView :value="entries" :layout="layout" :paginator="true" :rows="20">
+    <template #grid="slotProps">
+      <div class="col-12 sm:col-6 lg:col-4 xl:col-3">
+        <div class="product-grid-item card">
+          <div class="product-grid-item-top">
+            <div>
+              <i class="pi pi-tag product-category-icon"></i>
+              <span class="product-category">{{ slotProps.data.typetag }}</span>
             </div>
-            <div class="product-grid-item-content">
-              <img
-                :src="
-                  'https://hh3.gbdev.io/entries/' +
-                  slotProps.data.slug +
-                  '/' +
-                  slotProps.data.screenshots[0]
-                "
-                class="product-image"
-                :alt="slotProps.data.title"
-              />
-              <div class="product-name">
-                <router-link tag="li" :to="'/game/' + slotProps.data.slug">{{
-                  slotProps.data.title
-                }}</router-link>
-              </div>
-              <div class="product-description">
-                {{ slotProps.data.developer }}
-              </div>
-            </div>
-            <div class="product-grid-item-bottom"></div>
           </div>
+          <div class="product-grid-item-content">
+            <img
+              :src="
+                'https://hh3.gbdev.io/entries/' +
+                slotProps.data.slug +
+                '/' +
+                slotProps.data.screenshots[0]
+              "
+              class="product-image"
+              :alt="slotProps.data.title"
+            />
+            <div class="product-name">
+              <router-link tag="li" :to="'/game/' + slotProps.data.slug">{{
+                slotProps.data.title
+              }}</router-link>
+            </div>
+            <div class="product-description">
+              {{ slotProps.data.developer }}
+            </div>
+          </div>
+          <div class="product-grid-item-bottom"></div>
         </div>
-      </template>
-    </DataView>
-  </div>
+      </div>
+    </template>
+  </DataView>
 </template>
 <script>
 export default {
@@ -101,7 +109,7 @@ export default {
 }
 
 .product-image {
-  width: 256px;
+  width: 100%;
 }
 
 .product-description {

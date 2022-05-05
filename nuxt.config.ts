@@ -30,6 +30,11 @@ export default defineNuxtConfig({
           name: "demos",
           path: "/demos",
           file: resolve(__dirname, "pages/games.vue"),
+        },
+        {
+          name: "music",
+          path: "/music",
+          file: resolve(__dirname, "pages/games.vue"),
         }
       );
     },

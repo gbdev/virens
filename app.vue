@@ -1,6 +1,6 @@
 <!-- Main app template -->
 <template>
-  <div class="layout-static">
+  <div>
     <Topbar />
     <div class="layout-main-container">
       <div class="layout-main"><NuxtPage /></div>
@@ -54,5 +54,8 @@ export default {
 }
 .p-menuitem-icon {
   margin: 0 !important;
+}
+.layout-main-container {
+  padding: 7rem 2rem 2rem 2rem;
 }
 </style>
