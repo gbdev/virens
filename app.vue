@@ -1,4 +1,9 @@
 <!-- Main app template -->
+<script setup>
+useHead({
+  meta: [{ name: "twitter:site", content: "@gbdev0" }],
+});
+</script>
 <template>
   <div>
     <Topbar />

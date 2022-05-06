@@ -1,5 +1,9 @@
 <script setup>
 const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
+
+useHead({
+  title: "Homebrew Hub",
+});
 </script>
 <template>
   <div class="grid">

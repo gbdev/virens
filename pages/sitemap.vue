@@ -3,6 +3,10 @@ const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];
+
+useHead({
+  title: "Homebrew Hub - Sitemap",
+});
 </script>
 
 <template>

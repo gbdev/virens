@@ -7,6 +7,11 @@ const url = "https://hh3.gbdev.io/api/entry/" + route.params.slug + ".json";
 // Fetch the requested game manifest from the API
 const { data } = await useFetch(url);
 const game = data.value;
+
+const gametitle = data.value.title;
+useHead({
+  title: gametitle,
+});
 </script>
 
 <template>
