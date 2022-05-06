@@ -5,7 +5,7 @@ load the WASM build.
 */
 
 import Emulator from "./Emulator";
-import Mgba from "./mgba";
+import Mgba from "./Mgba";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Emulator", Emulator);

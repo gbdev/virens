@@ -1,5 +1,7 @@
 <script>
-import Mgba from "../mgba.js";
+import mGBA from "../mgba.js";
 
 export default { name: "Mgba" };
+
+console.log(mGBA);
 </script>
