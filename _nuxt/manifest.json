@@ -1,6 +1,6 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-c323ffd5.mjs",
+    "file": "entry-a40ef1db.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -25,7 +25,7 @@
     ]
   },
   "pages/credits.vue": {
-    "file": "credits-d88abbcd.mjs",
+    "file": "credits-d08d404f.mjs",
     "src": "pages/credits.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -33,7 +33,7 @@
     ]
   },
   "pages/developers.vue": {
-    "file": "developers-e6483fe6.mjs",
+    "file": "developers-3594cf4e.mjs",
     "src": "pages/developers.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -41,7 +41,7 @@
     ]
   },
   "pages/disclaimer.vue": {
-    "file": "disclaimer-d891990a.mjs",
+    "file": "disclaimer-646a8df1.mjs",
     "src": "pages/disclaimer.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -49,45 +49,45 @@
     ]
   },
   "pages/game/[slug].vue": {
-    "file": "_slug_-96facac4.mjs",
+    "file": "_slug_-f5c38a45.mjs",
     "src": "pages/game/[slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-eb515c05.mjs"
+      "_fetch-1f307460.mjs"
     ]
   },
-  "_fetch-eb515c05.mjs": {
-    "file": "fetch-eb515c05.mjs",
+  "_fetch-1f307460.mjs": {
+    "file": "fetch-1f307460.mjs",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/games.vue": {
-    "file": "games-498f190c.mjs",
+    "file": "games-c7d8615f.mjs",
     "src": "pages/games.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-eb515c05.mjs"
+      "_fetch-1f307460.mjs"
     ]
   },
   "pages/index.vue": {
-    "file": "index-80d79b30.mjs",
+    "file": "index-f63b641c.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-eb515c05.mjs"
+      "_fetch-1f307460.mjs"
     ]
   },
   "pages/sitemap.vue": {
-    "file": "sitemap-92c7ecd7.mjs",
+    "file": "sitemap-8d8babc8.mjs",
     "src": "pages/sitemap.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-eb515c05.mjs"
+      "_fetch-1f307460.mjs"
     ]
   },
   "__vite-browser-external": {

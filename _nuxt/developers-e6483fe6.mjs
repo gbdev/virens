@@ -1,1 +1,0 @@
-import{_ as t,o as n,a,F as s,b as e,d as o}from"./entry-c323ffd5.mjs";const c={},r=e("h1",null,"API",-1),_=o(" Documentation on the Homebrew Hub API can be found "),d=e("a",{href:"https://github.com/gbdev/homebrewhub#api-documentation"},"here",-1),h=o(". ");function i(u,m){return n(),a(s,null,[r,_,d,h],64)}var b=t(c,[["render",i]]);export{b as default};
