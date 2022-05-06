@@ -23,6 +23,7 @@ useHead({
           <div>
             <ClientOnly>
               <Emulator :gameData="game" />
+              <Mgba />
             </ClientOnly>
           </div>
         </div>
@@ -48,8 +49,12 @@ useHead({
             <br />
             <br />
             <br />
+
             <a :href="rom_endpoint"
               ><Button
+                v-tooltip="
+                  'Use an emulator like BGB or Gambatte to play downloaded ROMs'
+                "
                 label="Download ROM"
                 icon="pi pi-download"
                 iconPos="right"
