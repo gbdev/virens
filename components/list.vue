@@ -8,9 +8,9 @@ const a = route.params;
 let url = "https://hh3.gbdev.io/api/all?results=1000";
 
 if (route.name == "music") {
-  url = "https://hh3.gbdev.io/api/search?type=music";
+  url = "https://hh3.gbdev.io/api/search?typetag=music&results=1000";
 } else if (route.name == "demos") {
-  url = "https://hh3.gbdev.io/api/search?type=demo";
+  url = "https://hh3.gbdev.io/api/search?typetag=demo&results=1000";
 } else {
   url = "https://hh3.gbdev.io/api/all?results=1000";
 }
