@@ -13,6 +13,9 @@ import Menubar from "primevue/menubar";
 import DataView from "primevue/dataview";
 import Chip from "primevue/chip";
 import Slider from "primevue/slider";
+import SelectButton from "primevue/selectbutton";
+import MultiSelect from "primevue/multiselect";
+import Dropdown from "primevue/dropdown";
 import "../assets/styles/layout.scss";
 
 export default defineNuxtPlugin((nuxtApp) => {
@@ -26,4 +29,7 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("DataView", DataView);
   nuxtApp.vueApp.component("Chip", Chip);
   nuxtApp.vueApp.component("Slider", Slider);
+  nuxtApp.vueApp.component("SelectButton", SelectButton);
+  nuxtApp.vueApp.component("MultiSelect", MultiSelect);
+  nuxtApp.vueApp.component("Dropdown", Dropdown);
 });

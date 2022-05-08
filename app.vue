@@ -27,27 +27,6 @@ export default {
       return true;
     },
   },
-  data() {
-    return {
-      items: [
-        {
-          label: "Games",
-          icon: "",
-          to: "/games/",
-        },
-        {
-          label: "Demos",
-          icon: "",
-          to: "/demos",
-        },
-        {
-          label: "gbcompo21",
-          icon: "",
-          to: "/gbcompo21",
-        },
-      ],
-    };
-  },
 };
 </script>
 <style>
