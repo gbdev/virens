@@ -1,25 +1,3 @@
-<!--
-  Render a paginated list of entries with a grid of cards
--->
-<script setup>
-const route = useRoute();
-const a = route.params;
-
-let url = "https://hh3.gbdev.io/api/all?results=1000";
-
-if (route.name == "music") {
-  url = "https://hh3.gbdev.io/api/search?typetag=music&results=1000";
-} else if (route.name == "demos") {
-  url = "https://hh3.gbdev.io/api/search?typetag=demo&results=1000";
-} else {
-  url = "https://hh3.gbdev.io/api/all?results=1000";
-}
-const { data } = await useFetch(url);
-
-const entries = data.value["entries"];
-const total_entries = data.value["results"];
-</script>
-
 <template>
   <DataView :value="entries" :layout="layout" :paginator="true" :rows="20">
     <template #grid="slotProps">
@@ -62,6 +40,7 @@ export default {
   name: "List",
   props: {
     msg: String,
+    entries: Array,
   },
   data() {
     return {
