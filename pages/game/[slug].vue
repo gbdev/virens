@@ -43,7 +43,7 @@ useHead({
               >&nbsp; </template
             ><br />
             <span v-if="game.license"> License: {{ game.license }}<br /></span>
-
+            <span v-if="game.date"> Creation date: {{ game.date }}<br /></span>
             Type: <Chip>{{ game.typetag }}</Chip> -
             <Chip v-tooltip="tooltip[game.platform]">{{ game.platform }}</Chip>
             <br />

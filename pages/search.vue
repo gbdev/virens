@@ -60,7 +60,7 @@ import List from "~~/components/list.vue";
 export default {
   methods: {
     handlesearch: function () {
-      let baseurl = "http://localhost:8000/api/search?";
+      let baseurl = "https://hh3.gbdev.io/api/search?";
       let params = { results: 1000 };
       let tags = [];
       if (this.selectedTags) {
