@@ -1,5 +1,7 @@
 <!--
-  Emulator component. Fetches the game ROM Blob and rrepares and fires up the WASM build of the Binjgb emulator. Provides all the logic to control the emulation from the UI.
+  GB/GBC Emulator component. Fetches the game ROM Blob and fires up the WASM 
+  build of the Binjgb emulator. Provides some basic UI and all the logic to 
+  control the emulation from the UI.
 -->
 <template>
   <div>
@@ -31,18 +33,20 @@
     Volume: {{ Math.round(volume * 100) }}%
     <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
     <br />
-    DMG Palette:
-    <Button
-      @click="palDown()"
-      icon="pi pi-minus"
-      class="p-button-outlined p-button-sm p-button-rounded"
-    />
-    {{ pal }}
-    <Button
-      icon="pi pi-plus"
-      @click="palUp()"
-      class="p-button-outlined p-button-rounded p-button-sm"
-    />
+    <div v-if="gameData.platform == 'GB'">
+      DMG Palette:
+      <Button
+        @click="palDown()"
+        icon="pi pi-minus"
+        class="p-button-outlined p-button-sm p-button-rounded"
+      />
+      {{ pal }}
+      <Button
+        icon="pi pi-plus"
+        @click="palUp()"
+        class="p-button-outlined p-button-rounded p-button-sm"
+      />
+    </div>
   </div>
 </template>
 
