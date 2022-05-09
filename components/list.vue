@@ -1,30 +1,24 @@
 <template>
-  <DataView :value="entries" :layout="layout" :paginator="true" :rows="20">
+  <DataView :value="entries" :layout="layout" :paginator="true" :rows="18">
     <template #grid="slotProps">
-      <div class="col-12 sm:col-6 lg:col-4 xl:col-3">
+      <div class="listgrid col-12 sm:col-6 lg:col-3 xl:col-2">
         <div class="product-grid-item card">
-          <div class="product-grid-item-top">
-            <div>
-              <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category">{{ slotProps.data.typetag }}</span>
-            </div>
-          </div>
           <div class="product-grid-item-content">
-            <img
-              :src="
-                'https://hh3.gbdev.io/entries/' +
-                slotProps.data.slug +
-                '/' +
-                slotProps.data.screenshots[0]
-              "
-              class="product-image"
-              :alt="slotProps.data.title"
-            />
-            <div class="product-name">
-              <router-link tag="li" :to="'/game/' + slotProps.data.slug">{{
-                slotProps.data.title
-              }}</router-link>
-            </div>
+            <router-link tag="li" :to="'/game/' + slotProps.data.slug">
+              <img
+                :src="
+                  'https://hh3.gbdev.io/entries/' +
+                  slotProps.data.slug +
+                  '/' +
+                  slotProps.data.screenshots[0]
+                "
+                class="product-image"
+                :alt="slotProps.data.title"
+              />
+              <div class="product-name">
+                {{ slotProps.data.title }}
+              </div></router-link
+            >
             <div class="product-description">
               {{ slotProps.data.developer }}
             </div>
@@ -68,9 +62,20 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.listgrid {
+  background-color: #f8f9fa;
+}
+.grid-nogutter {
+  background-color: #f8f9fa;
+}
+
+.p-paginator {
+  background-color: #f8f9fa;
+}
+
 .card {
   background: #ffffff;
-  padding: 2rem;
+  padding: 0rem;
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 4px;
@@ -83,12 +88,18 @@ export default {
 }
 
 .product-name {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 600;
+  height: 2.3rem;
+}
+
+a {
+  color: var(--bluegray-900);
 }
 
 .product-image {
   width: 100%;
+  margin-top: 0px;
 }
 
 .product-description {
@@ -154,8 +165,7 @@ export default {
   }
 
   img {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    margin: 2rem 0;
+    margin-bottom: 1rem;
   }
 
   .product-grid-item-content {
