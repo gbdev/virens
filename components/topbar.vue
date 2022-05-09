@@ -36,6 +36,11 @@
           ><Button label="Music" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
+      <li>
+        <a href="/hb"
+          ><Button label="Tools" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
     </ul>
   </div>
 </template>

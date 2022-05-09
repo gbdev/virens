@@ -12,6 +12,9 @@ if (route.name == "music") {
 } else if (route.name == "demos") {
   url = "https://hh3.gbdev.io/api/search?typetag=demo&results=1000";
   pagetitle = "HH - Demos";
+} else if (route.name == "hb") {
+  url = "https://hh3.gbdev.io/api/search?typetag=homebrew&results=1000";
+  pagetitle = "HH - Tools";
 } else {
   url = "https://hh3.gbdev.io/api/all?results=1000";
   pagetitle = "HH - Games";
