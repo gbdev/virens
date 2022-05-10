@@ -6,6 +6,7 @@ import { defineNuxtPlugin } from "#app";
 import PrimeVue from "primevue/config";
 import Button from "primevue/button";
 import InputText from "primevue/inputtext";
+import InputNumber from "primevue/inputnumber";
 import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
 import ColorPicker from "primevue/colorpicker";
@@ -17,6 +18,7 @@ import SelectButton from "primevue/selectbutton";
 import MultiSelect from "primevue/multiselect";
 import Dropdown from "primevue/dropdown";
 import "../assets/styles/layout.scss";
+import "../assets/styles/themes/dark-bs.css";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.use(PrimeVue, { ripple: true });
@@ -32,4 +34,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("SelectButton", SelectButton);
   nuxtApp.vueApp.component("MultiSelect", MultiSelect);
   nuxtApp.vueApp.component("Dropdown", Dropdown);
+  nuxtApp.vueApp.component("InputNumber", InputNumber);
 });

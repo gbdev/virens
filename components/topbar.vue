@@ -52,6 +52,10 @@ export default {
 </script>
 <style>
 .layout-topbar-logo a {
-  color: black;
+  color: var(--text-color);
+}
+
+.p-button-text {
+  color: var(--text-color);
 }
 </style>
