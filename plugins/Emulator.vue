@@ -6,6 +6,13 @@
 <template>
   <div>
     <div>
+      <Button
+        @click="toggleFullscreen"
+        label="Fullscreen"
+        icon="pi pi-desktop"
+        iconPos="right"
+        class="p-button-text"
+      />
       {{ loading }}
       <canvas
         class="shadow-3"
@@ -15,37 +22,44 @@
       ></canvas>
     </div>
     <br />
-    <Button
-      @click="toggleFullscreen"
-      label="Fullscreen"
-      icon="pi pi-desktop"
-      iconPos="right"
-      class="p-button-text"
-    />
+
     <br />
-    <Slider
-      orientation="horizontal"
-      v-model="volume"
-      :step="0.01"
-      :min="0"
-      :max="1"
-    /><br />
-    Volume: {{ Math.round(volume * 100) }}%
-    <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
-    <br />
-    <div v-if="gameData.platform == 'GB'">
-      DMG Palette:
-      <Button
-        @click="palDown()"
-        icon="pi pi-minus"
-        class="p-button-outlined p-button-sm p-button-rounded"
-      />
-      {{ pal }}
-      <Button
-        icon="pi pi-plus"
-        @click="palUp()"
-        class="p-button-outlined p-button-rounded p-button-sm"
-      />
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-8">
+        <div class="">
+          <Slider
+            orientation="horizontal"
+            v-model="volume"
+            :step="0.01"
+            :min="0"
+            :max="1"
+          />
+        </div>
+      </div>
+      <div class="col-12 md:col-4">
+        <div class="p-inputgroup">
+          Volume: {{ Math.round(volume * 100) }}%
+          <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
+        </div>
+      </div>
+      <div class="col-12 md:col-3">
+        <div class="p-inputgroup">
+          <div v-if="gameData.platform == 'GB'">
+            DMG Palette:
+            <InputNumber
+              v-model="pal"
+              mode="decimal"
+              showButtons
+              buttonLayout="horizontal"
+              decrementButtonClass="p-button-secondary"
+              incrementButtonClass="p-button-secondary"
+              incrementButtonIcon="pi pi-plus"
+              decrementButtonIcon="pi pi-minus"
+              @click="setPal(pal)"
+            />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -143,6 +157,12 @@ export default {
       mute: false,
       volume_btn_icon: "pi pi-volume-up",
     };
+  },
+  watch: {
+    // Whenever the palette gets changed from the UI, set it in the emulator
+    pal(oldvalue, newPal) {
+      this.setPal(newPal);
+    },
   },
   mounted: function () {
     // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.

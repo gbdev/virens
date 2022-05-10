@@ -70,6 +70,12 @@ useHead({
           </div>
         </div>
       </div>
+      <br />
+      <div class="card mb-0">
+        <h2>Controls</h2>
+        A: Z, B: X, Start: Enter, Select: Shift <br />
+        Arrows
+      </div>
     </div>
   </div>
   <div>
