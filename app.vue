@@ -30,9 +30,6 @@ export default {
 };
 </script>
 <style>
-.p-button.p-button-text {
-  color: var(--gray-900);
-}
 .sitetitle {
   text-decoration: none;
 }
@@ -41,5 +38,11 @@ export default {
 }
 .layout-main-container {
   padding: 7rem 2rem 2rem 2rem;
+}
+.card {
+  padding: 1.5rem 2rem 0.1rem 2rem;
+}
+.main-text {
+  font-size: 1.5rem;
 }
 </style>

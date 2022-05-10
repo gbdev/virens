@@ -1,5 +1,5 @@
 <template>
-  <DataView :value="entries" :layout="layout" :paginator="true" :rows="18">
+  <DataView :value="entries" :layout="layout" :paginator="paginator" :rows="18">
     <template #grid="slotProps">
       <div class="listgrid col-12 sm:col-6 lg:col-3 xl:col-2">
         <div class="product-grid-item card">
@@ -35,6 +35,10 @@ export default {
   props: {
     msg: String,
     entries: Array,
+    paginator: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -63,18 +67,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .listgrid {
-  background-color: #f8f9fa;
+  background-color: var(--surface-b);
 }
 .grid-nogutter {
-  background-color: #f8f9fa;
+  background-color: var(--surface-b);
 }
 
 .p-paginator {
-  background-color: #f8f9fa;
+  background-color: var(--surface-b);
 }
 
 .card {
-  background: #ffffff;
+  background: var(--surface-e);
   padding: 0rem;
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
@@ -94,7 +98,7 @@ export default {
 }
 
 a {
-  color: var(--bluegray-900);
+  color: var(--text-color);
 }
 
 .product-image {
@@ -104,6 +108,7 @@ a {
 
 .product-description {
   margin: 0 0 1rem 0;
+  color: var(--text-color-secondary);
 }
 
 .product-category-icon {
@@ -155,7 +160,7 @@ a {
 
 ::v-deep(.product-grid-item) {
   margin: 0.5rem;
-  border: 1px solid #dee2e6;
+  border: 1px solid var(--surface-d);
 
   .product-grid-item-top,
   .product-grid-item-bottom {
