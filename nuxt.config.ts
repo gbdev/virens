@@ -6,6 +6,11 @@ import { createCommonJS } from "mlly";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      BASE_API_URL: process.env.BASE_API_URL || "https://hh3.gbdev.io",
+    },
+  },
   css: [
     "primeflex/primeflex.css",
     "primevue/resources/themes/saga-blue/theme.css",

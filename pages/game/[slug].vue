@@ -3,7 +3,9 @@
 -->
 <script setup>
 const route = useRoute();
-const url = "https://hh3.gbdev.io/api/entry/" + route.params.slug + ".json";
+const config = useRuntimeConfig().public;
+
+const url = config.BASE_API_URL +"/api/entry/" + route.params.slug + ".json";
 // Fetch the requested game manifest from the API
 const { data } = await useFetch(url);
 const game = data.value;

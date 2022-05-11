@@ -1,5 +1,7 @@
 <script setup>
-const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
+const config = useRuntimeConfig().public;
+
+const { data } = await useFetch(config.BASE_API_URL+"/api/all?results=1000");
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];

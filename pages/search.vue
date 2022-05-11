@@ -1,3 +1,8 @@
+<script setup>
+const config = useRuntimeConfig().public;
+
+</script>
+
 <template>
   <div>
     <h5>Filters</h5>
@@ -56,11 +61,12 @@
   </div>
 </template>
 <script>
-import List from "~~/components/list.vue";
+import List from "../components/list";
+
 export default {
   methods: {
     handlesearch: function () {
-      let baseurl = "https://hh3.gbdev.io/api/search?";
+      let baseurl = this.config.BASE_API_URL+"/api/search?";
       let params = { results: 1000 };
       let tags = [];
       if (this.selectedTags) {

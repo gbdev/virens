@@ -1,3 +1,6 @@
+<script setup>
+const config = useRuntimeConfig().public
+</script>
 <template>
   <DataView :value="entries" :layout="layout" :paginator="paginator" :rows="18">
     <template #grid="slotProps">
@@ -7,7 +10,7 @@
             <router-link tag="li" :to="'/game/' + slotProps.data.slug">
               <img
                 :src="
-                  'https://hh3.gbdev.io/entries/' +
+                  config.BASE_API_URL+'/entries/' +
                   slotProps.data.slug +
                   '/' +
                   slotProps.data.screenshots[0]

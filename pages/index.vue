@@ -2,8 +2,12 @@
 useHead({
   title: "Homebrew Hub",
 });
+const config = useRuntimeConfig().public;
 
-const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
+let url = config.BASE_API_URL+"/api/all?results=1000"
+
+const { data } = await useFetch(url);
+
 </script>
 <template>
   <div class="grid">
@@ -80,6 +84,8 @@ const { data } = await useFetch("https://hh3.gbdev.io/api/all?results=1000");
 </template>
 <script>
 export default {
+
+
   data() {
     return {
       entries: [],
@@ -94,7 +100,7 @@ export default {
       "ucity",
       "dango-dash",
     ].forEach((gameslug) => {
-      fetch("https://hh3.gbdev.io" + "/api/entry/" + gameslug + ".json")
+      fetch(this.config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
         .then((response) => response.json())
         .then((data) => {
           this.entries.push(data);

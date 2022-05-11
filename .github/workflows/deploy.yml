@@ -23,7 +23,7 @@ jobs:
         working-directory: virens/
 
       - name: Run Vue build
-        run: npm run generate --force
+        run: BASE_API_URL=https://hh3.gbdev.io npm run generate --force
         working-directory: virens/
 
       - name: Store final build

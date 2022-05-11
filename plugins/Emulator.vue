@@ -103,7 +103,7 @@ export default {
   },
   setup() {
     const gamecanvas = ref(null);
-
+    const config = useRuntimeConfig().public;
     // Before the component is mounted, the value
     // of the ref is `null` which is the default
     // value we've specified above.
@@ -116,6 +116,7 @@ export default {
       // It is important to return the ref,
       // otherwise it won't work.
       gamecanvas,
+      config
     };
   },
   data() {
@@ -172,7 +173,7 @@ export default {
     this.gameData.files.forEach((file) => {
       if (file.playable) {
         this.rom_endpoint =
-          "https://hh3.gbdev.io" +
+          this.config.BASE_API_URL +
           "/entries/" +
           this.gameData.slug +
           "/" +

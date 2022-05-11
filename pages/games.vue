@@ -1,22 +1,23 @@
 <script setup>
 const route = useRoute();
 const a = route.params;
+const config = useRuntimeConfig().public;
 
-let url = "https://hh3.gbdev.io/api/all?results=1000";
+let url = config.BASE_API_URL+"/api/all?results=1000";
 
 var pagetitle = "HH - Music";
 
 if (route.name == "music") {
-  url = "https://hh3.gbdev.io/api/search?typetag=music&results=1000";
+  url = config.BASE_API_URL+"/api/search?typetag=music&results=1000";
   pagetitle = "HH - Music";
 } else if (route.name == "demos") {
-  url = "https://hh3.gbdev.io/api/search?typetag=demo&results=1000";
+  url = config.BASE_API_URL+"/api/search?typetag=demo&results=1000";
   pagetitle = "HH - Demos";
 } else if (route.name == "hb") {
-  url = "https://hh3.gbdev.io/api/search?typetag=homebrew&results=1000";
+  url = config.BASE_API_URL+"/api/search?typetag=homebrew&results=1000";
   pagetitle = "HH - Tools";
 } else {
-  url = "https://hh3.gbdev.io/api/all?results=1000";
+  url = config.BASE_API_URL+"/api/all?results=1000";
   pagetitle = "HH - Games";
 }
 const { data } = await useFetch(url);
