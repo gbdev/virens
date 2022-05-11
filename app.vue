@@ -1,7 +1,8 @@
 <!-- Main app template -->
 <script setup>
 useHead({
-  meta: [{ name: "twitter:site", content: "@gbdev0" }],
+  meta: [{ name: "twitter:site", content: "@gbdev0" },
+         { name: "og:title", content: "Homebrew Hub" }],
 });
 </script>
 <template>

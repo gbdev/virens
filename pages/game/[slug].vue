@@ -10,9 +10,25 @@ const url = config.BASE_API_URL +"/api/entry/" + route.params.slug + ".json";
 const { data } = await useFetch(url);
 const game = data.value;
 
+let developer = ""
+
 const gametitle = data.value.title;
+if (game.developer) {
+  developer = game.developer
+} 
+const gamedescription = "A Game Boy homebrew game by "+ developer + ". Play online for free."
+
+let screenshot_url = ""
+
+if (game.screenshots[0]) {
+  screenshot_url = config.BASE_API_URL +"/entries/" + route.params.slug + '/'+game.screenshots[0]
+}
+
 useHead({
-  title: gametitle,
+  meta: [{ name: "title", content: gametitle },
+         { name: "og:title", content: gametitle },
+         { name: "og:description", content: gamedescription},
+         { name: "og:image", content: screenshot_url},],
 });
 </script>
 

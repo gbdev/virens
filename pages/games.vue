@@ -26,7 +26,8 @@ const entries = data.value["entries"];
 const total_entries = data.value["results"];
 
 useHead({
-  title: pagetitle,
+  meta: [{ name: "title", content: pagetitle },
+         { name: "og:title", content: pagetitle }],
 });
 </script>
 
