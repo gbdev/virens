@@ -2,7 +2,8 @@
 <script setup>
 useHead({
   meta: [{ name: "twitter:site", content: "@gbdev0" },
-         { name: "og:title", content: "Homebrew Hub" }],
+         { name: "og:title", content: "Homebrew Hub" },
+         { name: "twitter:card", content: "summary"}],
 });
 </script>
 <template>
