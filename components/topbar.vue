@@ -41,6 +41,11 @@
           ><Button label="Tools" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
+      <li>
+        <a href="/games/gbcompo21"
+          ><Button label="gbcompo21" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
     </ul>
   </div>
 </template>
