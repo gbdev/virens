@@ -7,8 +7,10 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "axios": "^0.27.2",
     "nuxt": "3.0.0-rc.1",
-    "primevue": "3.10.0"
+    "primevue": "3.10.0",
+    "sitemap": "^7.1.1"
   },
   "dependencies": {
     "primeflex": "3.1.2",

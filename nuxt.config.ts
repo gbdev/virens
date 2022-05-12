@@ -6,6 +6,10 @@ import { createCommonJS } from "mlly";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  modules: ["~/modules/sitemap"],
+  sitemap: {
+    hostname: "https://hh.gbdev.io",
+  },
   runtimeConfig: {
     public: {
       BASE_API_URL: process.env.BASE_API_URL || "https://hh3.gbdev.io",
