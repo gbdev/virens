@@ -1,5 +1,5 @@
 <script setup>
-const config = useRuntimeConfig().public
+const config = useRuntimeConfig().public;
 </script>
 <template>
   <DataView :value="entries" :layout="layout" :paginator="paginator" :rows="18">
@@ -10,7 +10,8 @@ const config = useRuntimeConfig().public
             <router-link tag="li" :to="'/game/' + slotProps.data.slug">
               <img
                 :src="
-                  config.BASE_API_URL+'/entries/' +
+                  config.BASE_API_URL +
+                  '/entries/' +
                   slotProps.data.slug +
                   '/' +
                   slotProps.data.screenshots[0]

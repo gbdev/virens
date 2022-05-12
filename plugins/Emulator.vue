@@ -116,7 +116,7 @@ export default {
       // It is important to return the ref,
       // otherwise it won't work.
       gamecanvas,
-      config
+      config,
     };
   },
   data() {

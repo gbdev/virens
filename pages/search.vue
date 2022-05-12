@@ -1,6 +1,9 @@
 <script setup>
 const config = useRuntimeConfig().public;
 
+useHead({
+  title: "HH - Search",
+});
 </script>
 
 <template>
@@ -66,7 +69,7 @@ import List from "../components/list";
 export default {
   methods: {
     handlesearch: function () {
-      let baseurl = this.config.BASE_API_URL+"/api/search?";
+      let baseurl = this.config.BASE_API_URL + "/api/search?";
       let params = { results: 1000 };
       let tags = [];
       if (this.selectedTags) {

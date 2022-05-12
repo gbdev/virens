@@ -1,13 +1,13 @@
 <script setup>
 const config = useRuntimeConfig().public;
 
-const { data } = await useFetch(config.BASE_API_URL+"/api/all?results=1000");
+const { data } = await useFetch(config.BASE_API_URL + "/api/all?results=1000");
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];
 
 useHead({
-  title: "Homebrew Hub - Sitemap",
+  title: "HH - Sitemap",
 });
 </script>
 

@@ -4,10 +4,9 @@ useHead({
 });
 const config = useRuntimeConfig().public;
 
-let url = config.BASE_API_URL+"/api/all?results=1000"
+let url = config.BASE_API_URL + "/api/all?results=1000";
 
 const { data } = await useFetch(url);
-
 </script>
 <template>
   <div class="grid">
@@ -84,8 +83,6 @@ const { data } = await useFetch(url);
 </template>
 <script>
 export default {
-
-
   data() {
     return {
       entries: [],
