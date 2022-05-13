@@ -12,6 +12,8 @@ import ToastService from "primevue/toastservice";
 import ColorPicker from "primevue/colorpicker";
 import Menubar from "primevue/menubar";
 import DataView from "primevue/dataview";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 import Chip from "primevue/chip";
 import Slider from "primevue/slider";
 import SelectButton from "primevue/selectbutton";
@@ -35,4 +37,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("MultiSelect", MultiSelect);
   nuxtApp.vueApp.component("Dropdown", Dropdown);
   nuxtApp.vueApp.component("InputNumber", InputNumber);
+  nuxtApp.vueApp.component("DataTable", DataTable);
+  nuxtApp.vueApp.component("Column", Column);
 });

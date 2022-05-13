@@ -25,20 +25,19 @@
 
     <br />
     <div class="grid p-fluid">
-      <div class="col-12 md:col-8">
-        <div class="">
+      <div class="col-12 md:col-8 vertical-align-bottom">
+        <div style="padding: 1rem">
           <Slider
             orientation="horizontal"
             v-model="volume"
-            :step="0.01"
+            :step="0.05"
             :min="0"
             :max="1"
           />
         </div>
       </div>
-      <div class="col-12 md:col-4">
+      <div class="col-12 md:col-1">
         <div class="p-inputgroup">
-          Volume: {{ Math.round(volume * 100) }}%
           <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
         </div>
       </div>
