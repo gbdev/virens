@@ -30,6 +30,15 @@ if (game.screenshots[0]) {
     game.screenshots[0];
 }
 
+let rom_endpoint = "";
+
+game.files.forEach((file) => {
+  if (file.playable) {
+    rom_endpoint =
+      config.BASE_API_URL + "/entries/" + game.slug + "/" + file.filename;
+  }
+});
+
 useHead({
   title: gametitle + "- Homebrew Hub",
   meta: [
@@ -48,7 +57,7 @@ useHead({
         <div class="flex justify-content-between mb-6">
           <div>
             <ClientOnly>
-              <Emulator :gameData="game" />
+              <Emulator :gameData="game" :romEndpoint="rom_endpoint" />
               <Mgba />
             </ClientOnly>
           </div>

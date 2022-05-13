@@ -99,6 +99,7 @@ export default {
   props: {
     msg: String,
     gameData: Object,
+    romEndpoint: String,
   },
   setup() {
     const gamecanvas = ref(null);
@@ -168,20 +169,8 @@ export default {
     // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
     window.vm = this;
 
-    // Find the first file it's playable from the game metadata
-    this.gameData.files.forEach((file) => {
-      if (file.playable) {
-        this.rom_endpoint =
-          this.config.BASE_API_URL +
-          "/entries/" +
-          this.gameData.slug +
-          "/" +
-          file.filename;
-      }
-    });
-
     // Download the ROM from the found endpoint
-    fetch(this.rom_endpoint).then((response) => {
+    fetch(this.romEndpoint).then((response) => {
       let gameblob = response.blob().then((blob) => {
         // Get the Blob
         this.gamerom = blob;
