@@ -116,12 +116,18 @@ useHead({
       <div class="card mb-0">
         <h2>Controls</h2>
         <DataTable :value="controls" responsiveLayout="scroll">
-          <Column
-            v-for="col of columns"
-            :field="col.field"
-            :header="col.header"
-            :key="col.field"
-          ></Column>
+          <Column field="gb" header="Game Boy"
+            ><template #body="slotProps"
+              ><Chip :class="buttonClass[slotProps.data.gb]">{{
+                slotProps.data.gb
+              }}</Chip></template
+            ></Column
+          >
+          <Column field="kb" header="Keyboard"
+            ><template #body="slotProps">{{
+              slotProps.data.kb
+            }}</template></Column
+          >
         </DataTable>
       </div>
     </div>
@@ -143,11 +149,18 @@ export default {
   },
   data() {
     return {
+      buttonClass: {
+        A: "ab-button",
+        B: "ab-button",
+        Start: "ss-button",
+        Select: "ss-button",
+        "← ↑ → ↓": "arrows",
+      },
       controls: [
         { gb: "A", kb: "Z" },
         { gb: "B", kb: "X" },
         { gb: "Start", kb: "Enter" },
-        { gb: "Select", kb: "Right Shift" },
+        { gb: "Select", kb: "Tab" },
         { gb: "← ↑ → ↓", kb: "← ↑ → ↓" },
       ],
       columns: [
@@ -163,3 +176,18 @@ export default {
   },
 };
 </script>
+<style>
+.ab-button {
+  font-size: 1.25rem !important;
+  font-weight: 500 !important;
+  background-color: #781641 !important;
+  padding: 0 0.4rem !important;
+}
+.ss-button {
+  background: radial-gradient(#7a6c73, #948994) !important;
+}
+
+.arrows {
+  background-color: #010202 !important;
+}
+</style>
