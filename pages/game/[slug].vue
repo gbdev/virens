@@ -19,7 +19,7 @@ if (game.developer) {
 
 let type = "";
 if (game.typetag) {
-  type = typetag;
+  type = game.typetag;
 } else {
   type = game;
 }
@@ -75,7 +75,7 @@ useHead({
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
           <div>
-            <h1>{{ game.title }} {{ romblob }}</h1>
+            <h1>{{ game.title }}</h1>
             <span v-if="game.developer">
               Developer: {{ game.developer }} <br
             /></span>

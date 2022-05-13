@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   },
   hooks: {
     // By default, we use "pages" routing, matching the paths under /pages
-    // Let's add some additional routes
+    // Here we add some additional routes
     "pages:extend"(pages) {
       pages.push(
         // /demos, /games and /gbcompo21 should just point to the games view. We'll change the api call there, based on the matched path.
