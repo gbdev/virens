@@ -99,8 +99,14 @@ useHead({
       <br />
       <div class="card mb-0">
         <h2>Controls</h2>
-        A: Z, B: X, Start: Enter, Select: Shift <br />
-        Arrows
+        <DataTable :value="controls" responsiveLayout="scroll">
+          <Column
+            v-for="col of columns"
+            :field="col.field"
+            :header="col.header"
+            :key="col.field"
+          ></Column>
+        </DataTable>
       </div>
     </div>
   </div>
@@ -121,6 +127,17 @@ export default {
   },
   data() {
     return {
+      controls: [
+        { gb: "A", kb: "Z" },
+        { gb: "B", kb: "X" },
+        { gb: "Start", kb: "Enter" },
+        { gb: "Select", kb: "Right Shift" },
+        { gb: "← ↑ → ↓", kb: "← ↑ → ↓" },
+      ],
+      columns: [
+        { field: "gb", header: "Game Boy" },
+        { field: "kb", header: "Keyboard" },
+      ],
       tooltip: {
         GB: "The cartridge was designed to be played on the original Game Boy",
         GBC: "The game supports Game Boy Color features",
