@@ -16,8 +16,15 @@ const gametitle = data.value.title;
 if (game.developer) {
   developer = game.developer;
 }
-const gamedescription =
-  "A Game Boy homebrew game by " + developer + ". Play online for free.";
+
+let type = "";
+if (game.typetag) {
+  type = typetag;
+} else {
+  type = game;
+}
+
+const gamedescription = `A Game Boy homebrew ${type} by ${developer}. Play online for free.`;
 
 let screenshot_url = "";
 
@@ -40,7 +47,7 @@ game.files.forEach((file) => {
 });
 
 useHead({
-  title: gametitle + "- Homebrew Hub",
+  title: gametitle + " - Homebrew Hub",
   meta: [
     { name: "og:title", content: gametitle },
     { name: "og:description", content: gamedescription },

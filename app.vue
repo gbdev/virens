@@ -2,9 +2,18 @@
 <script setup>
 useHead({
   meta: [
+    // Twitter additional stuff
     { name: "twitter:site", content: "@gbdev0" },
-    { name: "og:title", content: "Homebrew Hub" },
     { name: "twitter:card", content: "summary" },
+    // Open Graph
+    { name: "og:title", content: "Homebrew Hub" },
+    {
+      name: "og:description",
+      content:
+        "A digital collection of homebrew software produced for Game Boy (Color), playable directly in the browser through an accurate emulator.",
+    },
+    { name: "og:type", content: "website" },
+    { name: "og:site_name", content: "Homebrew Hub" },
   ],
 });
 </script>
