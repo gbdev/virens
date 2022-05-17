@@ -107,11 +107,6 @@ export default {
     // Before the component is mounted, the value
     // of the ref is `null` which is the default
     // value we've specified above.
-    onMounted(() => {
-      // Logs: `Headline`
-      console.log(gamecanvas);
-    });
-
     return {
       // It is important to return the ref,
       // otherwise it won't work.
@@ -164,6 +159,9 @@ export default {
     pal(oldvalue, newPal) {
       this.setPal(newPal);
     },
+  },
+  unmounted: function () {
+    Emulator.stop();
   },
   mounted: function () {
     // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
