@@ -65,7 +65,6 @@ useHead({
           <div>
             <ClientOnly>
               <Emulator :gameData="game" :romEndpoint="rom_endpoint" />
-              <Mgba />
             </ClientOnly>
           </div>
         </div>
@@ -130,14 +129,6 @@ useHead({
           >
         </DataTable>
       </div>
-    </div>
-  </div>
-  <div>
-    <div class="p-grid">
-      <div class="p-col">
-        <!-- The Emulator component should only be loaded in a actual browser -->
-      </div>
-      <div class="p-col"></div>
     </div>
   </div>
 </template>
