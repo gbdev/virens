@@ -2736,7 +2736,8 @@
     font-weight: 600;
   }
   .p-dataview .p-dataview-content {
-    background: #2a323d;
+    /* Not sure why these rules can't be overriden by style components*/
+    background: var(--surface-b);
     color: rgba(255, 255, 255, 0.87);
     border: 0 none;
     padding: 0;
@@ -3256,11 +3257,11 @@
   }
   
   .p-paginator {
-    background: #2a323d;
+    background: var(--surface-b);
     color: #8dd0ff;
-    border: solid #3f4b5b;
+    border: 0px;
     border-width: 0;
-    padding: 0.75rem;
+    padding: 1rem;
     border-radius: 4px;
   }
   .p-paginator .p-paginator-first,
