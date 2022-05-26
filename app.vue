@@ -43,6 +43,18 @@ export default {
 };
 </script>
 <style>
+h1,
+h2,
+h3,
+.product-name,
+.gametitle {
+  font-family: "Eudoxus Sans";
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .sitetitle {
   text-decoration: none;
 }
@@ -56,6 +68,6 @@ export default {
   padding: 1.5rem 2rem 0.1rem 2rem;
 }
 .main-text {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 </style>

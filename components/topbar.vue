@@ -58,6 +58,9 @@ export default {
 <style>
 .layout-topbar-logo a {
   color: var(--text-color);
+  font-size: 1.85rem;
+  font-family: "Eudoxus Sans";
+  font-weight: 500;
 }
 
 .p-button-text {
