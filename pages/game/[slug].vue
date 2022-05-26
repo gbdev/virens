@@ -74,7 +74,7 @@ useHead({
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
           <div>
-            <h1>{{ game.title }}</h1>
+            <span class="gametitle">{{ game.title }}</span>
             <span v-if="game.developer">
               Developer: {{ game.developer }} <br
             /></span>
@@ -180,5 +180,11 @@ export default {
 
 .arrows {
   background-color: #010202 !important;
+}
+
+.gametitle {
+  font-size: 3rem;
+  margin: 1.5rem 0 1rem;
+  display: block;
 }
 </style>

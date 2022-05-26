@@ -96,7 +96,7 @@ export default {
 }
 
 .product-name {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 600;
   height: 2.3rem;
 }

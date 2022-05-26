@@ -14,10 +14,13 @@ const { data } = await useFetch(url);
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
           <div>
-            <span class="block font-medium mb-3 main-text">
+            <h3>Welcome to the new version of Homebrew Hub!</h3>
+            <span class="block font-regular mb-3 main-text">
               Homebrew Hub is a community-led attempt to collect, archive and
-              preserve every unofficial game and homebrew released for Game Boy
-              produced through decades of passionate work. We currently have
+              preserve every unofficial game and homebrew for Game Boy (Color)
+              released through decades of passionate work. Each ROM can be
+              easily downloaded or played directly in the browser, through an
+              accurate emulator. <br />We currently have
               <b>{{ data.results }}</b> entries in the database.</span
             >
           </div>
@@ -38,12 +41,14 @@ const { data } = await useFetch(url);
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
           <div>
-            <h3>Your game here?</h3>
-            <span class="block font-medium text-lg mb-3">
-              Anyone can contribute adding games to the database. Whatever it's
-              something you just finished building with your friends or a lost
-              ROM from the 90s, a Pull Request is all you need to add a new
-              entry.
+            <h3>Contribute</h3>
+            <span class="block font-regular text-lg mb-3">
+              Anyone can add new entries or improve the existing ones. Whatever
+              it's something you just finished creating with your friends or a
+              lost music cartridge from 20 years ago, check out the
+              <a href="https://github.com/gbdev/database"
+                >database repository </a
+              >to get involved.
             </span>
           </div>
         </div>
@@ -54,11 +59,11 @@ const { data } = await useFetch(url);
         <div class="flex justify-content-between mb-6">
           <div>
             <h3>Digital Preservation</h3>
-            <span class="block font-medium text-lg mb-3">
-              We are committed to digitally preserve the past and the present of
-              the Game Boy homebrew development scene. We salvaged some of the
-              first ever unofficial software from the 90s and we keep working to
-              harvest more.
+            <span class="block font-regular text-lg mb-3">
+              We are committed to build a digital memory of the Game Boy
+              homebrew development scene. We salvaged some of the first ever
+              unofficial software from the 90s and we keep working to harvest
+              more.
             </span>
           </div>
         </div>
@@ -69,11 +74,11 @@ const { data } = await useFetch(url);
         <div class="flex justify-content-between mb-6">
           <div>
             <h3>Open and accessible</h3>
-            <span class="block font-medium text-lg mb-3">
-              The database powering this project is maintained on a public git
-              repository. Everyone can contribute and audit. Each game has a
-              manifest following a well defined JSON schema and the full data
-              set is released under a permissive license.
+            <span class="block font-regular text-lg mb-3">
+              The database is maintained on a public git repository. Everyone
+              can contribute and audit. Entries metadata follows a well defined
+              JSON schema and the full data set is released under a permissive
+              license.
             </span>
           </div>
         </div>
