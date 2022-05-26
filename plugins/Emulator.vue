@@ -5,14 +5,14 @@
 -->
 <template>
   <div>
-    <div>
+    <div ref="gamediv">
       <Button
         @click="toggleFullscreen"
         label="Fullscreen"
         icon="pi pi-desktop"
         iconPos="right"
         class="p-button-text"
-      />
+      /><br />
       {{ loading }}
       <canvas
         class="shadow-3"
@@ -102,6 +102,7 @@ export default {
     romEndpoint: String,
   },
   setup() {
+    const gamediv = ref(null);
     const gamecanvas = ref(null);
     const config = useRuntimeConfig().public;
     // Before the component is mounted, the value
@@ -110,6 +111,7 @@ export default {
     return {
       // It is important to return the ref,
       // otherwise it won't work.
+      gamediv,
       gamecanvas,
       config,
     };
@@ -174,11 +176,17 @@ export default {
         this.gamerom = blob;
         this.loading = null;
         // Lesssssgooooooo
+        this.updateCanvasSize();
         this.playROM();
       });
     });
   },
   methods: {
+    updateCanvasSize: function () {
+      console.log("Updating size.. parent width:", this.gamediv.clientWidth);
+      this.width = this.gamediv.clientWidth;
+      this.height = this.gamediv.clientWidth * (144 / 160);
+    },
     togglemute: function () {
       if (this.mute) {
         // If unmuting, set the old volume back
