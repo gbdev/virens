@@ -14,13 +14,7 @@ Make sure to install the dependencies:
 
 ```bash
 # yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
+yarn
 ```
 
 ## Development Server
@@ -28,7 +22,7 @@ pnpm install --shamefully-hoist
 Start the development server on http://localhost:3000
 
 ```bash
-npm run dev
+yarn dev
 ```
 
 ## Production
@@ -36,18 +30,18 @@ npm run dev
 Build the application for production:
 
 ```bash
-npm run build
+yarn build
 ```
 
 Locally preview production build:
 
 ```bash
-npm run preview
+yarn preview
 ```
 
 ## Deploy
 
-Deployment to `hh2.gbdev.io` is handled by a GitHub Action:
+Deployment to `hh.gbdev.io` is handled by a GitHub Action:
 
 - A **CNAME** DNS record on `hh.gbdev.io` points to GitHub servers.
 - Every time there's a push to the `master` branch, the [deploy.yml](https://github.com/gbdev/virens/blob/master/.github/workflows/deploy.yml) GitHub Action gets triggered, running `npm run build` and uploading the result build in the `gh-pages` branch of this repository which in turns gets served by GitHub Pages.
