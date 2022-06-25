@@ -45,7 +45,6 @@ export default {
 <style>
 h1,
 h2,
-h3,
 .product-name,
 .gametitle {
   font-family: "Eudoxus Sans";

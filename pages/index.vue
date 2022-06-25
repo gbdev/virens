@@ -12,7 +12,7 @@ const { data } = await useFetch(url);
   <div class="grid">
     <div class="col-12 lg:col-12 xl:col-12">
       <div class="card mb-0">
-        <div class="flex justify-content-between mb-6">
+        <div class="">
           <div>
             <h3>Welcome to the new version of Homebrew Hub!</h3>
             <span class="block font-regular mb-3 main-text">
@@ -36,7 +36,6 @@ const { data } = await useFetch(url);
         </div>
       </div>
     </div>
-
     <div class="col-12 lg:col-6 xl:col-4">
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
