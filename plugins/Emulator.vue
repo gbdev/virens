@@ -178,6 +178,18 @@ export default {
         // Lesssssgooooooo
         this.updateCanvasSize();
         this.playROM();
+        // Let's check if there are some query param we should honor
+        if (this.$route.query.palette) {
+          // Set the desired palette
+          let queryvalue = parseInt(this.$route.query.palette);
+          if (queryvalue < 0) {
+            queryvalue = 0;
+          } else if (queryvalue > 85) {
+            queryvalue = 85;
+          }
+          this.pal = queryvalue;
+          this.setPal(queryvalue);
+        }
       });
     });
   },
