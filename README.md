@@ -10,10 +10,9 @@ The UI component library used is [PrimeVue](https://www.primefaces.org/primevue)
 
 ## Setup
 
-Make sure to install the dependencies:
+Install dependencies:
 
 ```bash
-# yarn
 yarn
 ```
 
@@ -24,6 +23,8 @@ Start the development server on http://localhost:3000
 ```bash
 yarn dev
 ```
+
+By default, the base API is set to `https://hh3.gbdev.io`, you customise this by setting the `BASE_API_URL` environment variable to an instance of the [Homebrew Hub API](https://github.com/gbdev/homebrewhub) (be sure to have CORS [set up correctly](https://github.com/gbdev/homebrewhub/blob/main/hhub/settings.py) on that side).
 
 ## Production
 
@@ -41,11 +42,12 @@ yarn preview
 
 ## Deploy
 
-Deployment to `hh.gbdev.io` is handled by a GitHub Action:
+Deployment to [hh.gbdev.io](https://hh.gbdev.io) is handled by a GitHub Action:
 
-- A **CNAME** DNS record on `hh.gbdev.io` points to GitHub servers.
-- Every time there's a push to the `master` branch, the [deploy.yml](https://github.com/gbdev/virens/blob/master/.github/workflows/deploy.yml) GitHub Action gets triggered, running `npm run build` and uploading the result build in the `gh-pages` branch of this repository which in turns gets served by GitHub Pages.
-- A "CNAME" file is in the build directory, containing "hh.gbdev.io"
+- This GitHub repository has Pages set up to serve from the `gh-pages` branch;
+- A **CNAME** DNS record on `hh.gbdev.io` points to GitHub servers;
+- Every time there's a push to the `master` branch, the [deploy.yml](https://github.com/gbdev/virens/blob/master/.github/workflows/deploy.yml) GitHub Action gets triggered, running `npm run build` and uploading the result build in the `gh-pages` branch of this repository which in turns gets served by GitHub Pages;
+- A "CNAME" file is in the build directory, containing "hh.gbdev.io";
 - A '.nojekyll' file is needed to allow the `_nuxt` folder to be statically served (otherwise ignored by a standard Jekyll build).
 
 ## Acknowledgements
