@@ -24,7 +24,12 @@ if (game.typetag) {
   type = game;
 }
 
-const gamedescription = `A Game Boy homebrew ${type} by ${developer}. Play online for free.`;
+let gamedescription = "";
+if (type == "music") {
+  gamedescription = `A Game Boy music cartridge by ${developer}. Listen online for free.`;
+} else {
+  gamedescription = `A Game Boy homebrew ${type} by ${developer}. Play online for free.`;
+}
 
 let screenshot_url = "";
 
@@ -52,6 +57,7 @@ useHead({
     { name: "og:title", content: gametitle },
     { name: "og:description", content: gamedescription },
     { name: "og:image", content: screenshot_url },
+    { name: "twitter:card", content: "summary_large_image" },
   ],
 });
 </script>
@@ -108,6 +114,16 @@ useHead({
                 icon="pi pi-external-link"
                 iconPos="right"
             /></a>
+            <br />
+            <br />
+            <span style="font-size: 0.9rem">
+              <a
+                :href="`https://github.com/gbdev/database/tree/master/entries/${game.slug}/game.json`"
+                target="_blank"
+              >
+                Improve metadata for this entry </a
+              ><br
+            /></span>
           </div>
         </div>
       </div>
