@@ -135,6 +135,7 @@ export default {
           items: [
             { label: "GBA Jam 2021", value: "gbajam21" },
             { label: "GB Compo 21", value: "gbcompo21" },
+            { label: "GB Showdown 2022", value: "gb-showdown-22" },
             { label: "GB Compo 21 - Finalists", value: "gbcompo21-shortlist" },
           ],
         },
