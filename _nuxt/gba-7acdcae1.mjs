@@ -1,0 +1,1 @@
+import{_ as o,r as t,o as a,m as _,i as c,n as r,h as s}from"./entry-7b7a5a1c.mjs";const l={};function m(p,f){const e=t("Mgba"),n=r;return a(),_(n,null,{default:c(()=>[s(e)]),_:1})}var u=o(l,[["render",m]]);export{u as default};
