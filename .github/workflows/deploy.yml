@@ -18,12 +18,12 @@ jobs:
         with:
           node-version: "14.x"
 
-      - name: Install npm requirements
-        run: npm install
+      - name: Install requirements
+        run: yarn
         working-directory: virens/
 
       - name: Run Vue build
-        run: BASE_API_URL=https://hh3.gbdev.io npm run generate --force
+        run: BASE_API_URL=https://hh3.gbdev.io yarn generate --force
         working-directory: virens/
 
       - name: Store final build
