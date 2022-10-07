@@ -81,20 +81,44 @@ useHead({
         <div class="flex justify-content-between mb-6">
           <div>
             <span class="gametitle">{{ game.title }}</span>
-            <span v-if="game.developer">
-              Developer: {{ game.developer }} <br
-            /></span>
-            <span v-if="game.tags"> Tags: </span>
-            <template v-if="game.tags" v-for="tag in game.tags">
-              <Chip>{{ tag }}</Chip
-              >&nbsp; </template
-            ><br />
-            <span v-if="game.license"> License: {{ game.license }}<br /></span>
-            <span v-if="game.date"> Creation date: {{ game.date }}<br /></span>
-            Type: <Chip>{{ game.typetag }}</Chip> -
-            <Chip v-tooltip="tooltip[game.platform]">{{ game.platform }}</Chip>
-            <br />
-            <br />
+            <table>
+              <tr v-if="game.tags">
+                <td class="value-title">Tags</td>
+                <td>
+                  <template v-for="tag in game.tags">
+                    <Chip>{{ tag }}</Chip
+                    >&nbsp;
+                  </template>
+                </td>
+              </tr>
+              <tr v-if="game.developer">
+                <td class="value-title">Developer</td>
+                <td>{{ game.developer }}</td>
+              </tr>
+              <tr v-if="game.license">
+                <td class="value-title">License</td>
+                <td>{{ game.license }}</td>
+              </tr>
+              <tr v-if="game.date">
+                <td class="value-title">Release Date</td>
+                <td>{{ game.date }}</td>
+              </tr>
+              <tr v-if="game.typetag">
+                <td class="value-title">Type</td>
+                <td>
+                  <Chip>{{ game.typetag }}</Chip>
+                </td>
+              </tr>
+              <tr v-if="game.platform">
+                <td class="value-title">Platform</td>
+                <td>
+                  <Chip v-tooltip="tooltip[game.platform]">{{
+                    game.platform
+                  }}</Chip>
+                </td>
+              </tr>
+            </table>
+
             <br />
 
             <a :href="rom_endpoint"
@@ -184,6 +208,9 @@ export default {
 };
 </script>
 <style>
+.value-title {
+  font-weight: 600;
+}
 .ab-button {
   font-size: 1.25rem !important;
   font-weight: 500 !important;
