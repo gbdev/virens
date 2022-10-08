@@ -14,14 +14,13 @@ const { data } = await useFetch(url);
       <div class="card mb-0">
         <div class="">
           <div>
-            <h3>Welcome to the new version of Homebrew Hub!</h3>
+            <h3>Welcome to Homebrew Hub</h3>
             <span class="block font-regular mb-3 main-text">
-              Homebrew Hub is a community-led attempt to collect, archive and
-              preserve every unofficial game and homebrew for Game Boy (Color)
-              released through decades of passionate work. Each ROM can be
-              easily downloaded or played directly in the browser, through an
-              accurate emulator. <br />We currently have
-              <b>{{ data.results }}</b> entries in the database.</span
+              Homebrew Hub is a community-led initiative to collect, archive and
+              preserve <i>homebrew</i> software developed for Game Boy (Color). <br> 
+              Each ROM can be easily downloaded or played directly in the browser, through an
+              accurate emulator. <br />
+              <b>{{ data.results }}</b> entries are currently in the database.</span
             >
           </div>
         </div>
@@ -76,7 +75,7 @@ const { data } = await useFetch(url);
             <span class="block font-regular text-lg mb-3">
               The database is maintained on a public git repository. Everyone
               can contribute and audit. Entries metadata follows a well defined
-              JSON schema and the full data set is released under a permissive
+              JSON schema and the full dataset is released under a permissive
               license.
             </span>
           </div>
