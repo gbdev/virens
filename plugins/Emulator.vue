@@ -5,7 +5,7 @@
 -->
 <template>
   <div>
-    <div ref="gamediv">
+    <div ref="gamediv" style="width: 100%;">
       <Button
         @click="toggleFullscreen"
         label="Fullscreen"
@@ -15,10 +15,8 @@
       /><br />
       {{ loading }}
       <canvas
-        class="shadow-3"
+        class="shadow-3 gamecanvas"
         ref="gamecanvas"
-        :width="width"
-        :height="height"
       ></canvas>
     </div>
     <br />
@@ -176,7 +174,6 @@ export default {
         this.gamerom = blob;
         this.loading = null;
         // Lesssssgooooooo
-        this.updateCanvasSize();
         this.playROM();
         // Let's check if there are some query param we should honor
         if (this.$route.query.palette) {
@@ -194,11 +191,6 @@ export default {
     });
   },
   methods: {
-    updateCanvasSize: function () {
-      console.log("Updating size.. parent width:", this.gamediv.clientWidth);
-      this.width = this.gamediv.clientWidth;
-      this.height = this.gamediv.clientWidth * (144 / 160);
-    },
     togglemute: function () {
       if (this.mute) {
         // If unmuting, set the old volume back
@@ -1236,3 +1228,12 @@ class Rewind {
 </script>
 
 <style lang="scss" scoped></style>
+<style>
+.gamecanvas {
+  image-rendering: pixelated;
+  /* Fill the available space */
+  width: 100%;
+  /* Original resolution ratio */
+  aspect-ratio: 160 / 144;
+}
+</style>
