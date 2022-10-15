@@ -44,7 +44,12 @@ useHead({
           />
         </div>
       </div>
-
+      <div class="col-12 md:col-2">
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"> Title </span>
+          <InputText @keyup.enter="handlesearch()" v-model="textQuery" placeholder="Text query"/>
+        </div>
+      </div>
       <div class="col-12 md:col-2">
         <div class="p-inputgroup">
           <Button
@@ -58,9 +63,9 @@ useHead({
       </div>
     </div>
     <div v-if="entries != null">
+      <h5>Results</h5>
       <List :entries="entries" />
     </div>
-    <div v-else>No data yet..</div>
   </div>
 </template>
 <script>
@@ -87,6 +92,9 @@ export default {
       if (this.selectedType.name != "All") {
         params["typetag"] = this.selectedType.code;
       }
+      if (this.textQuery) {
+        params["q"] = this.textQuery;
+      }
       let url = baseurl + new URLSearchParams(params);
       console.log(url);
       fetch(url).then((response) => {
@@ -103,6 +111,7 @@ export default {
     return {
       entries: null,
       selectedPlatform: null,
+      textQuery: null,
       platforms: [
         { name: "GB", code: "GB" },
         { name: "GBC", code: "GBC" },
