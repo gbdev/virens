@@ -63,6 +63,29 @@ useHead({
 </script>
 
 <template>
+  <Dialog
+    :modal="true"
+    position="left"
+    :dismissableMask="true"
+    header="''Developed with'' info"
+    v-model:visible="display"
+  >
+    <p>
+      This information is provided by
+      <a href="https://github.com/bbbbbr/gbtoolsid" target="_blank">gbtoolsid</a
+      >, a tool which <i>attempts</i> to detect the tools used to develop a Game
+      Boy ROM through binary fingerprints.
+    </p>
+    <p>
+      Game engine (e.g. GB Studio), Audio driver (e.g. Carillon Player),
+      Toolchain (e.g. GBDK) and Sound FX driver (e.g. FX Hammer) can be
+      identified.
+    </p>
+    <p>
+      If the line is not present, the tool returned no results. Please report
+      any bug or failed detection in the repository.
+    </p>
+  </Dialog>
   <div class="grid">
     <div class="col-12 lg:col-0 xl:col-1"></div>
     <div class="col-12 lg:col-6 xl:col-5">
@@ -111,6 +134,44 @@ useHead({
                   <Chip v-tooltip="tooltip[game.platform]">{{
                     game.platform
                   }}</Chip>
+                </td>
+              </tr>
+              <tr
+                v-if="
+                  game.devtoolinfo.musicName ||
+                  game.devtoolinfo.toolsName ||
+                  game.devtoolinfo.engineName ||
+                  game.devtoolinfo.soundfxName
+                "
+              >
+                <td class="value-title devtoolinfo">
+                  Developed with<Button
+                    @click="display = true"
+                    icon="pi pi-question-circle"
+                    class="p-button-text"
+                  />
+                  &nbsp;
+                </td>
+                <td class="devtoolinfo">
+                  <p v-if="game.devtoolinfo.engineName">
+                    {{ game.devtoolinfo.engineName }}
+                    {{ game.devtoolinfo.engineVersion }} (Engine)
+                  </p>
+                  <div v-else>
+                  <p v-if="game.devtoolinfo.musicName">
+                    {{ game.devtoolinfo.musicName }}
+                    {{ game.devtoolinfo.musicVersion }} (Music)
+                  </p>
+                  <p v-if="game.devtoolinfo.toolsName">
+                    {{ game.devtoolinfo.toolsName }}
+                    {{ game.devtoolinfo.toolsVersion }} (Toolchains)
+                  </p>
+                  
+                  <p v-if="game.devtoolinfo.soundfxName">
+                    {{ game.devtoolinfo.soundfxName }}
+                    {{ game.devtoolinfo.soundfxVersion }} (Sound FX)
+                  </p>
+                </div>
                 </td>
               </tr>
             </table>
@@ -169,6 +230,8 @@ useHead({
   </div>
 </template>
 <script>
+import Dialog from "primevue/dialog";
+
 export default {
   name: "Game",
   props: {
@@ -176,6 +239,7 @@ export default {
   },
   data() {
     return {
+      display: false,
       buttonClass: {
         A: "ab-button",
         B: "ab-button",
@@ -204,6 +268,13 @@ export default {
 };
 </script>
 <style>
+.devtoolinfo {
+  padding-top: 10px;
+}
+
+.devtoolinfo p {
+  line-height: 1;
+}
 .value-title {
   font-weight: 600;
 }
