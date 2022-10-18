@@ -22,7 +22,7 @@ export default defineNuxtModule({
       console.log(sitemapRoutes);
 
       await axios
-        .get("https://hh3.gbdev.io/api/all?results=1000")
+        .get("https://hh3.gbdev.io/api/all?results=2000")
         .then(function (response) {
           let entries = response.data.entries;
           entries.forEach((element) => {
