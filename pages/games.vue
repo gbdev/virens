@@ -3,7 +3,7 @@ const route = useRoute();
 const a = route.params;
 const config = useRuntimeConfig().public;
 
-let url = config.BASE_API_URL + "/api/all?results=1000";
+let url = config.BASE_API_URL + "/api/all?results=2000";
 
 var pagetitle = "HH - Music";
 
@@ -20,7 +20,7 @@ if (route.name == "music") {
   url = config.BASE_API_URL + "/api/search?tags=gbcompo21&results=1000";
   pagetitle = "HH - GBCompo21";
 } else {
-  url = config.BASE_API_URL + "/api/all?results=1000";
+  url = config.BASE_API_URL + "/api/search?typetag=games&results=1000";
   pagetitle = "HH - Games";
 }
 const { data } = await useFetch(url);
