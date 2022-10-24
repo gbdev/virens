@@ -20,7 +20,7 @@ if (route.name == "music") {
   url = config.BASE_API_URL + "/api/search?tags=gbcompo21&results=1000";
   pagetitle = "HH - GBCompo21";
 } else {
-  url = config.BASE_API_URL + "/api/search?typetag=games&results=1000";
+  url = config.BASE_API_URL + "/api/search?typetag=game&results=1000";
   pagetitle = "HH - Games";
 }
 const { data } = await useFetch(url);
