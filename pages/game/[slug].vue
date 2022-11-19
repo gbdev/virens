@@ -10,6 +10,20 @@ const url = config.BASE_API_URL + "/api/entry/" + route.params.slug + ".json";
 const { data } = await useFetch(url);
 const game = data.value;
 
+/* Date conversion */
+
+let dateObject = new Date()
+
+if (isNaN(game.date) != true) {
+  dateObject = new Date(game.date * 1000)
+} else if (typeof(game.date) == "string") {
+  dateObject = new Date(game.date)
+}
+
+const dateString = dateObject.toLocaleString("en-US", {day: "numeric", month: "long", year: "numeric"})
+
+/* Head metadata */
+
 let developer = "";
 
 const gametitle = data.value.title;
@@ -118,9 +132,9 @@ useHead({
                 <td class="value-title">License</td>
                 <td>{{ game.license }}</td>
               </tr>
-              <tr v-if="game.date">
+              <tr v-if="dateString != 'Invalid Date'">
                 <td class="value-title">Release Date</td>
-                <td>{{ game.date }}</td>
+                <td>{{ dateString }}</td>
               </tr>
               <tr v-if="game.typetag">
                 <td class="value-title">Type</td>
