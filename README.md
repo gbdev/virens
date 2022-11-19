@@ -2,7 +2,7 @@
 
 [![build + deploy](https://github.com/gbdev/virens/actions/workflows/deploy.yml/badge.svg)](https://github.com/gbdev/virens/actions/workflows/deploy.yml)
 
-Experimental Homebrew Hub frontend in Nuxt 3 (`3.0.0-rc.1` - Vue 3), consuming the new [Homebrew Hub API](https://github.com/gbdev/homebrewhub/).
+Experimental Homebrew Hub frontend in Nuxt 3 (`3.0.0-rc.3` - Vue 3), consuming the new [Homebrew Hub API](https://github.com/gbdev/homebrewhub/).
 
 The GB/GBC emulation is powered by the [binjgb](https://github.com/binji/binjgb) emulator, running in the browser via WebAssembly.
 
@@ -25,6 +25,12 @@ yarn dev
 ```
 
 By default, the base API is set to `https://hh3.gbdev.io`, you customise this by setting the `BASE_API_URL` environment variable to an instance of the [Homebrew Hub API](https://github.com/gbdev/homebrewhub) (be sure to have CORS [set up correctly](https://github.com/gbdev/homebrewhub/blob/main/hhub/settings.py) on that side).
+
+E.g., if you're running the backend server locally:
+
+```
+BASE_API_URL=http://localhost:8000 yarn dev
+```
 
 ## Production
 
