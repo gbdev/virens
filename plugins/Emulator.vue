@@ -5,7 +5,7 @@
 -->
 <template>
   <div>
-    <div ref="gamediv" style="width: 100%;">
+    <div ref="gamediv" style="width: 100%">
       <Button
         @click="toggleFullscreen"
         label="Fullscreen"
@@ -14,10 +14,7 @@
         class="p-button-text"
       /><br />
       {{ loading }}
-      <canvas
-        class="shadow-3 gamecanvas"
-        ref="gamecanvas"
-      ></canvas>
+      <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
     </div>
     <br />
 
@@ -28,7 +25,7 @@
           <Slider
             orientation="horizontal"
             v-model="volume"
-            :step="0.05"
+            :step="0.0025"
             :min="0"
             :max="1"
           />
@@ -46,6 +43,8 @@
             <InputNumber
               v-model="pal"
               mode="decimal"
+              :min="0"
+              :max="83"
               showButtons
               buttonLayout="horizontal"
               decrementButtonClass="p-button-secondary"
