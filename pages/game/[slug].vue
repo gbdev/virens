@@ -12,15 +12,19 @@ const game = data.value;
 
 /* Date conversion */
 
-let dateObject = new Date()
+let dateObject = new Date();
 
 if (isNaN(game.date) != true) {
-  dateObject = new Date(game.date * 1000)
-} else if (typeof(game.date) == "string") {
-  dateObject = new Date(game.date)
+  dateObject = new Date(game.date * 1000);
+} else if (typeof game.date == "string") {
+  dateObject = new Date(game.date);
 }
 
-const dateString = dateObject.toLocaleString("en-US", {day: "numeric", month: "long", year: "numeric"})
+const dateString = dateObject.toLocaleString("en-US", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 
 /* Head metadata */
 
@@ -132,7 +136,7 @@ useHead({
                 <td class="value-title">License</td>
                 <td>{{ game.license }}</td>
               </tr>
-              <tr v-if="dateString != 'Invalid Date'">
+              <tr v-if="dateString != 'Invalid Date' && game.date">
                 <td class="value-title">Release Date</td>
                 <td>{{ dateString }}</td>
               </tr>
