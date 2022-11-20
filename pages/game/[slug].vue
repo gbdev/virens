@@ -119,6 +119,18 @@ useHead({
           <div>
             <span class="gametitle">{{ game.title }}</span>
             <table>
+              <tr v-if="game.platform">
+                <td class="value-title">Platform</td>
+                <td>
+                  <Chip
+                    :class="game.platform"
+                    v-tooltip="tooltip[game.platform]"
+                    >{{
+                      { GB: "Game Boy", GBC: "Game Boy Color" }[game.platform]
+                    }}</Chip
+                  >
+                </td>
+              </tr>
               <tr v-if="game.tags">
                 <td class="value-title">Tags</td>
                 <td>
@@ -146,14 +158,6 @@ useHead({
                   <Chip>{{ game.typetag }}</Chip>
                 </td>
               </tr>
-              <tr v-if="game.platform">
-                <td class="value-title">Platform</td>
-                <td>
-                  <Chip v-tooltip="tooltip[game.platform]">{{
-                    game.platform
-                  }}</Chip>
-                </td>
-              </tr>
               <tr
                 v-if="
                   game.devtoolinfo.musicName ||
@@ -176,20 +180,20 @@ useHead({
                     {{ game.devtoolinfo.engineVersion }} (Engine)
                   </p>
                   <div v-else>
-                  <p v-if="game.devtoolinfo.musicName">
-                    {{ game.devtoolinfo.musicName }}
-                    {{ game.devtoolinfo.musicVersion }} (Music)
-                  </p>
-                  <p v-if="game.devtoolinfo.toolsName">
-                    {{ game.devtoolinfo.toolsName }}
-                    {{ game.devtoolinfo.toolsVersion }} (Toolchains)
-                  </p>
-                  
-                  <p v-if="game.devtoolinfo.soundfxName">
-                    {{ game.devtoolinfo.soundfxName }}
-                    {{ game.devtoolinfo.soundfxVersion }} (Sound FX)
-                  </p>
-                </div>
+                    <p v-if="game.devtoolinfo.musicName">
+                      {{ game.devtoolinfo.musicName }}
+                      {{ game.devtoolinfo.musicVersion }} (Music)
+                    </p>
+                    <p v-if="game.devtoolinfo.toolsName">
+                      {{ game.devtoolinfo.toolsName }}
+                      {{ game.devtoolinfo.toolsVersion }} (Toolchains)
+                    </p>
+
+                    <p v-if="game.devtoolinfo.soundfxName">
+                      {{ game.devtoolinfo.soundfxName }}
+                      {{ game.devtoolinfo.soundfxVersion }} (Sound FX)
+                    </p>
+                  </div>
                 </td>
               </tr>
             </table>
@@ -314,5 +318,39 @@ export default {
   font-size: 3rem;
   margin: 1.5rem 0 1rem;
   display: block;
+}
+
+.GB {
+  border-radius: 0.2rem !important;
+  padding: 0.15rem 0.75rem !important;
+  font-size: 1rem;
+  padding: 0.5rem 3rem;
+  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(101deg, #9bbc0f, #447144);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #3f4b5b inset;
+}
+
+.GBC {
+  border-radius: 0.2rem !important;
+  padding: 0.15rem 0.75rem !important;
+  font-size: 1rem;
+  padding: 0.5rem 3rem;
+  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(101deg, #6d6b9e, #9a2257);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #3f4b5b inset;
 }
 </style>
