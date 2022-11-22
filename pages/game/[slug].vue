@@ -270,8 +270,8 @@ export default {
         "← ↑ → ↓": "arrows",
       },
       controls: [
-        { gb: "A", kb: "Z" },
-        { gb: "B", kb: "X" },
+        { gb: "A", kb: "X" },
+        { gb: "B", kb: "Z" },
         { gb: "Start", kb: "Enter" },
         { gb: "Select", kb: "Tab" },
         { gb: "← ↑ → ↓", kb: "← ↑ → ↓" },
