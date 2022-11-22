@@ -84,8 +84,8 @@ var mGBA = (function () {
     if (ENVIRONMENT_IS_NODE) {
       scriptDirectory = __dirname + "/";
       read_ = function shell_read(filename, binary) {
-        if (!nodeFS) nodeFS = import("fs");
-        if (!nodePath) nodePath = import("path");
+        if (!nodeFS) nodeFS = require("fs");
+        if (!nodePath) nodePath = require("path");
         filename = nodePath["normalize"](filename);
         return nodeFS["readFileSync"](filename, binary ? null : "utf8");
       };
@@ -787,7 +787,7 @@ var mGBA = (function () {
         ? filename.startsWith(dataURIPrefix)
         : filename.indexOf(dataURIPrefix) === 0;
     }
-    var wasmBinaryFile = "mgba.wasm";
+    var wasmBinaryFile = "/js/mgba.wasm";
     if (!isDataURI(wasmBinaryFile)) {
       wasmBinaryFile = locateFile(wasmBinaryFile);
     }
@@ -3500,7 +3500,7 @@ var mGBA = (function () {
           };
         } else if (ENVIRONMENT_IS_NODE) {
           try {
-            var crypto_module = import("crypto");
+            var crypto_module = require("crypto");
             random_device = function () {
               return crypto_module["randomBytes"](1)[0];
             };

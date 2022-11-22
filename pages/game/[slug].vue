@@ -109,7 +109,12 @@ useHead({
     <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
         <ClientOnly>
-          <Emulator :gameData="game" :romEndpoint="rom_endpoint" />
+          <template v-if="game.platform == 'GBA'">
+            <Medusa :gameData="game" :romEndpoint="rom_endpoint" />
+          </template>
+          <template v-else>
+            <Emulator :gameData="game" :romEndpoint="rom_endpoint" />
+          </template>
         </ClientOnly>
       </div>
     </div>
@@ -126,7 +131,11 @@ useHead({
                     :class="game.platform"
                     v-tooltip="tooltip[game.platform]"
                     >{{
-                      { GB: "Game Boy", GBC: "Game Boy Color" }[game.platform]
+                      {
+                        GBA: "Game Boy Advance",
+                        GB: "Game Boy",
+                        GBC: "Game Boy Color",
+                      }[game.platform]
                     }}</Chip
                   >
                 </td>

@@ -5,9 +5,9 @@ load the WASM build.
 */
 
 import Emulator from "./Emulator";
-import Mgba from "./Mgba";
+import Medusa from "./Medusa";
 
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Emulator", Emulator);
-  nuxtApp.vueApp.component("Mgba", Mgba);
+  nuxtApp.vueApp.component("Medusa", Medusa);
 });
