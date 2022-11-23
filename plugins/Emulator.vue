@@ -1226,8 +1226,8 @@ class Rewind {
 }
 </script>
 
-<style lang="scss" scoped></style>
-<style>
+
+<style scoped>
 .gamecanvas {
   image-rendering: pixelated;
   /* Fill the available space */
