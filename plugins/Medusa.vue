@@ -1,5 +1,28 @@
 <template>
-  <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
+  <Button
+    @click="toggleFullscreen"
+    label="Fullscreen"
+    icon="pi pi-desktop"
+    iconPos="right"
+    class="p-button-text"
+  /><br />
+  <canvas class="shadow-3 gamecanvas" ref="gamecanvas">
+  </canvas>
+  <br />
+  <div class="grid p-fluid">
+    <div class="col-12 md:col-8 vertical-align-bottom">
+      <div style="padding: 1rem">
+        <Slider
+          @change="changeVolume"
+          orientation="horizontal"
+          v-model="volume"
+          :step="0.0025"
+          :min="0"
+          :max="1"
+        />
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import mGBA from "../mgba.js";
@@ -26,13 +49,22 @@ export default {
       config,
     };
   },
+  data() {
+    return {
+      volume: 0.1,
+      started: false,
+    };
+  },
   mounted: function () {
     this.start()
   },
   methods: {
+    unmute: function () {
+      window.Module._unmute();
+    },
     start: function () {
+      this.started=true;
       window.vm = this;
-
       window.Module = {
         canvas: window.vm.gamecanvas,
       };
@@ -46,20 +78,25 @@ export default {
               {},
               "/hh-gba-data"
             );
-            const err = new Promise((resolve) => {
-              window.Module.FS.syncfs(true, resolve);
-            }).then(() => {
-              blob.arrayBuffer().then((data) => {
-                window.Module.FS.writeFile(
-                  "/hh-gba-data/game.gba",
-                  new Uint8Array(data)
-                );
-                window.Module.loadFile("/hh-gba-data/game.gba");
-              });
+
+            blob.arrayBuffer().then((data) => {
+              window.Module.FS.writeFile(
+                "/hh-gba-data/game.gba",
+                new Uint8Array(data)
+              );
+              window.Module.loadFile("/hh-gba-data/game.gba");
+              window.Module._setVolume(0.1)
             });
           });
         });
       });
+      //this.changeVolume(this.volume)
+    },
+    toggleFullscreen: function () {
+      this.gamecanvas.requestFullscreen();
+    },
+    changeVolume: function () {
+      window.Module._setVolume(this.volume);
     },
   },
 };
