@@ -369,6 +369,23 @@ export default {
   box-shadow: 2px 1000px 1px #3f4b5b inset;
 }
 
+.GBA {
+  border-radius: 0.2rem !important;
+  padding: 0.15rem 0.75rem !important;
+  font-size: 1rem;
+  padding: 0.5rem 3rem;
+  box-shadow: 0 0 6px 0 rgba(157, 96, 212, 0.5);
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(101deg, #5e48ff, #1e00ff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #3f4b5b inset;
+}
+
 .GBC {
   border-radius: 0.2rem !important;
   padding: 0.15rem 0.75rem !important;
