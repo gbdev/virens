@@ -242,7 +242,21 @@ useHead({
       <br />
       <div class="card mb-0">
         <h2>Controls</h2>
-        <DataTable :value="controls" responsiveLayout="scroll">
+        <DataTable v-if="game.platform=='GBA'" :value="controls_gba" responsiveLayout="scroll">
+          <Column field="gb" header="Game Boy Advance"
+            ><template #body="slotProps"
+              ><Chip :class="buttonClass[slotProps.data.gb]">{{
+                slotProps.data.gb
+              }}</Chip></template
+            ></Column
+          >
+          <Column field="kb" header="Keyboard"
+            ><template #body="slotProps">{{
+              slotProps.data.kb
+            }}</template></Column
+          >
+        </DataTable>
+        <DataTable v-else :value="controls" responsiveLayout="scroll">
           <Column field="gb" header="Game Boy"
             ><template #body="slotProps"
               ><Chip :class="buttonClass[slotProps.data.gb]">{{
@@ -284,6 +298,15 @@ export default {
         { gb: "Start", kb: "Enter" },
         { gb: "Select", kb: "Tab" },
         { gb: "← ↑ → ↓", kb: "← ↑ → ↓" },
+      ],
+      controls_gba: [
+        { gb: "A", kb: "X" },
+        { gb: "B", kb: "Z" },
+        { gb: "Start", kb: "Enter" },
+        { gb: "Select", kb: "Tab" },
+        { gb: "← ↑ → ↓", kb: "← ↑ → ↓" },
+        { gb: "L", kb: "A" },
+        { gb: "R", kb: "S" },
       ],
       columns: [
         { field: "gb", header: "Game Boy" },
