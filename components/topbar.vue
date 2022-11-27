@@ -46,6 +46,11 @@
           ><Button label="gbcompo21" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
+      <li>
+        <a href="/games/gba"
+          ><Button label="GBA" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
     </ul>
   </div>
 </template>

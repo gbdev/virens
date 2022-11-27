@@ -19,6 +19,9 @@ if (route.name == "music") {
 } else if (route.name == "gbcompo21") {
   url = config.BASE_API_URL + "/api/search?tags=gbcompo21&results=1000";
   pagetitle = "HH - GBCompo21";
+} else if (route.name == "gba") {
+  url = config.BASE_API_URL + "/api/search?platform=GBA&results=1000";
+  pagetitle = "HH - Game Boy Advance";
 } else {
   url = config.BASE_API_URL + "/api/search?typetag=game&results=1000";
   pagetitle = "HH - Games";
