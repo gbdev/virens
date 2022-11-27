@@ -8,13 +8,17 @@ const config = useRuntimeConfig().public;
         <div class="product-grid-item card">
           <div class="product-grid-item-content">
             <router-link tag="li" :to="'/game/' + slotProps.data.slug">
+              <!-- 
+                If there's at least one screenshot of the game, pick the first one as the cover, otherwise go for the placeholder
+              -->
               <img
                 :src="
+                  slotProps.data.screenshots.length > 0 ?
                   config.BASE_API_URL +
                   '/entries/' +
                   slotProps.data.slug +
                   '/' +
-                  slotProps.data.screenshots[0]
+                  slotProps.data.screenshots[0] : 'https://raw.githubusercontent.com/gbdev/database/master/placeholder.png'
                 "
                 class="product-image"
                 :alt="slotProps.data.title"
@@ -76,7 +80,6 @@ export default {
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 4px;
-  margin-bottom: 2rem;
 }
 
 .p-dropdown {
@@ -96,17 +99,25 @@ a {
 
 .product-image {
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1.1;
   object-fit: cover;
   margin-top: 0px;
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
 }
 
 .product-description {
-  margin: 0 1rem 1rem 1rem;
+  margin: 0 1rem 0.75rem 1rem;
   color: var(--text-color-secondary);
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+/* Adding a zero-width space character makes the author row takes the space anyway, so cards without this value won't take less height */
+.product-description:after {
+  content: "\200b";
 }
 
 .product-category-icon {
