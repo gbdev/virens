@@ -143,6 +143,8 @@ export default {
           code: "events",
           items: [
             { label: "GBA Jam 2021", value: "gbajam21" },
+            { label: "GBA Winter Jam 2021", value: "gba-winter-jam-2021" },
+            { label: "GBA Jam 2022", value: "gbajam22" },
             { label: "GB Compo 21", value: "gbcompo21" },
             { label: "GB Showdown 2022", value: "gb-showdown-22" },
             { label: "GB Compo 21 - Finalists", value: "gbcompo21-shortlist" },
