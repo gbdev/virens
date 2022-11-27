@@ -70,17 +70,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.listgrid {
-  background-color: var(--surface-b);
-}
-.grid-nogutter {
-  background-color: var(--surface-b);
-}
-
-.p-paginator {
-  background-color: var(--surface-b);
-}
-
 .card {
   background: var(--surface-e);
   padding: 0rem;
@@ -113,8 +102,11 @@ a {
 }
 
 .product-description {
-  margin: 0 0 1rem 0;
+  margin: 0 1rem 1rem 1rem;
   color: var(--text-color-secondary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .product-category-icon {
