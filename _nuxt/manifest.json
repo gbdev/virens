@@ -1,6 +1,6 @@
 {
   "node_modules/nuxt/dist/app/entry.mjs": {
-    "file": "entry-cf480ff4.mjs",
+    "file": "entry-f423f5fb.mjs",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "dynamicImports": [
@@ -14,7 +14,7 @@
       "pages/sitemap.vue"
     ],
     "css": [
-      "entry.de9cf564.css"
+      "entry.c82a9a9b.css"
     ],
     "assets": [
       "color.473bc8ca.png",
@@ -25,7 +25,7 @@
     ]
   },
   "pages/credits.vue": {
-    "file": "credits-07469da4.mjs",
+    "file": "credits-87563269.mjs",
     "src": "pages/credits.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -33,7 +33,7 @@
     ]
   },
   "pages/developers.vue": {
-    "file": "developers-7c4145b9.mjs",
+    "file": "developers-d7be2390.mjs",
     "src": "pages/developers.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -41,7 +41,7 @@
     ]
   },
   "pages/disclaimer.vue": {
-    "file": "disclaimer-56b28fd8.mjs",
+    "file": "disclaimer-4731cf9b.mjs",
     "src": "pages/disclaimer.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -49,62 +49,62 @@
     ]
   },
   "pages/game/[slug].vue": {
-    "file": "_slug_-62d97ed4.mjs",
+    "file": "_slug_-00769127.mjs",
     "src": "pages/game/[slug].vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-efc95e64.mjs"
+      "_fetch-9356241f.mjs"
     ]
   },
-  "_fetch-efc95e64.mjs": {
-    "file": "fetch-efc95e64.mjs",
+  "_fetch-9356241f.mjs": {
+    "file": "fetch-9356241f.mjs",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/games.vue": {
-    "file": "games-f7192b4d.mjs",
+    "file": "games-bbec4e81.mjs",
     "src": "pages/games.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-efc95e64.mjs",
-      "_list-f6f83847.mjs"
+      "_fetch-9356241f.mjs",
+      "_list-a64e153c.mjs"
     ]
   },
-  "_list-f6f83847.mjs": {
-    "file": "list-f6f83847.mjs",
+  "_list-a64e153c.mjs": {
+    "file": "list-a64e153c.mjs",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "pages/index.vue": {
-    "file": "index-cc3c0ecc.mjs",
+    "file": "index-dbf6e7b9.mjs",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_list-f6f83847.mjs",
+      "_list-a64e153c.mjs",
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-efc95e64.mjs"
+      "_fetch-9356241f.mjs"
     ]
   },
   "pages/search.vue": {
-    "file": "search-8d6b575b.mjs",
+    "file": "search-cb57c4a1.mjs",
     "src": "pages/search.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_list-f6f83847.mjs"
+      "_list-a64e153c.mjs"
     ]
   },
   "pages/sitemap.vue": {
-    "file": "sitemap-f1d6aa5c.mjs",
+    "file": "sitemap-40c155ff.mjs",
     "src": "pages/sitemap.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_fetch-efc95e64.mjs"
+      "_fetch-9356241f.mjs"
     ]
   }
 }
