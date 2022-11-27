@@ -107,6 +107,8 @@ a {
 
 .product-image {
   width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
   margin-top: 0px;
 }
 
