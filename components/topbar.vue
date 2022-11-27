@@ -70,5 +70,10 @@ export default {
 
 .p-button-text {
   color: var(--text-color);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
 }
+
 </style>
