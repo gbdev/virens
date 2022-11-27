@@ -17,10 +17,12 @@ const { data } = await useFetch(url);
             <h3>Welcome to Homebrew Hub</h3>
             <span class="block font-regular mb-3 main-text">
               Homebrew Hub is a community-led initiative to collect, archive and
-              preserve <i>homebrew</i> software developed for Game Boy (Color). <br> 
-              Each ROM can be easily downloaded or played directly in the browser, through an
-              accurate emulator. <br />
-              <b>{{ data.results }}</b> entries are currently in the database.</span
+              preserve <i>homebrew</i> software developed for Game Boy (Color).
+              <br />
+              Each ROM can be easily downloaded or played directly in the
+              browser, through an accurate emulator. <br />
+              <b>{{ data.results }}</b> entries are currently in the
+              database.</span
             >
           </div>
         </div>
@@ -30,7 +32,15 @@ const { data } = await useFetch(url);
       <div>
         <div>
           <div>
-            <List :entries="entries" :paginator="false" />
+            <div class="card mb-0">
+              <div class="home-cards">
+                <div>
+                  <h3>Games Showcase</h3>
+                  <List :entries="entries" :paginator="false" />
+                  <List :entries="gba_entries" :paginator="false" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -89,6 +99,7 @@ export default {
   data() {
     return {
       entries: [],
+      gba_entries: [],
     };
   },
   mounted: function () {
@@ -104,6 +115,21 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.entries.push(data);
+        });
+    });
+
+    [
+      "varooom3d",
+      "skyland",
+      "inheritors-of-the-oubliette",
+      "feline",
+      "sym-merged",
+      "hero-core-gba-port",
+    ].forEach((gameslug) => {
+      fetch(this.config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
+        .then((response) => response.json())
+        .then((data) => {
+          this.gba_entries.push(data);
         });
     });
   },
