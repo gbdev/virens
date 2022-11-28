@@ -303,7 +303,7 @@ export default {
         { gb: "A", kb: "X" },
         { gb: "B", kb: "Z" },
         { gb: "Start", kb: "Enter" },
-        { gb: "Select", kb: "Tab" },
+        { gb: "Select", kb: "Backspace" },
         { gb: "← ↑ → ↓", kb: "← ↑ → ↓" },
         { gb: "L", kb: "A" },
         { gb: "R", kb: "S" },
