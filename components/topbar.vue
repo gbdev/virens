@@ -22,6 +22,19 @@
         /></a>
       </li>
       <li>
+        <Button disabled="disabled" label="//" class="p-button-text mr-2 mb-2"
+        />
+      </li>
+      <li>
+        <a href="/games/gba"
+          ><Button label="GBA" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
+      <li>
+        <Button disabled="disabled" label="//" class="disabled p-button-text mr-2 mb-2"
+        />
+      </li>
+      <li>
         <a href="/games"
           ><Button label="Games" class="p-button-text mr-2 mb-2"
         /></a>
@@ -42,13 +55,17 @@
         /></a>
       </li>
       <li>
-        <a href="/games/gbcompo21"
-          ><Button label="gbcompo21" class="p-button-text mr-2 mb-2"
+        <Button disabled="disabled" label="//" class="disabled p-button-text mr-2 mb-2"
+        />
+      </li>
+      <li>
+        <a href="/events/gbcompo21"
+          ><Button label="gb compo 21" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
       <li>
-        <a href="/games/gba"
-          ><Button label="GBA" class="p-button-text mr-2 mb-2"
+        <a href="/events/gbajam22"
+          ><Button label="GBA Jam 22" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
     </ul>

@@ -32,7 +32,12 @@ export default defineNuxtConfig({
         // /demos, /games and /gbcompo21 should just point to the games view. We'll change the api call there, based on the matched path.
         {
           name: "gbcompo21",
-          path: "/games/gbcompo21",
+          path: "/events/gbcompo21",
+          file: resolve(__dirname, "pages/games.vue"),
+        },
+        {
+          name: "gbajam22",
+          path: "/events/gbajam22",
           file: resolve(__dirname, "pages/games.vue"),
         },
         {
