@@ -1,25 +1,34 @@
+<!--
+  GBA Emulator component. Fetches the game ROM Blob and fires up the WASM 
+  build of the mGBA emulator.
+-->
 <template>
-  <Button
-    @click="toggleFullscreen"
-    label="Fullscreen"
-    icon="pi pi-desktop"
-    iconPos="right"
-    class="p-button-text"
-  /><br />
-  <canvas class="shadow-3 gamecanvas" ref="gamecanvas">
-  </canvas>
-  <br />
-  <div class="grid p-fluid">
-    <div class="col-12 md:col-8 vertical-align-bottom">
-      <div style="padding: 1rem">
-        <Slider
-          @change="changeVolume"
-          orientation="horizontal"
-          v-model="volume"
-          :step="0.0025"
-          :min="0"
-          :max="1"
-        />
+  <div style="text-align: center" v-if="loading">
+    <ProgressSpinner style="width: 32px; height: 32px" strokeWidth="4" />
+    <Button :label="loading" class="p-button-text" disabled />
+  </div>
+  <div v-show="loading == ''">
+    <Button
+      @click="toggleFullscreen"
+      label="Fullscreen"
+      icon="pi pi-desktop"
+      iconPos="right"
+      class="p-button-text"
+    /><br />
+    <canvas class="shadow-3 gamecanvas" ref="gamecanvas"> </canvas>
+    <br />
+    <div class="grid p-fluid">
+      <div class="col-12 md:col-8 vertical-align-bottom">
+        <div style="padding: 1rem">
+          <Slider
+            @change="changeVolume"
+            orientation="horizontal"
+            v-model="volume"
+            :step="0.0025"
+            :min="0"
+            :max="1"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -53,17 +62,18 @@ export default {
     return {
       volume: 0.1,
       started: false,
+      loading: "Fetching game ROM file...",
     };
   },
   mounted: function () {
-    this.start()
+    this.start();
   },
   methods: {
     unmute: function () {
       window.Module._unmute();
     },
     start: function () {
-      this.started=true;
+      this.started = true;
       window.vm = this;
       window.Module = {
         canvas: window.vm.gamecanvas,
@@ -71,6 +81,7 @@ export default {
 
       fetch(this.romEndpoint).then((response) => {
         let gameblob = response.blob().then((blob) => {
+          this.loading = "Loading emulator..";
           mGBA(window.Module).then(() => {
             window.Module.FS.mkdir("/hh-gba-data");
             window.Module.FS.mount(
@@ -85,7 +96,8 @@ export default {
                 new Uint8Array(data)
               );
               window.Module.loadFile("/hh-gba-data/game.gba");
-              window.Module._setVolume(0.1)
+              this.loading = "";
+              window.Module._setVolume(0.1);
             });
           });
         });
@@ -106,7 +118,7 @@ export default {
   image-rendering: pixelated;
   /* Fill the available space */
   width: 100%;
-  /* Original resolution ratio */
+  /* GBA original resolution ratio */
   aspect-ratio: 240 / 160;
 }
 </style>

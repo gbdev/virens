@@ -19,6 +19,7 @@ import Slider from "primevue/slider";
 import SelectButton from "primevue/selectbutton";
 import MultiSelect from "primevue/multiselect";
 import Dropdown from "primevue/dropdown";
+import ProgressSpinner from 'primevue/progressspinner';
 import "../assets/styles/layout.scss";
 import "../assets/styles/themes/dark-bs.css";
 
@@ -39,4 +40,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("InputNumber", InputNumber);
   nuxtApp.vueApp.component("DataTable", DataTable);
   nuxtApp.vueApp.component("Column", Column);
+  nuxtApp.vueApp.component("ProgressSpinner", ProgressSpinner);
 });
