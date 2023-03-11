@@ -135,3 +135,10 @@ export default {
   },
 };
 </script>
+
+<style type="text/css">
+.card {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+</style>

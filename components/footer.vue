@@ -33,5 +33,6 @@ export default {
 }
 .layout-footer {
   flex-wrap: wrap;
+  margin-top: 15px;
 }
 </style>
