@@ -5,6 +5,7 @@ import { SitemapStream, streamToPromise } from "sitemap";
 import { defineNuxtModule, createResolver } from "@nuxt/kit";
 import axios from "axios";
 
+
 export default defineNuxtModule({
   meta: {
     name: "sitemap",
@@ -22,7 +23,9 @@ export default defineNuxtModule({
       console.log(sitemapRoutes);
 
       await axios
-        .get("https://hh3.gbdev.io/api/all?results=2000")
+        /* this should use "useRuntimeConfig" but it's not available here and
+        I couldn't figure out how to import it */
+        .get(process.env.BASE_API_URL + "/api/all?results=2000")
         .then(function (response) {
           let entries = response.data.entries;
           entries.forEach((element) => {
