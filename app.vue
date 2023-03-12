@@ -49,7 +49,6 @@ h2,
 .gametitle {
   font-family: "Eudoxus Sans";
   font-weight: 400;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
