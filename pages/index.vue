@@ -37,7 +37,6 @@ const { data } = await useFetch(url);
                 <div>
                   <h3>Games Showcase</h3>
                   <List :entries="entries" :paginator="false" />
-                  <List :entries="gba_entries" :paginator="false" />
                 </div>
               </div>
             </div>
@@ -99,37 +98,31 @@ export default {
   data() {
     return {
       entries: [],
-      gba_entries: [],
     };
   },
   mounted: function () {
-    [
+    let config = useRuntimeConfig().public;
+
+    let showcased_games = [
       "dangan",
       "unearthed",
       "rhythm-land",
       "shock-lobster",
       "ucity",
       "dango-dash",
-    ].forEach((gameslug) => {
-      fetch(this.config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
-        .then((response) => response.json())
-        .then((data) => {
-          this.entries.push(data);
-        });
-    });
-
-    [
       "varooom3d",
       "skyland",
       "inheritors-of-the-oubliette",
       "feline",
       "sym-merged",
       "hero-core-gba-port",
-    ].forEach((gameslug) => {
-      fetch(this.config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
+    ];
+
+    showcased_games.forEach((gameslug) => {
+      fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
         .then((response) => response.json())
         .then((data) => {
-          this.gba_entries.push(data);
+          this.entries.push(data);
         });
     });
   },
