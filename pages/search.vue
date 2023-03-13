@@ -1,6 +1,4 @@
 <script setup>
-const config = useRuntimeConfig().public;
-
 useHead({
   title: "HH - Search",
 });
@@ -30,7 +28,7 @@ useHead({
           />
         </div>
       </div>
-      <div class="col-12 md:col-4">
+      <div class="col-12 md:col-3">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Tags </span>
           <MultiSelect
@@ -44,19 +42,28 @@ useHead({
           />
         </div>
       </div>
-      <div class="col-12 md:col-2">
+      <div class="col-12 md:col-3">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Title </span>
-          <InputText @keyup.enter="handlesearch()" v-model="textQuery" placeholder="Text query"/>
+          <InputText
+            @keyup.enter="handlesearch()"
+            v-model="textQuery"
+            placeholder="Text query"
+          />
         </div>
       </div>
-      <div class="col-12 md:col-2">
+      <div class="col-12 lg:col-2 md:col-3">
         <div class="p-inputgroup">
+          <Button
+            label="Reset"
+            class="p-button-outlined"
+            @click="resetsearch()"
+          />
           <Button
             label="Search"
             icon="pi pi-search"
             iconPos="right"
-            class="p-button-outlined"
+            class="p-button"
             @click="handlesearch()"
           />
         </div>
@@ -64,6 +71,9 @@ useHead({
     </div>
     <div v-if="entries != null">
       <h5>Results</h5>
+      <div v-if="entries.length == 0">
+        Welp, it looks like there are no results matching your query
+      </div>
       <List :entries="entries" />
     </div>
   </div>
@@ -73,8 +83,15 @@ import List from "../components/list";
 
 export default {
   methods: {
+    resetsearch: function () {
+      this.selectedPlatform = null;
+      this.textQuery = null;
+      this.selectedType = { name: "All", code: "all" };
+      this.selectedTags = null;
+    },
     handlesearch: function () {
-      let baseurl = this.config.BASE_API_URL + "/api/search?";
+      let config = useRuntimeConfig();
+      let baseurl = config.BASE_API_URL + "/api/search?";
       let params = { results: 1000 };
       let tags = [];
       if (this.selectedTags) {
@@ -148,9 +165,9 @@ export default {
             { label: "GB Compo 21", value: "gbcompo21" },
             { label: "GB Showdown 2022", value: "gb-showdown-22" },
             { label: "GB Compo 21 - Finalists", value: "gbcompo21-shortlist" },
-            { label: "GBA Winter Jam 2023", value: "event:gbawinterjam23"},
-            { label: "GBAX2003", value: "event:gbax2003"},
-            { label: "2004Mbit", value: "2004Mbit"},
+            { label: "GBA Winter Jam 2023", value: "event:gbawinterjam23" },
+            { label: "GBAX2003", value: "event:gbax2003" },
+            { label: "2004Mbit", value: "2004Mbit" },
           ],
         },
       ],
