@@ -131,7 +131,6 @@ export default {
 
 <style type="text/css">
 .card {
-  margin-left: 10px;
-  margin-top: 10px;
+  margin: 10px 10px 0px 10px;
 }
 </style>

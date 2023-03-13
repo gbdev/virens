@@ -62,10 +62,16 @@ h2,
 .layout-main-container {
   padding: 7rem 2rem 2rem 2rem;
 }
+
 .card {
   padding: 1.5rem 2rem 0.1rem 2rem;
 }
 .main-text {
   font-size: 1.3rem;
+}
+@media (max-width: 576px) {
+  .layout-main-container {
+    padding: 6rem 0.5rem 2rem 0.5rem;
+  }
 }
 </style>
