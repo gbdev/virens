@@ -2,9 +2,9 @@
 
 [![build + deploy](https://github.com/gbdev/virens/actions/workflows/deploy.yml/badge.svg)](https://github.com/gbdev/virens/actions/workflows/deploy.yml)
 
-Experimental Homebrew Hub frontend in Nuxt 3 (`3.0.0-rc.3` - Vue 3), consuming the new [Homebrew Hub API](https://github.com/gbdev/homebrewhub/).
+Experimental Homebrew Hub frontend in Nuxt 3, consuming the new [Homebrew Hub API](https://github.com/gbdev/homebrewhub/).
 
-The GB/GBC emulation is powered by the [binjgb](https://github.com/binji/binjgb) emulator, running in the browser via WebAssembly.
+The GB/GBC emulation is powered by the [binjgb](https://github.com/binji/binjgb) emulator, running in the browser via WebAssembly. The GBA emulation is provided in a similar fashion by [mGBA](https://mgba.io/).
 
 The UI component library used is [PrimeVue](https://www.primefaces.org/primevue).
 
