@@ -17,10 +17,11 @@ const { data } = await useFetch(url);
             <h3>Welcome to Homebrew Hub</h3>
             <span class="block font-regular mb-3 main-text">
               Homebrew Hub is a community-led initiative to collect, archive and
-              preserve <i>homebrew</i> software developed for Game Boy (Color).
+              preserve <i>homebrew</i> software developed for Game Boy (Color)
+              and the Game Boy Advance.
               <br />
-              Each ROM can be easily downloaded or played directly in the
-              browser, through an accurate emulator. <br />
+              Each ROM can be downloaded or played directly in the browser,
+              through an accurate emulator. <br />
               <b>{{ data.results }}</b> entries are currently in the
               database.</span
             >
