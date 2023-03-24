@@ -360,7 +360,8 @@ export default {
   font-weight: 600;
   letter-spacing: 0.1rem;
   border-radius:3px;
-  padding: 0.4rem;
+  padding: 0.15rem 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .open-source {
@@ -372,7 +373,8 @@ export default {
   font-weight: 600;
   letter-spacing: 0.1rem;
   border-radius:3px;
-  padding: 0.4rem;
+  padding: 0.15rem 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 .game {
