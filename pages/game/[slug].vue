@@ -128,7 +128,7 @@ useHead({
                 <td class="value-title">Platform</td>
                 <td>
                   <Chip
-                    :class="game.platform"
+                    :class="game.platform + ' tag'"
                     v-tooltip="tooltip[game.platform]"
                     >{{
                       {
@@ -140,11 +140,17 @@ useHead({
                   >
                 </td>
               </tr>
+              <tr v-if="game.typetag">
+                <td class="value-title">Type</td>
+                <td>
+                  <Chip :class="'typetag '+game.typetag">{{ game.typetag }}</Chip>
+                </td>
+              </tr>
               <tr v-if="game.tags">
                 <td class="value-title">Tags</td>
                 <td>
                   <template v-for="tag in game.tags">
-                    <Chip>{{ tag }}</Chip
+                    <Chip :class="'tag '+ tag.replace(' ','-').toLowerCase() ">{{ tag }}</Chip
                     >&nbsp;
                   </template>
                 </td>
@@ -160,12 +166,6 @@ useHead({
               <tr v-if="dateString != 'Invalid Date' && game.date">
                 <td class="value-title">Release Date</td>
                 <td>{{ dateString }}</td>
-              </tr>
-              <tr v-if="game.typetag">
-                <td class="value-title">Type</td>
-                <td>
-                  <Chip>{{ game.typetag }}</Chip>
-                </td>
               </tr>
               <tr
                 v-if="
@@ -353,7 +353,40 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
+
+.tag {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  border-radius:3px;
+  padding: 0.4rem;
+}
+
+.open-source {
+  background-color: var(--teal-700);  
+}
+
+.typetag {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  border-radius:3px;
+  padding: 0.4rem;
+}
+
+.game {
+  background-color: var(--blue-700);  
+}
+
+.demo {
+  background-color: var(--green-700);
+}
+
+.music {
+  background-color: var(--purple-700);
+}
+
 .devtoolinfo {
   padding-top: 10px;
 }
