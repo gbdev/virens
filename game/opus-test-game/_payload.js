@@ -1,1 +1,1 @@
-export default {data:{QCcHXep5YW:{title:"Opus Test Game",slug:"opus-test-game",developer:"Opus Games",platform:"GB",typetag:"homebrew",screenshots:[],files:[{description:"release",filename:"opustest.zip"}],devtoolinfo:""}},prerenderedAt:1678826772070}
+export default {data:{QCcHXep5YW:{title:"Opus Test Game",slug:"opus-test-game",developer:"Opus Games",platform:"GB",typetag:"homebrew",screenshots:[],files:[{description:"release",filename:"opustest.zip"}],devtoolinfo:""}},prerenderedAt:1679687802830}
