@@ -14,7 +14,215 @@ const { data } = await useFetch(url);
       <div class="card mb-0">
         <div class="">
           <div>
-            <h3>Welcome to Homebrew Hub</h3>
+            <h3>
+              Welcome to Homebrew Hub
+              <svg
+                class="icon-widget"
+                enable-background="new 0 0 64 64"
+                version="1.1"
+                viewBox="0 0 64 64"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+              >
+                <g id="object">
+                  <g>
+                    <polyline
+                      fill="none"
+                      points="56,43 56,61     8,61 8,3 51,3 51,8 56,8 56,37   "
+                      stroke="var(--surface-900)"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="56"
+                      x2="56"
+                      y1="39"
+                      y2="41"
+                    />
+                    <path
+                      d="M46.05,25h-28.1C15.216,25,13,22.784,13,20.05    v-0.1c0-2.734,2.216-4.95,4.95-4.95h28.1c2.734,0,4.95,2.216,4.95,4.95v0.1C51,22.784,48.784,25,46.05,25z"
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="15"
+                      x2="7"
+                      y1="16"
+                      y2="16"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="13"
+                      x2="7"
+                      y1="20"
+                      y2="20"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="57"
+                      x2="51"
+                      y1="20"
+                      y2="20"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="57"
+                      x2="49"
+                      y1="16"
+                      y2="16"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="15"
+                      x2="7"
+                      y1="24"
+                      y2="24"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="57"
+                      x2="49"
+                      y1="24"
+                      y2="24"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="17"
+                      x2="35"
+                      y1="7"
+                      y2="7"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="17"
+                      x2="22"
+                      y1="11"
+                      y2="11"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="37"
+                      x2="39"
+                      y1="7"
+                      y2="7"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="41"
+                      x2="47"
+                      y1="7"
+                      y2="7"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="24"
+                      x2="26"
+                      y1="11"
+                      y2="11"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="28"
+                      x2="47"
+                      y1="11"
+                      y2="11"
+                    />
+                    <rect
+                      fill="none"
+                      height="20"
+                      stroke="var(--surface-900)"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      width="32"
+                      x="16"
+                      y="29"
+                    />
+                    <polygon
+                      fill="none"
+                      points="32,57 30,55     28,53 32,53 36,53 34,55   "
+                      stroke="var(--surface-900)"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="12"
+                      x2="14"
+                      y1="56"
+                      y2="56"
+                    />
+                    <line
+                      fill="none"
+                      stroke="var(--surface-900)"
+                      stroke-linejoin="round"
+                      stroke-miterlimit="10"
+                      stroke-width="1.2"
+                      x1="50"
+                      x2="52"
+                      y1="56"
+                      y2="56"
+                    />
+                  </g>
+                </g>
+              </svg>
+            </h3>
             <span class="block font-regular mb-3 main-text">
               Homebrew Hub is a community-led initiative to collect, archive and
               preserve <i>homebrew</i> software developed for Game Boy (Color)
@@ -22,9 +230,8 @@ const { data } = await useFetch(url);
               <br />
               Each ROM can be downloaded or played directly in the browser,
               through an accurate emulator. <br />
-              <b>{{ data.results }}</b> entries are currently in the
-              database.</span
-            >
+              <b>{{ data.results }}</b> entries are currently in the database.
+            </span>
           </div>
         </div>
       </div>
@@ -133,5 +340,12 @@ export default {
 <style type="text/css">
 .card {
   margin: 10px 10px 0px 10px;
+}
+.icon-widget {
+  width: 105px;
+  color: #8dd0ff;
+  transform: rotate(15deg);
+  position: relative;
+  float: right;
 }
 </style>
