@@ -2,7 +2,7 @@
   <div class="layout-footer">
     <div>
       <span class="font-medium ml-2">
-        <a href="/sitemap">sitemap</a> -
+        <a href="/stats">stats</a> - <a href="/sitemap">sitemap</a> -
         <a href="/disclaimer">disclaimer/DMCA</a> -
         <a href="/developers">API</a> - <a href="/credits">credits</a> -
         <a href="https://github.com/gbdev/virens">source code</a> -
