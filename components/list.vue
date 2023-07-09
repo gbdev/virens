@@ -91,6 +91,9 @@ export default {
   font-size: 1.35rem;
   font-weight: 600;
   height: 2.3rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 a {
