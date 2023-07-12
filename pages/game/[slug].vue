@@ -10,6 +10,17 @@ const url = config.BASE_API_URL + "/api/entry/" + route.params.slug + ".json";
 const { data } = await useFetch(url);
 const game = data.value;
 
+console.log();
+
+const images = [];
+data.value.screenshots.forEach((url) => {
+  images.push({
+    itemImageSrc: config.BASE_API_URL + "/entries/" + game.slug + "/" + url,
+    thumbnailImageSrc:
+      config.BASE_API_URL + "/entries/" + game.slug + "/" + url,
+  });
+});
+
 /* Date conversion */
 
 let dateObject = new Date();
@@ -117,9 +128,38 @@ useHead({
           </template>
         </ClientOnly>
       </div>
+      <div class="card mb-0">
+        <div class="justify-content-between mb-6">
+          <h3> Gallery </h3>
+          <div>
+            <Galleria
+              :value="images"
+              :numVisible="5"
+              containerStyle="max-width: 640px"
+              :showItemNavigators="true"
+              :showThumbnails="false"
+            >
+              <template #item="slotProps">
+                <img
+                  :src="slotProps.item.itemImageSrc"
+                  :alt="slotProps.item.alt"
+                  style="width: 100%; image-rendering: pixelated"
+                />
+              </template>
+              <template #thumbnail="slotProps">
+                <img
+                  :src="slotProps.item.thumbnailImageSrc"
+                  style="width: 32px"
+                />
+              </template>
+            </Galleria>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
+        <h3> Homebrew Information </h3>
         <div class="flex justify-content-between mb-6">
           <div>
             <span class="gametitle">{{ game.title }}</span>

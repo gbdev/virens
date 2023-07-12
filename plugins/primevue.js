@@ -21,6 +21,7 @@ import MultiSelect from "primevue/multiselect";
 import Dropdown from "primevue/dropdown";
 import ProgressSpinner from "primevue/progressspinner";
 import Chart from "primevue/chart";
+import Galleria from 'primevue/galleria';
 
 import "../assets/styles/layout.scss";
 import "../assets/styles/themes/dark-bs.css";
@@ -44,4 +45,5 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.component("Column", Column);
   nuxtApp.vueApp.component("ProgressSpinner", ProgressSpinner);
   nuxtApp.vueApp.component("Chart", Chart);
+  nuxtApp.vueApp.component("Galleria", Galleria);
 });
