@@ -90,7 +90,7 @@ export default {
       this.selectedTags = null;
     },
     handlesearch: function () {
-      let config = useRuntimeConfig();
+      let config = useRuntimeConfig().public;
       let baseurl = config.BASE_API_URL + "/api/search?";
       let params = { results: 1000 };
       let tags = [];
@@ -123,29 +123,39 @@ export default {
     setSearchParameters: function () {
       // Let's check if there are some query param we should honor
       if (this.$route.query.title) {
-        this.textQuery = this.$route.query.title
+        this.textQuery = this.$route.query.title;
       }
       if (this.$route.query.platform) {
-        if (["gb", "gbc", "gba"].includes(this.$route.query.platform.toLowerCase())) {
+        if (
+          ["gb", "gbc", "gba"].includes(
+            this.$route.query.platform.toLowerCase()
+          )
+        ) {
           this.selectedPlatform = {
-            'name': this.$route.query.platform.toUpperCase(),
-            'code': this.$route.query.platform.toUpperCase()
-          }
+            name: this.$route.query.platform.toUpperCase(),
+            code: this.$route.query.platform.toUpperCase(),
+          };
         }
       }
       if (this.$route.query.type) {
-        if (["all", "game", "demo", "music", "tool"].includes(this.$route.query.type.toLowerCase())) {
+        if (
+          ["all", "game", "demo", "music", "tool"].includes(
+            this.$route.query.type.toLowerCase()
+          )
+        ) {
           this.selectedType = {
-            'name': this.$route.query.type.charAt(0).toUpperCase() + this.$route.query.type.slice(1),
-            'code': this.$route.query.type.toLowerCase()
-          }
+            name:
+              this.$route.query.type.charAt(0).toUpperCase() +
+              this.$route.query.type.slice(1),
+            code: this.$route.query.type.toLowerCase(),
+          };
         }
       }
     },
   },
   mounted: function () {
-    this.setSearchParameters()
-    this.handlesearch()
+    this.setSearchParameters();
+    this.handlesearch();
   },
   data() {
     return {

@@ -2,13 +2,6 @@
 useHead({
   title: "Homebrew Hub - Stats",
 });
-const config = useRuntimeConfig().public;
-
-// API calls
-
-let stats_url = config.BASE_API_URL + "/api/stats";
-
-let stats_data = useFetch(stats_url).data;
 </script>
 <template>
   <div class="grid">
