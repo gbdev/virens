@@ -119,6 +119,7 @@ useHead({
     <div class="col-12 lg:col-0 xl:col-1"></div>
     <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
+        <h3> Emulator </h3>
         <ClientOnly>
           <template v-if="game.platform == 'GBA'">
             <Medusa :gameData="game" :romEndpoint="rom_endpoint" />
@@ -309,7 +310,7 @@ useHead({
       </div>
       <br />
       <div class="card mb-0">
-        <h2>Controls</h2>
+        <h3>Controls</h3>
         <DataTable
           v-if="game.platform == 'GBA'"
           :value="controls_gba"
