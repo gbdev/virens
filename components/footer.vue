@@ -3,7 +3,7 @@
     <div>
       <span class="font-medium ml-2">
         <a href="/stats">stats</a> - <a href="https://opencollective.com/gbdev" target="_blank">donate</a> - <a href="/sitemap">sitemap</a> -
-        <a href="/disclaimer">disclaimer/DMCA</a> -
+        <a href="/disclaimer">disclaimer/DMCA</a> - <a href="https://stats.uptimerobot.com/P9A8kh07DG" target="_blank">uptime</a> -
         <a href="/developers">API</a> - <a href="/credits">credits</a> -
         <a href="https://github.com/gbdev/virens" target="_blank">source code</a> -
         <a href="https://gbdev.io" target="_blank">gbdev community</a></span
