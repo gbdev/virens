@@ -119,7 +119,7 @@ useHead({
     <div class="col-12 lg:col-0 xl:col-1"></div>
     <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
-        <h3> Emulator </h3>
+        <h3>Emulator</h3>
         <ClientOnly>
           <template v-if="game.platform == 'GBA'">
             <Medusa :gameData="game" :romEndpoint="rom_endpoint" />
@@ -129,38 +129,46 @@ useHead({
           </template>
         </ClientOnly>
       </div>
+      <br />
       <div class="card mb-0">
-        <div class="justify-content-between mb-6">
-          <h3> Gallery </h3>
-          <div>
-            <Galleria
-              :value="images"
-              :numVisible="5"
-              containerStyle="max-width: 640px"
-              :showItemNavigators="true"
-              :showThumbnails="false"
-            >
-              <template #item="slotProps">
-                <img
-                  :src="slotProps.item.itemImageSrc"
-                  :alt="slotProps.item.alt"
-                  style="width: 100%; image-rendering: pixelated"
-                />
-              </template>
-              <template #thumbnail="slotProps">
-                <img
-                  :src="slotProps.item.thumbnailImageSrc"
-                  style="width: 32px"
-                />
-              </template>
-            </Galleria>
-          </div>
-        </div>
+        <h3>Controls</h3>
+        <DataTable
+          v-if="game.platform == 'GBA'"
+          :value="controls_gba"
+          responsiveLayout="scroll"
+        >
+          <Column field="gb" header="Game Boy Advance"
+            ><template #body="slotProps"
+              ><Chip :class="buttonClass[slotProps.data.gb]">{{
+                slotProps.data.gb
+              }}</Chip></template
+            ></Column
+          >
+          <Column field="kb" header="Keyboard"
+            ><template #body="slotProps">{{
+              slotProps.data.kb
+            }}</template></Column
+          >
+        </DataTable>
+        <DataTable v-else :value="controls" responsiveLayout="scroll">
+          <Column field="gb" header="Game Boy"
+            ><template #body="slotProps"
+              ><Chip :class="buttonClass[slotProps.data.gb]">{{
+                slotProps.data.gb
+              }}</Chip></template
+            ></Column
+          >
+          <Column field="kb" header="Keyboard"
+            ><template #body="slotProps">{{
+              slotProps.data.kb
+            }}</template></Column
+          >
+        </DataTable>
       </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0">
-        <h3> Homebrew Information </h3>
+        <h3>Homebrew Information</h3>
         <div class="flex justify-content-between mb-6">
           <div>
             <span class="gametitle">{{ game.title }}</span>
@@ -184,14 +192,18 @@ useHead({
               <tr v-if="game.typetag">
                 <td class="value-title">Type</td>
                 <td>
-                  <Chip :class="'typetag '+game.typetag">{{ game.typetag }}</Chip>
+                  <Chip :class="'typetag ' + game.typetag">{{
+                    game.typetag
+                  }}</Chip>
                 </td>
               </tr>
               <tr v-if="game.tags">
                 <td class="value-title">Tags</td>
                 <td>
                   <template v-for="tag in game.tags">
-                    <Chip :class="'tag '+ tag.replace(' ','-').toLowerCase() ">{{ tag }}</Chip
+                    <Chip
+                      :class="'tag ' + tag.replace(' ', '-').toLowerCase()"
+                      >{{ tag }}</Chip
                     >&nbsp;
                   </template>
                 </td>
@@ -310,39 +322,32 @@ useHead({
       </div>
       <br />
       <div class="card mb-0">
-        <h3>Controls</h3>
-        <DataTable
-          v-if="game.platform == 'GBA'"
-          :value="controls_gba"
-          responsiveLayout="scroll"
-        >
-          <Column field="gb" header="Game Boy Advance"
-            ><template #body="slotProps"
-              ><Chip :class="buttonClass[slotProps.data.gb]">{{
-                slotProps.data.gb
-              }}</Chip></template
-            ></Column
-          >
-          <Column field="kb" header="Keyboard"
-            ><template #body="slotProps">{{
-              slotProps.data.kb
-            }}</template></Column
-          >
-        </DataTable>
-        <DataTable v-else :value="controls" responsiveLayout="scroll">
-          <Column field="gb" header="Game Boy"
-            ><template #body="slotProps"
-              ><Chip :class="buttonClass[slotProps.data.gb]">{{
-                slotProps.data.gb
-              }}</Chip></template
-            ></Column
-          >
-          <Column field="kb" header="Keyboard"
-            ><template #body="slotProps">{{
-              slotProps.data.kb
-            }}</template></Column
-          >
-        </DataTable>
+        <div class="justify-content-between mb-6">
+          <h3>Gallery</h3>
+          <div>
+            <Galleria
+              :value="images"
+              :numVisible="5"
+              containerStyle="max-width: 640px"
+              :showItemNavigators="true"
+              :showThumbnails="false"
+            >
+              <template #item="slotProps">
+                <img
+                  :src="slotProps.item.itemImageSrc"
+                  :alt="slotProps.item.alt"
+                  style="width: 100%; image-rendering: pixelated"
+                />
+              </template>
+              <template #thumbnail="slotProps">
+                <img
+                  :src="slotProps.item.thumbnailImageSrc"
+                  style="width: 32px"
+                />
+              </template>
+            </Galleria>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -395,31 +400,30 @@ export default {
 };
 </script>
 <style scoped>
-
 .tag {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.1rem;
-  border-radius:3px;
+  border-radius: 3px;
   padding: 0.15rem 0.75rem;
   margin-bottom: 0.5rem;
 }
 
 .open-source {
-  background-color: var(--teal-700);  
+  background-color: var(--teal-700);
 }
 
 .typetag {
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.1rem;
-  border-radius:3px;
+  border-radius: 3px;
   padding: 0.15rem 0.75rem;
   margin-bottom: 0.25rem;
 }
 
 .game {
-  background-color: var(--blue-700);  
+  background-color: var(--blue-700);
 }
 
 .demo {
