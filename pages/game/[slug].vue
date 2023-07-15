@@ -130,7 +130,7 @@ useHead({
         </ClientOnly>
       </div>
       <br />
-      <div class="card mb-0">
+      <div class="card mb-0" v-if="!touchEnabled || game.platform == 'GBA'">
         <h3>Controls</h3>
         <DataTable
           v-if="game.platform == 'GBA'"
@@ -355,6 +355,7 @@ useHead({
 <script>
 import Dialog from "primevue/dialog";
 
+
 export default {
   name: "Game",
   props: {
@@ -362,6 +363,7 @@ export default {
   },
   data() {
     return {
+      touchEnabled: false,
       display: false,
       buttonClass: {
         A: "ab-button",
@@ -397,6 +399,10 @@ export default {
       },
     };
   },
+  mounted: function () {
+    this.touchEnabled = 'ontouchstart' in document.documentElement;
+
+  }
 };
 </script>
 <style scoped>
