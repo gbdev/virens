@@ -15,7 +15,20 @@
       /><br />
       {{ loading }}
       <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
+      <div id="controller">
+        <div id="controller_dpad">
+          <div id="controller_left"></div>
+          <div id="controller_right"></div>
+          <div id="controller_up"></div>
+          <div id="controller_down"></div>
+        </div>
+        <div id="controller_select" class="capsuleBtn">Select</div>
+        <div id="controller_start" class="capsuleBtn">Start</div>
+        <div id="controller_b" class="roundBtn">B</div>
+        <div id="controller_a" class="roundBtn">A</div>
+      </div>
     </div>
+
     <br />
 
     <br />
@@ -66,6 +79,8 @@ import Binjgb from "../binjgb.js";
 let emulator = null;
 const binjgbPromise = Binjgb();
 
+const $ = document.querySelector.bind(document);
+
 const RESULT_OK = 0;
 const RESULT_ERROR = 1;
 const SCREEN_WIDTH = 160;
@@ -90,6 +105,8 @@ const REWIND_UPDATE_MS = 16;
 const BUILTIN_PALETTES = 83; // See builtin-palettes.def.
 const GAMEPAD_POLLING_INTERVAL = 1000 / 60 / 4; // When activated, poll for gamepad input about ~4 times per gameboy frame (~240 times second)
 const GAMEPAD_KEYMAP_STANDARD_STR = "standard"; // Try to use "standard" HTML5 mapping config if available
+
+const OSGP_DEADZONE = 0.1;
 
 export default {
   name: "Emulator",
@@ -364,7 +381,8 @@ export default {
 
 /*
 Emulator code, adapted from
-https://github.com/binji/binjgb/blob/main/docs/demo.js
+https://github.com/binji/binjgb/blob/main/docs/demo.js and
+https://github.com/binji/binjgb/blob/main/docs/simple.js
 */
 
 function makeWasmBuffer(module, ptr, size) {
@@ -797,6 +815,12 @@ class Emulator {
       this.loadExtRam(extRamBuffer);
     }
     this.bindKeys();
+
+    this.bindTouch();
+
+    this.touchEnabled = "ontouchstart" in document.documentElement;
+    this.updateOnscreenGamepad();
+
     this.gamepad.init();
   }
   destroy() {
@@ -918,6 +942,7 @@ class Emulator {
       window.vm.extRamUpdated = true;
     }
   }
+
   rafCallback(startMs) {
     this.requestAnimationFrame();
     let deltaSec = 0;
@@ -936,6 +961,128 @@ class Emulator {
     this.fps = lerp(this.fps, Math.min(1 / deltaSec, 10000), 0.3);
     this.video.renderTexture();
   }
+
+  updateOnscreenGamepad() {
+    $("#controller").style.display = this.touchEnabled ? "block" : "none";
+  }
+
+  bindTouch() {
+    const controllerEl = $("#controller");
+    const dpadEl = $("#controller_dpad");
+    const selectEl = $("#controller_select");
+    const startEl = $("#controller_start");
+    const bEl = $("#controller_b");
+    const aEl = $("#controller_a");
+
+    this.touchFuncs = {
+      controller_b: this.setJoypB.bind(this),
+      controller_a: this.setJoypA.bind(this),
+      controller_start: this.setJoypStart.bind(this),
+      controller_select: this.setJoypSelect.bind(this),
+    };
+
+    this.boundButtonTouchStart = this.buttonTouchStart.bind(this);
+    this.boundButtonTouchEnd = this.buttonTouchEnd.bind(this);
+
+    selectEl.addEventListener("touchend", this.boundButtonTouchEnd);
+    startEl.addEventListener("touchstart", this.boundButtonTouchStart);
+    startEl.addEventListener("touchend", this.boundButtonTouchEnd);
+    bEl.addEventListener("touchstart", this.boundButtonTouchStart);
+    bEl.addEventListener("touchend", this.boundButtonTouchEnd);
+    aEl.addEventListener("touchstart", this.boundButtonTouchStart);
+    aEl.addEventListener("touchend", this.boundButtonTouchEnd);
+
+    this.boundDpadTouchStartMove = this.dpadTouchStartMove.bind(this);
+    this.boundDpadTouchEnd = this.dpadTouchEnd.bind(this);
+    dpadEl.addEventListener("touchstart", this.boundDpadTouchStartMove);
+    dpadEl.addEventListener("touchmove", this.boundDpadTouchStartMove);
+    dpadEl.addEventListener("touchend", this.boundDpadTouchEnd);
+
+    this.boundTouchRestore = this.touchRestore.bind(this);
+    window.addEventListener("touchstart", this.boundTouchRestore);
+  }
+
+  unbindTouch() {
+    selectEl.removeEventListener("touchstart", this.boundButtonTouchStart);
+    selectEl.removeEventListener("touchend", this.boundButtonTouchEnd);
+    startEl.removeEventListener("touchstart", this.boundButtonTouchStart);
+    startEl.removeEventListener("touchend", this.boundButtonTouchEnd);
+    bEl.removeEventListener("touchstart", this.boundButtonTouchStart);
+    bEl.removeEventListener("touchend", this.boundButtonTouchEnd);
+    aEl.removeEventListener("touchstart", this.boundButtonTouchStart);
+    aEl.removeEventListener("touchend", this.boundButtonTouchEnd);
+
+    dpadEl.removeEventListener("touchstart", this.boundDpadTouchStartMove);
+    dpadEl.removeEventListener("touchmove", this.boundDpadTouchStartMove);
+    dpadEl.removeEventListener("touchend", this.boundDpadTouchEnd);
+
+    window.removeEventListener("touchstart", this.boundTouchRestore);
+  }
+
+  buttonTouchStart(event) {
+    if (event.currentTarget.id in this.touchFuncs) {
+      this.touchFuncs[event.currentTarget.id](true);
+      event.currentTarget.classList.add("btnPressed");
+      event.preventDefault();
+    }
+  }
+
+  buttonTouchEnd(event) {
+    if (event.currentTarget.id in this.touchFuncs) {
+      this.touchFuncs[event.currentTarget.id](false);
+      event.currentTarget.classList.remove("btnPressed");
+      event.preventDefault();
+    }
+  }
+
+  dpadTouchStartMove(event) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x =
+      (2 * (event.targetTouches[0].clientX - rect.left)) / rect.width - 1;
+    const y =
+      (2 * (event.targetTouches[0].clientY - rect.top)) / rect.height - 1;
+
+    if (Math.abs(x) > OSGP_DEADZONE) {
+      if (y > x && y < -x) {
+        this.setJoypLeft(true);
+        this.setJoypRight(false);
+      } else if (y < x && y > -x) {
+        this.setJoypLeft(false);
+        this.setJoypRight(true);
+      }
+    } else {
+      this.setJoypLeft(false);
+      this.setJoypRight(false);
+    }
+
+    if (Math.abs(y) > OSGP_DEADZONE) {
+      if (x > y && x < -y) {
+        this.setJoypUp(true);
+        this.setJoypDown(false);
+      } else if (x < y && x > -y) {
+        this.setJoypUp(false);
+        this.setJoypDown(true);
+      }
+    } else {
+      this.setJoypUp(false);
+      this.setJoypDown(false);
+    }
+    event.preventDefault();
+  }
+
+  dpadTouchEnd(event) {
+    this.setJoypLeft(false);
+    this.setJoypRight(false);
+    this.setJoypUp(false);
+    this.setJoypDown(false);
+    event.preventDefault();
+  }
+
+  touchRestore() {
+    this.touchEnabled = true;
+    this.updateOnscreenGamepad();
+  }
+
   bindKeys() {
     this.keyFuncs = {
       ArrowDown: this.module._set_joyp_down.bind(null, this.e),
@@ -960,6 +1107,10 @@ class Emulator {
   }
   keyDown(event) {
     if (event.code in this.keyFuncs) {
+      if (this.touchEnabled) {
+        this.touchEnabled = false;
+        this.updateOnscreenGamepad();
+      }
       this.keyFuncs[event.code](true);
       event.preventDefault();
     }
@@ -983,6 +1134,31 @@ class Emulator {
   }
   keyPause(isKeyDown) {
     if (isKeyDown) window.vm.togglePause();
+  }
+
+  setJoypDown(set) {
+    this.module._set_joyp_down(this.e, set);
+  }
+  setJoypUp(set) {
+    this.module._set_joyp_up(this.e, set);
+  }
+  setJoypLeft(set) {
+    this.module._set_joyp_left(this.e, set);
+  }
+  setJoypRight(set) {
+    this.module._set_joyp_right(this.e, set);
+  }
+  setJoypSelect(set) {
+    this.module._set_joyp_select(this.e, set);
+  }
+  setJoypStart(set) {
+    this.module._set_joyp_start(this.e, set);
+  }
+  setJoypB(set) {
+    this.module._set_joyp_B(this.e, set);
+  }
+  setJoypA(set) {
+    this.module._set_joyp_A(this.e, set);
   }
 }
 class WebGLRenderer {
@@ -1226,13 +1402,236 @@ class Rewind {
 }
 </script>
 
-
 <style scoped>
 .gamecanvas {
   image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: crisp-edges;
+
   /* Fill the available space */
   width: 100%;
   /* Original resolution ratio */
   aspect-ratio: 160 / 144;
+
+  margin: 0; /* binjgb */
+  padding: 0; /* binjgb */
+  touch-action: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none; /* binjgb */
+  overflow: hidden;
+}
+
+#controller {
+  display: none;
+  position: fixed;
+  bottom: 100px;
+  height: 210px;
+  width: 90%;
+  touch-action: none;
+  opacity: 0.8;
+}
+
+#controller_dpad {
+  position: absolute;
+  bottom: 20px;
+  left: -5%;
+  width: 184px;
+  height: 184px;
+}
+
+#controller_dpad:before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 48px;
+  background: #5c5c5c;
+  background: radial-gradient(
+    ellipse at center,
+    #5c5c5c 0%,
+    #555 59%,
+    #5c5c5c 60%
+  );
+  position: absolute;
+  left: 68px;
+  top: 68px;
+}
+
+#controller_left {
+  position: absolute;
+  left: 20px;
+  top: 68px;
+  width: 48px;
+  height: 48px;
+  background: #666;
+  background: radial-gradient(ellipse at center, #666 0%, #5c5c5c 80%);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+#controller_right {
+  position: absolute;
+  left: 116px;
+  top: 68px;
+  width: 48px;
+  height: 48px;
+  background: #666;
+  background: radial-gradient(ellipse at center, #666 0%, #5c5c5c 80%);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#controller_up {
+  position: absolute;
+  left: 68px;
+  top: 20px;
+  width: 48px;
+  height: 48px;
+  background: #666;
+  background: radial-gradient(ellipse at center, #666 0%, #5c5c5c 80%);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+#controller_down {
+  position: absolute;
+  left: 68px;
+  top: 116px;
+  width: 48px;
+  height: 48px;
+  background: #666;
+  background: radial-gradient(ellipse at center, #666 0%, #5c5c5c 80%);
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+#controller_a {
+  position: absolute;
+  bottom: 110px;
+  right: 20px;
+}
+
+#controller_b {
+  position: absolute;
+  bottom: 80px;
+  right: 100px;
+}
+
+.roundBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 32px;
+  color: #440f1f;
+  line-height: 64px;
+  width: 64px;
+  height: 64px;
+  border-radius: 64px;
+  background: #870a4c;
+  background: radial-gradient(ellipse at center, #ab1465 0%, #8b1e57 100%);
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.capsuleBtn {
+  font-weight: bold;
+  font-size: 10px;
+  color: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 40px;
+  text-transform: uppercase;
+  width: 64px;
+  height: 32px;
+  border-radius: 40px;
+  background: #222;
+  background: radial-gradient(ellipse at center, #666 0%, #555 100%);
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+#controller_start {
+  position: absolute;
+  bottom: 20px;
+  right: 15px;
+}
+
+#controller_select {
+  position: absolute;
+  bottom: 20px;
+  right: 100px;
+}
+
+.btnPressed {
+  opacity: 0.5;
+}
+
+@media only screen and (max-device-width: 320px) and (orientation: portrait) {
+  #controller_dpad {
+    left: -5px;
+    bottom: -5px;
+  }
+
+  #controller_a {
+    right: 5px;
+    bottom: 95px;
+  }
+
+  #controller_b {
+    right: 80px;
+  }
+
+  #controller_start {
+    right: 5px;
+  }
+
+  #controller_select {
+    right: 80px;
+  }
+}
+
+@media only screen and (max-width: 500px) and (max-height: 400px) {
+  #controller {
+    display: none;
+  }
+}
+
+/* Small devices in landscape */
+@media only screen and (max-device-width: 300px) and (orientation: landscape) {
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #game:after {
+    content: "PLEASE ROTATE ↻";
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  #game canvas {
+    display: none;
+    max-width: 480px;
+  }
+
+  #controller {
+    display: none;
+  }
+}
+
+/* Devices large enough for landscape */
+@media only screen and (min-width: 300px) and (orientation: landscape) {
+  #controller {
+    bottom: 50%;
+    transform: translateY(50%);
+    opacity: 0.5;
+  }
 }
 </style>
