@@ -284,7 +284,7 @@ var Binjgb = (() => {
       return filename.startsWith(dataURIPrefix);
     }
     var wasmBinaryFile;
-    wasmBinaryFile = "../js/binjgb.wasm";
+    wasmBinaryFile = "/js/binjgb.wasm";
     if (!isDataURI(wasmBinaryFile)) {
       wasmBinaryFile = locateFile(wasmBinaryFile);
     }
