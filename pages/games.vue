@@ -13,8 +13,8 @@ if (route.name == "music") {
 } else if (route.name == "demos") {
   url = config.BASE_API_URL + "/api/search?typetag=demo&results=1000";
   pagetitle = "HH - Demos";
-} else if (route.name == "hb") {
-  url = config.BASE_API_URL + "/api/search?typetag=homebrew&results=1000";
+} else if (route.name == "tools") {
+  url = config.BASE_API_URL + "/api/search?typetag=tool&results=1000";
   pagetitle = "HH - Tools";
 } else if (route.name == "gbcompo21") {
   url = config.BASE_API_URL + "/api/search?tags=gbcompo21&results=1000";

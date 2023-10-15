@@ -49,8 +49,8 @@ export default defineNuxtConfig({
           file: resolve(__dirname, "pages/games.vue"),
         },
         {
-          name: "hb",
-          path: "/hb",
+          name: "tools",
+          path: "/tools",
           file: resolve(__dirname, "pages/games.vue"),
         },
         {
