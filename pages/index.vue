@@ -58,10 +58,10 @@ let stats_data = useFetch(stats_url).data;
           <div>
             <h3>Emulation</h3>
             <span class="block font-regular text-lg mb-3">
-              We use Webassembly builds of
+              We use WebAssembly builds of
               <a href="https://mgba.io/" target="_blank">mGBA</a> and
               <a href="https://github.com/binji/binjgb" target="_blank"
-                >binjb</a
+                >binjgb</a
               >
               to provide seamless and accurate emulation capabilities directly
               in the browser.
