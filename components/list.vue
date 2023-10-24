@@ -15,7 +15,7 @@ const config = useRuntimeConfig().public;
                 :src="
                   slotProps.data.screenshots.length > 0 ?
                   config.BASE_API_URL +
-                  '/entries/' +
+                  '/static/' + slotProps.data.basepath + '/' +
                   slotProps.data.slug +
                   '/' +
                   slotProps.data.screenshots[0] : 'https://raw.githubusercontent.com/gbdev/database/master/placeholder.png'
