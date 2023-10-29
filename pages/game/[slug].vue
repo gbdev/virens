@@ -310,7 +310,7 @@ useHead({
             <br />
             <span style="font-size: 0.9rem">
               <a
-                :href="`https://github.com/gbdev/database/tree/master/entries/${game.slug}/game.json`"
+                :href="`${game.baserepo}/tree/master/entries/${game.slug}/game.json`"
                 target="_blank"
               >
                 Improve metadata for this entry </a
