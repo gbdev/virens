@@ -201,6 +201,7 @@ export default {
             { label: "GBA Winter Jam 2023", value: "event:gbawinterjam23" },
             { label: "GBAX2003", value: "event:gbax2003" },
             { label: "2004Mbit", value: "2004Mbit" },
+            { label: "GB Compo 23", value: "event:gbcompo23" },
           ],
         },
       ],
