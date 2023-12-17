@@ -14,7 +14,8 @@
     "primeicons": "5.0.0",
     "primevue": "^3.30.0",
     "sass": "^1.51.0",
-    "sitemap": "^7.1.1"
+    "sitemap": "^7.1.1",
+    "vue-matomo": "^4.2.0"
   },
   "license": "GPL-3.0-only"
 }
