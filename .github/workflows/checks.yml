@@ -1,0 +1,14 @@
+name: CI
+
+on: push
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install requirements
+        run: yarn
+
+      - name: Run Prettier
+        run: yarn prettier . --check
