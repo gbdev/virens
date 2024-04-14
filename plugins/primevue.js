@@ -21,7 +21,7 @@ import MultiSelect from "primevue/multiselect";
 import Dropdown from "primevue/dropdown";
 import ProgressSpinner from "primevue/progressspinner";
 import Chart from "primevue/chart";
-import Galleria from 'primevue/galleria';
+import Galleria from "primevue/galleria";
 
 import "../assets/styles/layout.scss";
 import "../assets/styles/themes/dark-bs.css";

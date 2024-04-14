@@ -57,7 +57,7 @@ export default defineNuxtConfig({
           name: "music",
           path: "/music",
           file: resolve(__dirname, "pages/games.vue"),
-        }
+        },
       );
     },
   },

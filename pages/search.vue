@@ -128,7 +128,7 @@ export default {
       if (this.$route.query.platform) {
         if (
           ["gb", "gbc", "gba"].includes(
-            this.$route.query.platform.toLowerCase()
+            this.$route.query.platform.toLowerCase(),
           )
         ) {
           this.selectedPlatform = {
@@ -140,7 +140,7 @@ export default {
       if (this.$route.query.type) {
         if (
           ["all", "game", "demo", "music", "tool"].includes(
-            this.$route.query.type.toLowerCase()
+            this.$route.query.type.toLowerCase(),
           )
         ) {
           this.selectedType = {

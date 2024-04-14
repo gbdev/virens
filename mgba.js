@@ -156,7 +156,7 @@ var mGBA = (function () {
       if (scriptDirectory.indexOf("blob:") !== 0) {
         scriptDirectory = scriptDirectory.substr(
           0,
-          scriptDirectory.lastIndexOf("/") + 1
+          scriptDirectory.lastIndexOf("/") + 1,
         );
       } else {
         scriptDirectory = "";
@@ -241,7 +241,7 @@ var mGBA = (function () {
             var bits = parseInt(type.substr(1));
             assert(
               bits % 8 === 0,
-              "getNativeTypeSize invalid bits " + bits + ", type " + type
+              "getNativeTypeSize invalid bits " + bits + ", type " + type,
             );
             return bits / 8;
           } else {
@@ -294,8 +294,8 @@ var mGBA = (function () {
       var bytes = new Uint8Array(
         [0, 97, 115, 109, 1, 0, 0, 0].concat(
           typeSection,
-          [2, 7, 1, 1, 101, 1, 102, 0, 0, 7, 5, 1, 1, 102, 0, 0]
-        )
+          [2, 7, 1, 1, 101, 1, 102, 0, 0, 7, 5, 1, 1, 102, 0, 0],
+        ),
       );
       var module = new WebAssembly.Module(bytes);
       var instance = new WebAssembly.Instance(module, { e: { f: func } });
@@ -350,7 +350,7 @@ var mGBA = (function () {
                     0) >>>
                   0
                 : ~~+Math_ceil(
-                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                   ) >>> 0
               : 0),
           ]),
@@ -384,7 +384,7 @@ var mGBA = (function () {
       var func = Module["_" + ident];
       assert(
         func,
-        "Cannot call unknown function " + ident + ", make sure it is exported"
+        "Cannot call unknown function " + ident + ", make sure it is exported",
       );
       return func;
     }
@@ -459,7 +459,7 @@ var mGBA = (function () {
         ret = ptr;
       } else {
         ret = [_malloc, stackAlloc, dynamicAlloc][allocator](
-          Math.max(size, singleType ? 1 : types.length)
+          Math.max(size, singleType ? 1 : types.length),
         );
       }
       if (zeroinit) {
@@ -862,16 +862,16 @@ var mGBA = (function () {
           !isDataURI(wasmBinaryFile) &&
           typeof fetch === "function"
         ) {
-          fetch(wasmBinaryFile, { credentials: "same-origin" }).then(function (
-            response
-          ) {
-            var result = WebAssembly.instantiateStreaming(response, info);
-            return result.then(receiveInstantiatedSource, function (reason) {
-              err("wasm streaming compile failed: " + reason);
-              err("falling back to ArrayBuffer instantiation");
-              instantiateArrayBuffer(receiveInstantiatedSource);
-            });
-          });
+          fetch(wasmBinaryFile, { credentials: "same-origin" }).then(
+            function (response) {
+              var result = WebAssembly.instantiateStreaming(response, info);
+              return result.then(receiveInstantiatedSource, function (reason) {
+                err("wasm streaming compile failed: " + reason);
+                err("falling back to ArrayBuffer instantiation");
+                instantiateArrayBuffer(receiveInstantiatedSource);
+              });
+            },
+          );
         } else {
           return instantiateArrayBuffer(receiveInstantiatedSource);
         }
@@ -1114,7 +1114,7 @@ var mGBA = (function () {
           SDL2.capture.scriptProcessorNode =
             SDL2.audioContext.createScriptProcessor($1, $0, 1);
           SDL2.capture.scriptProcessorNode.onaudioprocess = function (
-            audioProcessingEvent
+            audioProcessingEvent,
           ) {
             if (SDL2 === undefined || SDL2.capture === undefined) {
               return;
@@ -1125,10 +1125,10 @@ var mGBA = (function () {
             dynCall("vi", $2, [$3]);
           };
           SDL2.capture.mediaStreamNode.connect(
-            SDL2.capture.scriptProcessorNode
+            SDL2.capture.scriptProcessorNode,
           );
           SDL2.capture.scriptProcessorNode.connect(
-            SDL2.audioContext.destination
+            SDL2.audioContext.destination,
           );
           SDL2.capture.stream = stream;
         };
@@ -1136,7 +1136,7 @@ var mGBA = (function () {
         SDL2.capture.silenceBuffer = SDL2.audioContext.createBuffer(
           $0,
           $1,
-          SDL2.audioContext.sampleRate
+          SDL2.audioContext.sampleRate,
         );
         SDL2.capture.silenceBuffer.getChannelData(0).fill(0);
         var silence_callback = function () {
@@ -1145,7 +1145,7 @@ var mGBA = (function () {
         };
         SDL2.capture.silenceTimer = setTimeout(
           silence_callback,
-          ($1 / SDL2.audioContext.sampleRate) * 1e3
+          ($1 / SDL2.audioContext.sampleRate) * 1e3,
         );
         if (
           navigator.mediaDevices !== undefined &&
@@ -1159,7 +1159,7 @@ var mGBA = (function () {
           navigator.webkitGetUserMedia(
             { audio: true, video: false },
             have_microphone,
-            no_microphone
+            no_microphone,
           );
         }
       },
@@ -1176,7 +1176,7 @@ var mGBA = (function () {
           dynCall("vi", $2, [$3]);
         };
         SDL2.audio.scriptProcessorNode["connect"](
-          SDL2.audioContext["destination"]
+          SDL2.audioContext["destination"],
         );
       },
       function ($0) {
@@ -1194,7 +1194,7 @@ var mGBA = (function () {
           }
           if (SDL2.capture.scriptProcessorNode !== undefined) {
             SDL2.capture.scriptProcessorNode.onaudioprocess = function (
-              audioProcessingEvent
+              audioProcessingEvent,
             ) {};
             SDL2.capture.scriptProcessorNode.disconnect();
             SDL2.capture.scriptProcessorNode = undefined;
@@ -1409,7 +1409,7 @@ var mGBA = (function () {
           path.split("/").filter(function (p) {
             return !!p;
           }),
-          !isAbsolute
+          !isAbsolute,
         ).join("/");
         if (!path && !isAbsolute) {
           path = ".";
@@ -1471,7 +1471,7 @@ var mGBA = (function () {
           resolvedPath.split("/").filter(function (p) {
             return !!p;
           }),
-          !resolvedAbsolute
+          !resolvedAbsolute,
         ).join("/");
         return (resolvedAbsolute ? "/" : "") + resolvedPath || ".";
       },
@@ -1588,7 +1588,7 @@ var mGBA = (function () {
                   buf,
                   0,
                   BUFSIZE,
-                  null
+                  null,
                 );
               } catch (e) {
                 if (e.toString().indexOf("EOF") != -1) bytesRead = 0;
@@ -1752,7 +1752,7 @@ var mGBA = (function () {
         newCapacity = Math.max(
           newCapacity,
           (prevCapacity * (prevCapacity < CAPACITY_DOUBLING_MAX ? 2 : 1.125)) |
-            0
+            0,
         );
         if (prevCapacity != 0) newCapacity = Math.max(newCapacity, 256);
         var oldContents = node.contents;
@@ -1773,7 +1773,7 @@ var mGBA = (function () {
           node.contents = new Uint8Array(new ArrayBuffer(newSize));
           if (oldContents) {
             node.contents.set(
-              oldContents.subarray(0, Math.min(newSize, node.usedBytes))
+              oldContents.subarray(0, Math.min(newSize, node.usedBytes)),
             );
           }
           node.usedBytes = newSize;
@@ -1903,14 +1903,14 @@ var mGBA = (function () {
               return length;
             } else if (node.usedBytes === 0 && position === 0) {
               node.contents = new Uint8Array(
-                buffer.subarray(offset, offset + length)
+                buffer.subarray(offset, offset + length),
               );
               node.usedBytes = length;
               return length;
             } else if (position + length <= node.usedBytes) {
               node.contents.set(
                 buffer.subarray(offset, offset + length),
-                position
+                position,
               );
               return length;
             }
@@ -1919,7 +1919,7 @@ var mGBA = (function () {
           if (node.contents.subarray && buffer.subarray)
             node.contents.set(
               buffer.subarray(offset, offset + length),
-              position
+              position,
             );
           else {
             for (var i = 0; i < length; i++) {
@@ -1947,7 +1947,7 @@ var mGBA = (function () {
           MEMFS.expandFileStorage(stream.node, offset + length);
           stream.node.usedBytes = Math.max(
             stream.node.usedBytes,
-            offset + length
+            offset + length,
           );
         },
         mmap: function (stream, buffer, offset, length, position, prot, flags) {
@@ -1968,7 +1968,7 @@ var mGBA = (function () {
                 contents = Array.prototype.slice.call(
                   contents,
                   position,
-                  position + length
+                  position + length,
                 );
               }
             }
@@ -1995,7 +1995,7 @@ var mGBA = (function () {
             0,
             length,
             offset,
-            false
+            false,
           );
           return 0;
         },
@@ -2092,7 +2092,7 @@ var mGBA = (function () {
           if (FS.isDir(stat.mode)) {
             check.push.apply(
               check,
-              FS.readdir(path).filter(isRealDir).map(toAbsolute(path))
+              FS.readdir(path).filter(isRealDir).map(toAbsolute(path)),
             );
           }
           entries[path] = { timestamp: stat.mtime };
@@ -2314,7 +2314,7 @@ var mGBA = (function () {
           path.split("/").filter(function (p) {
             return !!p;
           }),
-          false
+          false,
         );
         var current = FS.root;
         var current_path = "/";
@@ -2683,7 +2683,7 @@ var mGBA = (function () {
           console.log(
             "warning: " +
               FS.syncFSRequests +
-              " FS.syncfs operations in flight at once, probably just doing extra work"
+              " FS.syncfs operations in flight at once, probably just doing extra work",
           );
         }
         var mounts = FS.getMounts(FS.root.mount);
@@ -2911,7 +2911,7 @@ var mGBA = (function () {
               "', '" +
               new_path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
         FS.hashRemoveNode(old_node);
@@ -2932,7 +2932,7 @@ var mGBA = (function () {
               "', '" +
               new_path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
       },
@@ -2960,7 +2960,7 @@ var mGBA = (function () {
             "FS.trackingDelegate['willDeletePath']('" +
               path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
         parent.node_ops.rmdir(parent, name);
@@ -2973,7 +2973,7 @@ var mGBA = (function () {
             "FS.trackingDelegate['onDeletePath']('" +
               path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
       },
@@ -3009,7 +3009,7 @@ var mGBA = (function () {
             "FS.trackingDelegate['willDeletePath']('" +
               path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
         parent.node_ops.unlink(parent, name);
@@ -3022,7 +3022,7 @@ var mGBA = (function () {
             "FS.trackingDelegate['onDeletePath']('" +
               path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
       },
@@ -3037,7 +3037,7 @@ var mGBA = (function () {
         }
         return PATH_FS.resolve(
           FS.getPath(link.parent),
-          link.node_ops.readlink(link)
+          link.node_ops.readlink(link),
         );
       },
       stat: function (path, dontFollow) {
@@ -3207,7 +3207,7 @@ var mGBA = (function () {
             error: false,
           },
           fd_start,
-          fd_end
+          fd_end,
         );
         if (stream.stream_ops.open) {
           stream.stream_ops.open(stream);
@@ -3235,7 +3235,7 @@ var mGBA = (function () {
             "FS.trackingDelegate['onOpenFile']('" +
               path +
               "', flags) threw an exception: " +
-              e.message
+              e.message,
           );
         }
         return stream;
@@ -3300,7 +3300,7 @@ var mGBA = (function () {
           buffer,
           offset,
           length,
-          position
+          position,
         );
         if (!seeking) stream.position += bytesRead;
         return bytesRead;
@@ -3336,7 +3336,7 @@ var mGBA = (function () {
           offset,
           length,
           position,
-          canOwn
+          canOwn,
         );
         if (!seeking) stream.position += bytesWritten;
         try {
@@ -3347,7 +3347,7 @@ var mGBA = (function () {
             "FS.trackingDelegate['onWriteToFile']('" +
               stream.path +
               "') threw an exception: " +
-              e.message
+              e.message,
           );
         }
         return bytesWritten;
@@ -3391,7 +3391,7 @@ var mGBA = (function () {
           length,
           position,
           prot,
-          flags
+          flags,
         );
       },
       msync: function (stream, buffer, offset, length, mmapFlags) {
@@ -3403,7 +3403,7 @@ var mGBA = (function () {
           buffer,
           offset,
           length,
-          mmapFlags
+          mmapFlags,
         );
       },
       munmap: function (stream) {
@@ -3547,7 +3547,7 @@ var mGBA = (function () {
             },
           },
           {},
-          "/proc/self/fd"
+          "/proc/self/fd",
         );
       },
       createStandardStreams: function () {
@@ -3678,7 +3678,7 @@ var mGBA = (function () {
       createFolder: function (parent, name, canRead, canWrite) {
         var path = PATH.join2(
           typeof parent === "string" ? parent : FS.getPath(parent),
-          name
+          name,
         );
         var mode = FS.getMode(canRead, canWrite);
         return FS.mkdir(path, mode);
@@ -3700,7 +3700,7 @@ var mGBA = (function () {
       createFile: function (parent, name, properties, canRead, canWrite) {
         var path = PATH.join2(
           typeof parent === "string" ? parent : FS.getPath(parent),
-          name
+          name,
         );
         var mode = FS.getMode(canRead, canWrite);
         return FS.create(path, mode);
@@ -3709,7 +3709,7 @@ var mGBA = (function () {
         var path = name
           ? PATH.join2(
               typeof parent === "string" ? parent : FS.getPath(parent),
-              name
+              name,
             )
           : parent;
         var mode = FS.getMode(canRead, canWrite);
@@ -3732,7 +3732,7 @@ var mGBA = (function () {
       createDevice: function (parent, name, input, output) {
         var path = PATH.join2(
           typeof parent === "string" ? parent : FS.getPath(parent),
-          name
+          name,
         );
         var mode = FS.getMode(!!input, !!output);
         if (!FS.createDevice.major) FS.createDevice.major = 64;
@@ -3786,7 +3786,7 @@ var mGBA = (function () {
       createLink: function (parent, name, target, canRead, canWrite) {
         var path = PATH.join2(
           typeof parent === "string" ? parent : FS.getPath(parent),
-          name
+          name,
         );
         return FS.symlink(target, path);
       },
@@ -3796,7 +3796,7 @@ var mGBA = (function () {
         var success = true;
         if (typeof XMLHttpRequest !== "undefined") {
           throw new Error(
-            "Lazy loading should have been performed (contents set) in createLazyFile, but it was not. Lazy loading only works in web workers. Use --embed-file or --preload-file in emcc on the main thread."
+            "Lazy loading should have been performed (contents set) in createLazyFile, but it was not. Lazy loading only works in web workers. Use --embed-file or --preload-file in emcc on the main thread.",
           );
         } else if (read_) {
           try {
@@ -3837,7 +3837,7 @@ var mGBA = (function () {
               !((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)
             )
               throw new Error(
-                "Couldn't load " + url + ". Status: " + xhr.status
+                "Couldn't load " + url + ". Status: " + xhr.status,
               );
             var datalength = Number(xhr.getResponseHeader("Content-length"));
             var header;
@@ -3856,11 +3856,11 @@ var mGBA = (function () {
                     from +
                     ", " +
                     to +
-                    ") or no bytes requested!"
+                    ") or no bytes requested!",
                 );
               if (to > datalength - 1)
                 throw new Error(
-                  "only " + datalength + " bytes available! programmer error!"
+                  "only " + datalength + " bytes available! programmer error!",
                 );
               var xhr = new XMLHttpRequest();
               xhr.open("GET", url, false);
@@ -3876,7 +3876,7 @@ var mGBA = (function () {
                 !((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304)
               )
                 throw new Error(
-                  "Couldn't load " + url + ". Status: " + xhr.status
+                  "Couldn't load " + url + ". Status: " + xhr.status,
                 );
               if (xhr.response !== undefined) {
                 return new Uint8Array(xhr.response || []);
@@ -3901,7 +3901,7 @@ var mGBA = (function () {
               datalength = this.getter(0).length;
               chunkSize = datalength;
               console.log(
-                "LazyFiles on gzip forces download of the whole file when length is accessed"
+                "LazyFiles on gzip forces download of the whole file when length is accessed",
               );
             }
             this._length = datalength;
@@ -3964,7 +3964,7 @@ var mGBA = (function () {
           buffer,
           offset,
           length,
-          position
+          position,
         ) {
           if (!FS.forceLoadFile(node)) {
             throw new FS.ErrnoError(29);
@@ -3996,7 +3996,7 @@ var mGBA = (function () {
         onerror,
         dontCreateFile,
         canOwn,
-        preFinish
+        preFinish,
       ) {
         Browser.init();
         var fullname = name
@@ -4013,7 +4013,7 @@ var mGBA = (function () {
                 byteArray,
                 canRead,
                 canWrite,
-                canOwn
+                canOwn,
               );
             }
             if (onload) onload();
@@ -4039,7 +4039,7 @@ var mGBA = (function () {
             function (byteArray) {
               processData(byteArray);
             },
-            onerror
+            onerror,
           );
         } else {
           processData(url);
@@ -4086,7 +4086,7 @@ var mGBA = (function () {
           paths.forEach(function (path) {
             var putRequest = files.put(
               FS.analyzePath(path).object.contents,
-              path
+              path,
             );
             putRequest.onsuccess = function putRequest_onsuccess() {
               ok++;
@@ -4139,7 +4139,7 @@ var mGBA = (function () {
                 getRequest.result,
                 true,
                 true,
-                true
+                true,
               );
               ok++;
               if (ok + fail == total) finish();
@@ -4203,7 +4203,7 @@ var mGBA = (function () {
                   0) >>>
                 0
               : ~~+Math_ceil(
-                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                 ) >>> 0
             : 0),
         ]),
@@ -4226,7 +4226,7 @@ var mGBA = (function () {
                   0) >>>
                 0
               : ~~+Math_ceil(
-                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                 ) >>> 0
             : 0),
         ]),
@@ -4493,10 +4493,10 @@ var mGBA = (function () {
             type = FS.isChrdev(child.mode)
               ? 2
               : FS.isDir(child.mode)
-              ? 4
-              : FS.isLink(child.mode)
-              ? 10
-              : 8;
+                ? 4
+                : FS.isLink(child.mode)
+                  ? 10
+                  : 8;
           }
           (tempI64 = [
             id >>> 0,
@@ -4507,7 +4507,7 @@ var mGBA = (function () {
                     0) >>>
                   0
                 : ~~+Math_ceil(
-                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                   ) >>> 0
               : 0),
           ]),
@@ -4522,7 +4522,7 @@ var mGBA = (function () {
                     0) >>>
                   0
                 : ~~+Math_ceil(
-                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                   ) >>> 0
               : 0),
           ]),
@@ -4768,10 +4768,10 @@ var mGBA = (function () {
         var type = stream.tty
           ? 2
           : FS.isDir(stream.mode)
-          ? 3
-          : FS.isLink(stream.mode)
-          ? 7
-          : 4;
+            ? 3
+            : FS.isLink(stream.mode)
+              ? 7
+              : 4;
         HEAP8[pbuf >> 0] = type;
         return 0;
       } catch (e) {
@@ -4817,7 +4817,7 @@ var mGBA = (function () {
                   0) >>>
                 0
               : ~~+Math_ceil(
-                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                  (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                 ) >>> 0
             : 0),
         ]),
@@ -4898,7 +4898,7 @@ var mGBA = (function () {
     }
     function _dlopen() {
       abort(
-        "To use dlopen, you need to use Emscripten's linking support, see https://github.com/emscripten-core/emscripten/wiki/Linking"
+        "To use dlopen, you need to use Emscripten's linking support, see https://github.com/emscripten-core/emscripten/wiki/Linking",
       );
     }
     function _dlclose() {
@@ -4922,7 +4922,7 @@ var mGBA = (function () {
             var timeUntilNextTick =
               Math.max(
                 0,
-                Browser.mainLoop.tickStartTime + value - _emscripten_get_now()
+                Browser.mainLoop.tickStartTime + value - _emscripten_get_now(),
               ) | 0;
             setTimeout(Browser.mainLoop.runner, timeUntilNextTick);
           };
@@ -4948,7 +4948,7 @@ var mGBA = (function () {
           addEventListener(
             "message",
             Browser_setImmediate_messageHandler,
-            true
+            true,
           );
           setImmediate = function Browser_emulated_setImmediate(func) {
             setImmediates.push(func);
@@ -4973,12 +4973,12 @@ var mGBA = (function () {
       fps,
       simulateInfiniteLoop,
       arg,
-      noSetTiming
+      noSetTiming,
     ) {
       noExitRuntime = true;
       assert(
         !Browser.mainLoop.func,
-        "emscripten_set_main_loop: there can only be one main loop function at once: call emscripten_cancel_main_loop to cancel the previous one before setting a new one with different parameters."
+        "emscripten_set_main_loop: there can only be one main loop function at once: call emscripten_cancel_main_loop to cancel the previous one before setting a new one with different parameters.",
       );
       Browser.mainLoop.func = func;
       Browser.mainLoop.arg = arg;
@@ -5015,7 +5015,7 @@ var mGBA = (function () {
               blocker.name +
               '" took ' +
               (Date.now() - start) +
-              " ms"
+              " ms",
           );
           Browser.mainLoop.updateStatus();
           if (thisMainLoopId < Browser.mainLoop.currentlyRunningMainloop)
@@ -5040,7 +5040,7 @@ var mGBA = (function () {
         GL.newRenderingFrameStarted();
         if (Browser.mainLoop.method === "timeout" && Module.ctx) {
           err(
-            "Looks like you are rendering without using requestAnimationFrame for the main loop. You should use 0 for the frame rate in emscripten_set_main_loop in order to use requestAnimationFrame, as that can greatly improve your frame rates!"
+            "Looks like you are rendering without using requestAnimationFrame for the main loop. You should use 0 for the frame rate in emscripten_set_main_loop in order to use requestAnimationFrame, as that can greatly improve your frame rates!",
           );
           Browser.mainLoop.method = "";
         }
@@ -5092,7 +5092,12 @@ var mGBA = (function () {
             if (remaining) {
               if (remaining < expected) {
                 Module["setStatus"](
-                  message + " (" + (expected - remaining) + "/" + expected + ")"
+                  message +
+                    " (" +
+                    (expected - remaining) +
+                    "/" +
+                    expected +
+                    ")",
                 );
               } else {
                 Module["setStatus"](message);
@@ -5138,17 +5143,17 @@ var mGBA = (function () {
         } catch (e) {
           Browser.hasBlobConstructor = false;
           console.log(
-            "warning: no blob constructor, cannot create blobs with mimetypes"
+            "warning: no blob constructor, cannot create blobs with mimetypes",
           );
         }
         Browser.BlobBuilder =
           typeof MozBlobBuilder != "undefined"
             ? MozBlobBuilder
             : typeof WebKitBlobBuilder != "undefined"
-            ? WebKitBlobBuilder
-            : !Browser.hasBlobConstructor
-            ? console.log("warning: no BlobBuilder")
-            : null;
+              ? WebKitBlobBuilder
+              : !Browser.hasBlobConstructor
+                ? console.log("warning: no BlobBuilder")
+                : null;
         Browser.URLObject =
           typeof window != "undefined"
             ? window.URL
@@ -5160,7 +5165,7 @@ var mGBA = (function () {
           typeof Browser.URLObject === "undefined"
         ) {
           console.log(
-            "warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available."
+            "warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available.",
           );
           Module.noImageDecoding = true;
         }
@@ -5172,7 +5177,7 @@ var mGBA = (function () {
           byteArray,
           name,
           onload,
-          onerror
+          onerror,
         ) {
           var b = null;
           if (Browser.hasBlobConstructor) {
@@ -5187,7 +5192,7 @@ var mGBA = (function () {
               warnOnce(
                 "Blob constructor present but fails: " +
                   e +
-                  "; falling back to blob builder"
+                  "; falling back to blob builder",
               );
             }
           }
@@ -5227,7 +5232,7 @@ var mGBA = (function () {
           byteArray,
           name,
           onload,
-          onerror
+          onerror,
         ) {
           var done = false;
           function finish(audio) {
@@ -5257,14 +5262,14 @@ var mGBA = (function () {
               function () {
                 finish(audio);
               },
-              false
+              false,
             );
             audio.onerror = function audio_onerror(event) {
               if (done) return;
               console.log(
                 "warning: browser could not fully decode audio " +
                   name +
-                  ", trying slower base64 approach"
+                  ", trying slower base64 approach",
               );
               function encode64(data) {
                 var BASE =
@@ -5332,22 +5337,22 @@ var mGBA = (function () {
           document.addEventListener(
             "pointerlockchange",
             pointerLockChange,
-            false
+            false,
           );
           document.addEventListener(
             "mozpointerlockchange",
             pointerLockChange,
-            false
+            false,
           );
           document.addEventListener(
             "webkitpointerlockchange",
             pointerLockChange,
-            false
+            false,
           );
           document.addEventListener(
             "mspointerlockchange",
             pointerLockChange,
-            false
+            false,
           );
           if (Module["elementPointerLock"]) {
             canvas.addEventListener(
@@ -5361,7 +5366,7 @@ var mGBA = (function () {
                   ev.preventDefault();
                 }
               },
-              false
+              false,
             );
           }
         }
@@ -5370,7 +5375,7 @@ var mGBA = (function () {
         canvas,
         useWebGL,
         setInModule,
-        webGLContextAttributes
+        webGLContextAttributes,
       ) {
         if (useWebGL && Module.ctx && canvas == Module.canvas)
           return Module.ctx;
@@ -5401,7 +5406,7 @@ var mGBA = (function () {
           if (!useWebGL)
             assert(
               typeof GLctx === "undefined",
-              "cannot set in module if GLctx is used, but we are a non-GL context that would replace it"
+              "cannot set in module if GLctx is used, but we are a non-GL context that would replace it",
             );
           Module.ctx = ctx;
           if (useWebGL) GL.makeContextCurrent(contextHandle);
@@ -5464,22 +5469,22 @@ var mGBA = (function () {
           document.addEventListener(
             "fullscreenchange",
             fullscreenChange,
-            false
+            false,
           );
           document.addEventListener(
             "mozfullscreenchange",
             fullscreenChange,
-            false
+            false,
           );
           document.addEventListener(
             "webkitfullscreenchange",
             fullscreenChange,
-            false
+            false,
           );
           document.addEventListener(
             "MSFullscreenChange",
             fullscreenChange,
-            false
+            false,
           );
         }
         var canvasContainer = document.createElement("div");
@@ -5492,14 +5497,14 @@ var mGBA = (function () {
           (canvasContainer["webkitRequestFullscreen"]
             ? function () {
                 canvasContainer["webkitRequestFullscreen"](
-                  Element["ALLOW_KEYBOARD_INPUT"]
+                  Element["ALLOW_KEYBOARD_INPUT"],
                 );
               }
             : null) ||
           (canvasContainer["webkitRequestFullScreen"]
             ? function () {
                 canvasContainer["webkitRequestFullScreen"](
-                  Element["ALLOW_KEYBOARD_INPUT"]
+                  Element["ALLOW_KEYBOARD_INPUT"],
                 );
               }
             : null);
@@ -5736,7 +5741,7 @@ var mGBA = (function () {
           function (arrayBuffer) {
             assert(
               arrayBuffer,
-              'Loading data file "' + url + '" failed (no arrayBuffer).'
+              'Loading data file "' + url + '" failed (no arrayBuffer).',
             );
             onload(new Uint8Array(arrayBuffer));
             if (dep) removeRunDependency(dep);
@@ -5747,7 +5752,7 @@ var mGBA = (function () {
             } else {
               throw 'Loading data file "' + url + '" failed.';
             }
-          }
+          },
         );
         if (dep) addRunDependency(dep);
       },
@@ -5862,7 +5867,7 @@ var mGBA = (function () {
         attribList,
         config,
         config_size,
-        numConfigs
+        numConfigs,
       ) {
         if (display != 62e3) {
           EGL.setErrorCode(12296);
@@ -5923,14 +5928,14 @@ var mGBA = (function () {
       attrib_list,
       configs,
       config_size,
-      numConfigs
+      numConfigs,
     ) {
       return EGL.chooseConfig(
         display,
         attrib_list,
         configs,
         config_size,
-        numConfigs
+        numConfigs,
       );
     }
     var GL = {
@@ -6024,7 +6029,7 @@ var mGBA = (function () {
           context.tempQuadIndexBuffer = GLctx.createBuffer();
           context.GLctx.bindBuffer(
             context.GLctx.ELEMENT_ARRAY_BUFFER,
-            context.tempQuadIndexBuffer
+            context.tempQuadIndexBuffer,
           );
           var numIndexes = GL.MAX_TEMP_BUFFER_SIZE >> 1;
           var quadIndexes = new Uint16Array(numIndexes);
@@ -6048,7 +6053,7 @@ var mGBA = (function () {
           context.GLctx.bufferData(
             context.GLctx.ELEMENT_ARRAY_BUFFER,
             quadIndexes,
-            context.GLctx.STATIC_DRAW
+            context.GLctx.STATIC_DRAW,
           );
           context.GLctx.bindBuffer(context.GLctx.ELEMENT_ARRAY_BUFFER, null);
         }
@@ -6082,12 +6087,12 @@ var mGBA = (function () {
         GL.currentContext.tempIndexBuffers[idx] = GLctx.createBuffer();
         GLctx.bindBuffer(
           GLctx.ELEMENT_ARRAY_BUFFER,
-          GL.currentContext.tempIndexBuffers[idx]
+          GL.currentContext.tempIndexBuffers[idx],
         );
         GLctx.bufferData(
           GLctx.ELEMENT_ARRAY_BUFFER,
           1 << idx,
-          GLctx.DYNAMIC_DRAW
+          GLctx.DYNAMIC_DRAW,
         );
         GLctx.bindBuffer(GLctx.ELEMENT_ARRAY_BUFFER, prevIBO);
         return GL.currentContext.tempIndexBuffers[idx];
@@ -6115,7 +6120,7 @@ var mGBA = (function () {
           var len = length ? HEAP32[(length + i * 4) >> 2] : -1;
           source += UTF8ToString(
             HEAP32[(string + i * 4) >> 2],
-            len < 0 ? undefined : len
+            len < 0 ? undefined : len,
           );
         }
         return source;
@@ -6141,7 +6146,7 @@ var mGBA = (function () {
             GLctx.bufferSubData(
               GLctx.ARRAY_BUFFER,
               0,
-              HEAPU8.subarray(cb.ptr, cb.ptr + size)
+              HEAPU8.subarray(cb.ptr, cb.ptr + size),
             );
             cb.vertexAttribPointerAdaptor.call(
               GLctx,
@@ -6150,7 +6155,7 @@ var mGBA = (function () {
               cb.type,
               cb.normalized,
               cb.stride,
-              0
+              0,
             );
           }
         },
@@ -6159,7 +6164,7 @@ var mGBA = (function () {
           if (GL.resetBufferBinding) {
             GLctx.bindBuffer(
               GLctx.ARRAY_BUFFER,
-              GL.buffers[GL.currArrayBuffer]
+              GL.buffers[GL.currArrayBuffer],
             );
           }
         },
@@ -6189,7 +6194,7 @@ var mGBA = (function () {
           GL.initExtensions(context);
         }
         context.maxVertexAttribs = context.GLctx.getParameter(
-          context.GLctx.MAX_VERTEX_ATTRIBS
+          context.GLctx.MAX_VERTEX_ATTRIBS,
         );
         context.clientBuffers = [];
         for (var i = 0; i < context.maxVertexAttribs; i++) {
@@ -6220,7 +6225,7 @@ var mGBA = (function () {
           GL.currentContext = null;
         if (typeof JSEvents === "object")
           JSEvents.removeAllHandlersOnTarget(
-            GL.contexts[contextHandle].GLctx.canvas
+            GL.contexts[contextHandle].GLctx.canvas,
           );
         if (
           GL.contexts[contextHandle] &&
@@ -6240,7 +6245,7 @@ var mGBA = (function () {
             mode,
             first,
             count,
-            primcount
+            primcount,
           ) {
             ext["drawArraysInstancedANGLE"](mode, first, count, primcount);
           };
@@ -6249,14 +6254,14 @@ var mGBA = (function () {
             count,
             type,
             indices,
-            primcount
+            primcount,
           ) {
             ext["drawElementsInstancedANGLE"](
               mode,
               count,
               type,
               indices,
-              primcount
+              primcount,
             );
           };
         }
@@ -6297,7 +6302,7 @@ var mGBA = (function () {
           GL.acquireDrawBuffersExtension(GLctx);
         }
         GLctx.disjointTimerQueryExt = GLctx.getExtension(
-          "EXT_disjoint_timer_query"
+          "EXT_disjoint_timer_query",
         );
         var automaticallyEnabledExtensions = [
           "OES_texture_float",
@@ -6350,7 +6355,7 @@ var mGBA = (function () {
           var name = u.name;
           ptable.maxUniformLength = Math.max(
             ptable.maxUniformLength,
-            name.length + 1
+            name.length + 1,
           );
           if (name.slice(-1) == "]") {
             name = name.slice(0, name.lastIndexOf("["));
@@ -6625,7 +6630,7 @@ var mGBA = (function () {
           ret = allocate(
             intArrayFromString("1.4 Emscripten EGL"),
             "i8",
-            ALLOC_NORMAL
+            ALLOC_NORMAL,
           );
           break;
         case 12373:
@@ -6793,7 +6798,7 @@ var mGBA = (function () {
         h.target.removeEventListener(
           h.eventTypeString,
           h.eventListenerFunc,
-          h.useCapture
+          h.useCapture,
         );
         JSEvents.eventHandlers.splice(i, 1);
       },
@@ -6811,7 +6816,7 @@ var mGBA = (function () {
           eventHandler.target.addEventListener(
             eventHandler.eventTypeString,
             jsEventHandler,
-            eventHandler.useCapture
+            eventHandler.useCapture,
           );
           JSEvents.eventHandlers.push(eventHandler);
           JSEvents.registerRemoveEventListeners();
@@ -6952,7 +6957,7 @@ var mGBA = (function () {
           document.removeEventListener("mozfullscreenchange", restoreOldStyle);
           document.removeEventListener(
             "webkitfullscreenchange",
-            restoreOldStyle
+            restoreOldStyle,
           );
           document.removeEventListener("MSFullscreenChange", restoreOldStyle);
           __set_canvas_element_size(canvas, oldWidth, oldHeight);
@@ -6981,7 +6986,7 @@ var mGBA = (function () {
               __currentFullscreenStrategy.canvasResizedCallback,
               37,
               0,
-              __currentFullscreenStrategy.canvasResizedCallbackUserData
+              __currentFullscreenStrategy.canvasResizedCallbackUserData,
             );
           }
         }
@@ -7017,7 +7022,7 @@ var mGBA = (function () {
         __setLetterbox(
           target,
           (cssHeight - windowedCssHeight) / 2,
-          (cssWidth - windowedCssWidth) / 2
+          (cssWidth - windowedCssWidth) / 2,
         );
         cssWidth = windowedCssWidth;
         cssHeight = windowedCssHeight;
@@ -7081,7 +7086,7 @@ var mGBA = (function () {
           strategy.canvasResizedCallback,
           37,
           0,
-          strategy.canvasResizedCallbackUserData
+          strategy.canvasResizedCallbackUserData,
         );
       }
       return 0;
@@ -7204,7 +7209,7 @@ var mGBA = (function () {
     function _emscripten_glBeginQueryEXT(target, id) {
       GLctx.disjointTimerQueryExt["beginQueryEXT"](
         target,
-        GL.timerQueriesEXT[id]
+        GL.timerQueriesEXT[id],
       );
     }
     function _emscripten_glBindAttribLocation(program, index, name) {
@@ -7251,7 +7256,7 @@ var mGBA = (function () {
       GLctx.bufferData(
         target,
         data ? HEAPU8.subarray(data, data + size) : size,
-        usage
+        usage,
       );
     }
     function _emscripten_glBufferSubData(target, offset, size, data) {
@@ -7286,7 +7291,7 @@ var mGBA = (function () {
       height,
       border,
       imageSize,
-      data
+      data,
     ) {
       GLctx["compressedTexImage2D"](
         target,
@@ -7295,7 +7300,7 @@ var mGBA = (function () {
         width,
         height,
         border,
-        data ? HEAPU8.subarray(data, data + imageSize) : null
+        data ? HEAPU8.subarray(data, data + imageSize) : null,
       );
     }
     function _emscripten_glCompressedTexSubImage2D(
@@ -7307,7 +7312,7 @@ var mGBA = (function () {
       height,
       format,
       imageSize,
-      data
+      data,
     ) {
       GLctx["compressedTexSubImage2D"](
         target,
@@ -7317,7 +7322,7 @@ var mGBA = (function () {
         width,
         height,
         format,
-        data ? HEAPU8.subarray(data, data + imageSize) : null
+        data ? HEAPU8.subarray(data, data + imageSize) : null,
       );
     }
     function _emscripten_glCopyTexImage2D(x0, x1, x2, x3, x4, x5, x6, x7) {
@@ -7450,7 +7455,7 @@ var mGBA = (function () {
       mode,
       first,
       count,
-      primcount
+      primcount,
     ) {
       GLctx["drawArraysInstanced"](mode, first, count, primcount);
     }
@@ -7471,7 +7476,7 @@ var mGBA = (function () {
         GLctx.bufferSubData(
           GLctx.ELEMENT_ARRAY_BUFFER,
           0,
-          HEAPU8.subarray(indices, indices + size)
+          HEAPU8.subarray(indices, indices + size),
         );
         indices = 0;
       }
@@ -7487,7 +7492,7 @@ var mGBA = (function () {
       count,
       type,
       indices,
-      primcount
+      primcount,
     ) {
       GLctx["drawElementsInstanced"](mode, count, type, indices, primcount);
     }
@@ -7512,13 +7517,13 @@ var mGBA = (function () {
       target,
       attachment,
       renderbuffertarget,
-      renderbuffer
+      renderbuffer,
     ) {
       GLctx.framebufferRenderbuffer(
         target,
         attachment,
         renderbuffertarget,
-        GL.renderbuffers[renderbuffer]
+        GL.renderbuffers[renderbuffer],
       );
     }
     function _emscripten_glFramebufferTexture2D(
@@ -7526,14 +7531,14 @@ var mGBA = (function () {
       attachment,
       textarget,
       texture,
-      level
+      level,
     ) {
       GLctx.framebufferTexture2D(
         target,
         attachment,
         textarget,
         GL.textures[texture],
-        level
+        level,
       );
     }
     function _emscripten_glFrontFace(x0) {
@@ -7591,7 +7596,7 @@ var mGBA = (function () {
       length,
       size,
       type,
-      name
+      name,
     ) {
       program = GL.programs[program];
       var info = GLctx.getActiveAttrib(program, index);
@@ -7609,7 +7614,7 @@ var mGBA = (function () {
       length,
       size,
       type,
-      name
+      name,
     ) {
       program = GL.programs[program];
       var info = GLctx.getActiveUniform(program, index);
@@ -7624,7 +7629,7 @@ var mGBA = (function () {
       program,
       maxCount,
       count,
-      shaders
+      shaders,
     ) {
       var result = GLctx.getAttachedShaders(GL.programs[program]);
       var len = result.length;
@@ -7726,7 +7731,7 @@ var mGBA = (function () {
                     name_ +
                     ")! (error: " +
                     e +
-                    ")"
+                    ")",
                 );
                 return;
               }
@@ -7745,7 +7750,7 @@ var mGBA = (function () {
                 result +
                 " of type " +
                 typeof result +
-                "!"
+                "!",
             );
             return;
         }
@@ -7761,7 +7766,7 @@ var mGBA = (function () {
                     0) >>>
                   0
                 : ~~+Math_ceil(
-                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                    (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
                   ) >>> 0
               : 0),
           ]),
@@ -7801,12 +7806,12 @@ var mGBA = (function () {
       target,
       attachment,
       pname,
-      params
+      params,
     ) {
       var result = GLctx.getFramebufferAttachmentParameter(
         target,
         attachment,
-        pname
+        pname,
       );
       if (
         result instanceof WebGLRenderbuffer ||
@@ -7823,7 +7828,7 @@ var mGBA = (function () {
       program,
       maxLength,
       length,
-      infoLog
+      infoLog,
     ) {
       var log = GLctx.getProgramInfoLog(GL.programs[program]);
       if (log === null) log = "(unknown error)";
@@ -7860,7 +7865,7 @@ var mGBA = (function () {
             var activeAttrib = GLctx.getActiveAttrib(program, i);
             ptable.maxAttributeLength = Math.max(
               ptable.maxAttributeLength,
-              activeAttrib.name.length + 1
+              activeAttrib.name.length + 1,
             );
           }
         }
@@ -7874,7 +7879,7 @@ var mGBA = (function () {
             var activeBlockName = GLctx.getActiveUniformBlockName(program, i);
             ptable.maxUniformBlockNameLength = Math.max(
               ptable.maxUniformBlockNameLength,
-              activeBlockName.length + 1
+              activeBlockName.length + 1,
             );
           }
         }
@@ -7891,7 +7896,7 @@ var mGBA = (function () {
       var query = GL.timerQueriesEXT[id];
       var param = GLctx.disjointTimerQueryExt["getQueryObjectEXT"](
         query,
-        pname
+        pname,
       );
       var ret;
       if (typeof param == "boolean") {
@@ -7908,7 +7913,7 @@ var mGBA = (function () {
                 0) >>>
               0
             : ~~+Math_ceil(
-                (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
               ) >>> 0
           : 0),
       ]),
@@ -7923,7 +7928,7 @@ var mGBA = (function () {
       var query = GL.timerQueriesEXT[id];
       var param = GLctx.disjointTimerQueryExt["getQueryObjectEXT"](
         query,
-        pname
+        pname,
       );
       var ret;
       if (typeof param == "boolean") {
@@ -7941,7 +7946,7 @@ var mGBA = (function () {
       var query = GL.timerQueriesEXT[id];
       var param = GLctx.disjointTimerQueryExt["getQueryObjectEXT"](
         query,
-        pname
+        pname,
       );
       var ret;
       if (typeof param == "boolean") {
@@ -7958,7 +7963,7 @@ var mGBA = (function () {
                 0) >>>
               0
             : ~~+Math_ceil(
-                (tempDouble - +(~~tempDouble >>> 0)) / 4294967296
+                (tempDouble - +(~~tempDouble >>> 0)) / 4294967296,
               ) >>> 0
           : 0),
       ]),
@@ -7973,7 +7978,7 @@ var mGBA = (function () {
       var query = GL.timerQueriesEXT[id];
       var param = GLctx.disjointTimerQueryExt["getQueryObjectEXT"](
         query,
-        pname
+        pname,
       );
       var ret;
       if (typeof param == "boolean") {
@@ -7990,7 +7995,7 @@ var mGBA = (function () {
       }
       HEAP32[params >> 2] = GLctx.disjointTimerQueryExt["getQueryEXT"](
         target,
-        pname
+        pname,
       );
     }
     function _emscripten_glGetRenderbufferParameteriv(target, pname, params) {
@@ -8004,7 +8009,7 @@ var mGBA = (function () {
       shader,
       maxLength,
       length,
-      infoLog
+      infoLog,
     ) {
       var log = GLctx.getShaderInfoLog(GL.shaders[shader]);
       if (log === null) log = "(unknown error)";
@@ -8016,7 +8021,7 @@ var mGBA = (function () {
       shaderType,
       precisionType,
       range,
-      precision
+      precision,
     ) {
       var result = GLctx.getShaderPrecisionFormat(shaderType, precisionType);
       HEAP32[range >> 2] = result.rangeMin;
@@ -8063,7 +8068,7 @@ var mGBA = (function () {
           exts = exts.concat(
             exts.map(function (e) {
               return "GL_" + e;
-            })
+            }),
           );
           ret = stringToNewUTF8(exts.join(" "));
           break;
@@ -8182,7 +8187,7 @@ var mGBA = (function () {
       }
       if (GL.currentContext.clientBuffers[index].enabled) {
         err(
-          "glGetVertexAttribPointer on client-side array: not supported, bad data returned"
+          "glGetVertexAttribPointer on client-side array: not supported, bad data returned",
         );
       }
       HEAP32[pointer >> 2] = GLctx.getVertexAttribOffset(index, pname);
@@ -8194,7 +8199,7 @@ var mGBA = (function () {
       }
       if (GL.currentContext.clientBuffers[index].enabled) {
         err(
-          "glGetVertexAttrib*v on client-side array: not supported, bad data returned"
+          "glGetVertexAttrib*v on client-side array: not supported, bad data returned",
         );
       }
       var data = GLctx.getVertexAttrib(index, pname);
@@ -8309,14 +8314,14 @@ var mGBA = (function () {
     function _emscripten_glQueryCounterEXT(id, target) {
       GLctx.disjointTimerQueryExt["queryCounterEXT"](
         GL.timerQueriesEXT[id],
-        target
+        target,
       );
     }
     function __computeUnpackAlignedImageSize(
       width,
       height,
       sizePerPixel,
-      alignment
+      alignment,
     ) {
       function roundedToNextMultipleOf(x, y) {
         return (x + y - 1) & -y;
@@ -8346,7 +8351,7 @@ var mGBA = (function () {
       width,
       height,
       pixels,
-      internalFormat
+      internalFormat,
     ) {
       var heap = __heapObjectForWebGLType(type);
       var shift = __heapAccessShiftForWebGLHeap(heap);
@@ -8356,7 +8361,7 @@ var mGBA = (function () {
         width,
         height,
         sizePerPixel,
-        GL.unpackAlignment
+        GL.unpackAlignment,
       );
       return heap.subarray(pixels >> shift, (pixels + bytes) >> shift);
     }
@@ -8367,7 +8372,7 @@ var mGBA = (function () {
       height,
       format,
       type,
-      pixels
+      pixels,
     ) {
       var pixelData = emscriptenWebGLGetTexPixelData(
         type,
@@ -8375,7 +8380,7 @@ var mGBA = (function () {
         width,
         height,
         pixels,
-        format
+        format,
       );
       if (!pixelData) {
         GL.recordError(1280);
@@ -8427,7 +8432,7 @@ var mGBA = (function () {
       border,
       format,
       type,
-      pixels
+      pixels,
     ) {
       GLctx.texImage2D(
         target,
@@ -8445,9 +8450,9 @@ var mGBA = (function () {
               width,
               height,
               pixels,
-              internalFormat
+              internalFormat,
             )
-          : null
+          : null,
       );
     }
     function _emscripten_glTexParameterf(x0, x1, x2) {
@@ -8473,7 +8478,7 @@ var mGBA = (function () {
       height,
       format,
       type,
-      pixels
+      pixels,
     ) {
       var pixelData = null;
       if (pixels)
@@ -8483,7 +8488,7 @@ var mGBA = (function () {
           width,
           height,
           pixels,
-          0
+          0,
         );
       GLctx.texSubImage2D(
         target,
@@ -8494,7 +8499,7 @@ var mGBA = (function () {
         height,
         format,
         type,
-        pixelData
+        pixelData,
       );
     }
     function _emscripten_glUniform1f(location, v0) {
@@ -8517,7 +8522,7 @@ var mGBA = (function () {
     function _emscripten_glUniform1iv(location, count, value) {
       GLctx.uniform1iv(
         GL.uniforms[location],
-        HEAP32.subarray(value >> 2, (value + count * 4) >> 2)
+        HEAP32.subarray(value >> 2, (value + count * 4) >> 2),
       );
     }
     function _emscripten_glUniform2f(location, v0, v1) {
@@ -8541,7 +8546,7 @@ var mGBA = (function () {
     function _emscripten_glUniform2iv(location, count, value) {
       GLctx.uniform2iv(
         GL.uniforms[location],
-        HEAP32.subarray(value >> 2, (value + count * 8) >> 2)
+        HEAP32.subarray(value >> 2, (value + count * 8) >> 2),
       );
     }
     function _emscripten_glUniform3f(location, v0, v1, v2) {
@@ -8566,7 +8571,7 @@ var mGBA = (function () {
     function _emscripten_glUniform3iv(location, count, value) {
       GLctx.uniform3iv(
         GL.uniforms[location],
-        HEAP32.subarray(value >> 2, (value + count * 12) >> 2)
+        HEAP32.subarray(value >> 2, (value + count * 12) >> 2),
       );
     }
     function _emscripten_glUniform4f(location, v0, v1, v2, v3) {
@@ -8592,7 +8597,7 @@ var mGBA = (function () {
     function _emscripten_glUniform4iv(location, count, value) {
       GLctx.uniform4iv(
         GL.uniforms[location],
-        HEAP32.subarray(value >> 2, (value + count * 16) >> 2)
+        HEAP32.subarray(value >> 2, (value + count * 16) >> 2),
       );
     }
     function _emscripten_glUniformMatrix2fv(location, count, transpose, value) {
@@ -8680,7 +8685,7 @@ var mGBA = (function () {
         index,
         HEAPF32[v >> 2],
         HEAPF32[(v + 4) >> 2],
-        HEAPF32[(v + 8) >> 2]
+        HEAPF32[(v + 8) >> 2],
       );
     }
     function _emscripten_glVertexAttrib4f(x0, x1, x2, x3, x4) {
@@ -8692,7 +8697,7 @@ var mGBA = (function () {
         HEAPF32[v >> 2],
         HEAPF32[(v + 4) >> 2],
         HEAPF32[(v + 8) >> 2],
-        HEAPF32[(v + 12) >> 2]
+        HEAPF32[(v + 12) >> 2],
       );
     }
     function _emscripten_glVertexAttribDivisorANGLE(index, divisor) {
@@ -8704,7 +8709,7 @@ var mGBA = (function () {
       type,
       normalized,
       stride,
-      ptr
+      ptr,
     ) {
       var cb = GL.currentContext.clientBuffers[index];
       if (!GL.currArrayBuffer) {
@@ -8720,7 +8725,7 @@ var mGBA = (function () {
           type,
           normalized,
           stride,
-          ptr
+          ptr,
         ) {
           this.vertexAttribPointer(index, size, type, normalized, stride, ptr);
         };
@@ -8770,7 +8775,7 @@ var mGBA = (function () {
     function _emscripten_request_fullscreen_strategy(
       target,
       deferUntilInEventHandler,
-      fullscreenStrategy
+      fullscreenStrategy,
     ) {
       var strategy = {};
       strategy.scaleMode = HEAP32[fullscreenStrategy >> 2];
@@ -8832,7 +8837,7 @@ var mGBA = (function () {
         } else {
           newSize = Math.min(
             alignUp((3 * newSize + 2147483648) / 4, PAGE_MULTIPLE),
-            LIMIT
+            LIMIT,
           );
         }
       }
@@ -8846,8 +8851,8 @@ var mGBA = (function () {
       return (JSEvents.lastGamepadState = navigator.getGamepads
         ? navigator.getGamepads()
         : navigator.webkitGetGamepads
-        ? navigator.webkitGetGamepads()
-        : null)
+          ? navigator.webkitGetGamepads()
+          : null)
         ? 0
         : -1;
     }
@@ -8858,7 +8863,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.focusEvent) JSEvents.focusEvent = _malloc(256);
       var focusEventHandlerFunc = function (ev) {
@@ -8886,7 +8891,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerFocusEventCallback(
         target,
@@ -8895,7 +8900,7 @@ var mGBA = (function () {
         callbackfunc,
         12,
         "blur",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -8911,7 +8916,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerFocusEventCallback(
         target,
@@ -8920,7 +8925,7 @@ var mGBA = (function () {
         callbackfunc,
         13,
         "focus",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -8959,7 +8964,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.fullscreenChangeEvent)
         JSEvents.fullscreenChangeEvent = _malloc(280);
@@ -8972,7 +8977,7 @@ var mGBA = (function () {
             callbackfunc,
             eventTypeId,
             fullscreenChangeEvent,
-            userData
+            userData,
           )
         )
           e.preventDefault();
@@ -8992,7 +8997,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.fullscreenEnabled()) return -1;
       target = target ? __findEventTarget(target) : __specialEventTargets[1];
@@ -9004,7 +9009,7 @@ var mGBA = (function () {
         callbackfunc,
         19,
         "fullscreenchange",
-        targetThread
+        targetThread,
       );
       __registerFullscreenChangeEventCallback(
         target,
@@ -9013,7 +9018,7 @@ var mGBA = (function () {
         callbackfunc,
         19,
         "mozfullscreenchange",
-        targetThread
+        targetThread,
       );
       __registerFullscreenChangeEventCallback(
         target,
@@ -9022,7 +9027,7 @@ var mGBA = (function () {
         callbackfunc,
         19,
         "webkitfullscreenchange",
-        targetThread
+        targetThread,
       );
       __registerFullscreenChangeEventCallback(
         target,
@@ -9031,7 +9036,7 @@ var mGBA = (function () {
         callbackfunc,
         19,
         "msfullscreenchange",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9042,7 +9047,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.gamepadEvent) JSEvents.gamepadEvent = _malloc(1432);
       var gamepadEventHandlerFunc = function (ev) {
@@ -9066,7 +9071,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (!navigator.getGamepads && !navigator.webkitGetGamepads) return -1;
       __registerGamepadEventCallback(
@@ -9076,7 +9081,7 @@ var mGBA = (function () {
         callbackfunc,
         26,
         "gamepadconnected",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9084,7 +9089,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (!navigator.getGamepads && !navigator.webkitGetGamepads) return -1;
       __registerGamepadEventCallback(
@@ -9094,7 +9099,7 @@ var mGBA = (function () {
         callbackfunc,
         27,
         "gamepaddisconnected",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9105,7 +9110,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.keyEvent) JSEvents.keyEvent = _malloc(164);
       var keyEventHandlerFunc = function (ev) {
@@ -9142,7 +9147,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerKeyEventCallback(
         target,
@@ -9151,7 +9156,7 @@ var mGBA = (function () {
         callbackfunc,
         2,
         "keydown",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9160,7 +9165,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerKeyEventCallback(
         target,
@@ -9169,7 +9174,7 @@ var mGBA = (function () {
         callbackfunc,
         1,
         "keypress",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9178,7 +9183,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerKeyEventCallback(
         target,
@@ -9187,7 +9192,7 @@ var mGBA = (function () {
         callbackfunc,
         3,
         "keyup",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9241,7 +9246,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.mouseEvent) JSEvents.mouseEvent = _malloc(72);
       target = __findEventTarget(target);
@@ -9273,7 +9278,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerMouseEventCallback(
         target,
@@ -9282,7 +9287,7 @@ var mGBA = (function () {
         callbackfunc,
         5,
         "mousedown",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9291,7 +9296,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerMouseEventCallback(
         target,
@@ -9300,7 +9305,7 @@ var mGBA = (function () {
         callbackfunc,
         33,
         "mouseenter",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9309,7 +9314,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerMouseEventCallback(
         target,
@@ -9318,7 +9323,7 @@ var mGBA = (function () {
         callbackfunc,
         34,
         "mouseleave",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9327,7 +9332,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerMouseEventCallback(
         target,
@@ -9336,7 +9341,7 @@ var mGBA = (function () {
         callbackfunc,
         8,
         "mousemove",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9345,7 +9350,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerMouseEventCallback(
         target,
@@ -9354,7 +9359,7 @@ var mGBA = (function () {
         callbackfunc,
         6,
         "mouseup",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9381,7 +9386,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.pointerlockChangeEvent)
         JSEvents.pointerlockChangeEvent = _malloc(260);
@@ -9394,7 +9399,7 @@ var mGBA = (function () {
             callbackfunc,
             eventTypeId,
             pointerlockChangeEvent,
-            userData
+            userData,
           )
         )
           e.preventDefault();
@@ -9414,7 +9419,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (
         !document ||
@@ -9435,7 +9440,7 @@ var mGBA = (function () {
         callbackfunc,
         20,
         "pointerlockchange",
-        targetThread
+        targetThread,
       );
       __registerPointerlockChangeEventCallback(
         target,
@@ -9444,7 +9449,7 @@ var mGBA = (function () {
         callbackfunc,
         20,
         "mozpointerlockchange",
-        targetThread
+        targetThread,
       );
       __registerPointerlockChangeEventCallback(
         target,
@@ -9453,7 +9458,7 @@ var mGBA = (function () {
         callbackfunc,
         20,
         "webkitpointerlockchange",
-        targetThread
+        targetThread,
       );
       __registerPointerlockChangeEventCallback(
         target,
@@ -9462,7 +9467,7 @@ var mGBA = (function () {
         callbackfunc,
         20,
         "mspointerlockchange",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9473,7 +9478,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.uiEvent) JSEvents.uiEvent = _malloc(36);
       if (eventTypeString == "scroll" && !target) {
@@ -9515,7 +9520,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerUiEventCallback(
         target,
@@ -9524,7 +9529,7 @@ var mGBA = (function () {
         callbackfunc,
         10,
         "resize",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9535,7 +9540,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.touchEvent) JSEvents.touchEvent = _malloc(1684);
       target = __findEventTarget(target);
@@ -9613,7 +9618,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerTouchEventCallback(
         target,
@@ -9622,7 +9627,7 @@ var mGBA = (function () {
         callbackfunc,
         25,
         "touchcancel",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9631,7 +9636,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerTouchEventCallback(
         target,
@@ -9640,7 +9645,7 @@ var mGBA = (function () {
         callbackfunc,
         23,
         "touchend",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9649,7 +9654,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerTouchEventCallback(
         target,
@@ -9658,7 +9663,7 @@ var mGBA = (function () {
         callbackfunc,
         24,
         "touchmove",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9667,7 +9672,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       __registerTouchEventCallback(
         target,
@@ -9676,7 +9681,7 @@ var mGBA = (function () {
         callbackfunc,
         22,
         "touchstart",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9693,7 +9698,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.visibilityChangeEvent)
         JSEvents.visibilityChangeEvent = _malloc(8);
@@ -9706,7 +9711,7 @@ var mGBA = (function () {
             callbackfunc,
             eventTypeId,
             visibilityChangeEvent,
-            userData
+            userData,
           )
         )
           e.preventDefault();
@@ -9725,7 +9730,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       if (!__specialEventTargets[1]) {
         return -4;
@@ -9737,7 +9742,7 @@ var mGBA = (function () {
         callbackfunc,
         21,
         "visibilitychange",
-        targetThread
+        targetThread,
       );
       return 0;
     }
@@ -9748,7 +9753,7 @@ var mGBA = (function () {
       callbackfunc,
       eventTypeId,
       eventTypeString,
-      targetThread
+      targetThread,
     ) {
       if (!JSEvents.wheelEvent) JSEvents.wheelEvent = _malloc(104);
       var wheelHandlerFunc = function (ev) {
@@ -9775,7 +9780,7 @@ var mGBA = (function () {
           callbackfunc,
           eventTypeId,
           JSEvents.wheelEvent,
-          userData
+          userData,
         );
         if (shouldCancel) {
           e.preventDefault();
@@ -9797,7 +9802,7 @@ var mGBA = (function () {
       userData,
       useCapture,
       callbackfunc,
-      targetThread
+      targetThread,
     ) {
       target = __findEventTarget(target);
       if (typeof target.onwheel !== "undefined") {
@@ -9808,7 +9813,7 @@ var mGBA = (function () {
           callbackfunc,
           9,
           "wheel",
-          targetThread
+          targetThread,
         );
         return 0;
       } else if (typeof target.onmousewheel !== "undefined") {
@@ -9819,7 +9824,7 @@ var mGBA = (function () {
           callbackfunc,
           9,
           "mousewheel",
-          targetThread
+          targetThread,
         );
         return 0;
       } else {
@@ -9852,7 +9857,7 @@ var mGBA = (function () {
       var winter = new Date(currentYear, 0, 1);
       var summer = new Date(currentYear, 6, 1);
       HEAP32[__get_daylight() >> 2] = Number(
-        winter.getTimezoneOffset() != summer.getTimezoneOffset()
+        winter.getTimezoneOffset() != summer.getTimezoneOffset(),
       );
       function extractZone(date) {
         var match = date.toTimeString().match(/\(([A-Za-z ]+)\)$/);
@@ -9863,12 +9868,12 @@ var mGBA = (function () {
       var winterNamePtr = allocate(
         intArrayFromString(winterName),
         "i8",
-        ALLOC_NORMAL
+        ALLOC_NORMAL,
       );
       var summerNamePtr = allocate(
         intArrayFromString(summerName),
         "i8",
-        ALLOC_NORMAL
+        ALLOC_NORMAL,
       );
       if (summer.getTimezoneOffset() < winter.getTimezoneOffset()) {
         HEAP32[__get_tzname() >> 2] = winterNamePtr;
@@ -9978,19 +9983,19 @@ var mGBA = (function () {
     Module["requestFullscreen"] = function Module_requestFullscreen(
       lockPointer,
       resizeCanvas,
-      vrDevice
+      vrDevice,
     ) {
       Browser.requestFullscreen(lockPointer, resizeCanvas, vrDevice);
     };
     Module["requestAnimationFrame"] = function Module_requestAnimationFrame(
-      func
+      func,
     ) {
       Browser.requestAnimationFrame(func);
     };
     Module["setCanvasSize"] = function Module_setCanvasSize(
       width,
       height,
-      noUpdates
+      noUpdates,
     ) {
       Browser.setCanvasSize(width, height, noUpdates);
     };
@@ -10007,13 +10012,13 @@ var mGBA = (function () {
       canvas,
       useWebGL,
       setInModule,
-      webGLContextAttributes
+      webGLContextAttributes,
     ) {
       return Browser.createContext(
         canvas,
         useWebGL,
         setInModule,
-        webGLContextAttributes
+        webGLContextAttributes,
       );
     };
     var GLctx;
@@ -10027,7 +10032,7 @@ var mGBA = (function () {
         stringy,
         u8array,
         0,
-        u8array.length
+        u8array.length,
       );
       if (dontAddNull) u8array.length = numBytesWritten;
       return u8array;
@@ -10521,7 +10526,7 @@ var mGBA = (function () {
       function () {
         return Module["asm"]["_emscripten_GetProcAddress"].apply(
           null,
-          arguments
+          arguments,
         );
       });
     var _emscripten_get_sbrk_ptr = (Module["_emscripten_get_sbrk_ptr"] =
@@ -10532,7 +10537,7 @@ var mGBA = (function () {
       function () {
         return Module["asm"]["_emscripten_replace_memory"].apply(
           null,
-          arguments
+          arguments,
         );
       });
     var _free = (Module["_free"] = function () {

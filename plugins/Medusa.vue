@@ -87,13 +87,13 @@ export default {
             window.Module.FS.mount(
               window.Module.FS.filesystems.IDBFS,
               {},
-              "/hh-gba-data"
+              "/hh-gba-data",
             );
 
             blob.arrayBuffer().then((data) => {
               window.Module.FS.writeFile(
                 "/hh-gba-data/game.gba",
-                new Uint8Array(data)
+                new Uint8Array(data),
               );
               window.Module.loadFile("/hh-gba-data/game.gba");
               this.loading = "";

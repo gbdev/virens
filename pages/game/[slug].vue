@@ -10,13 +10,25 @@ const url = config.BASE_API_URL + "/api/entry/" + route.params.slug + ".json";
 const { data } = await useFetch(url);
 const game = data.value;
 
-
 const images = [];
 data.value.screenshots.forEach((url) => {
   images.push({
-    itemImageSrc: config.BASE_API_URL + "/static/" + game.basepath + "/" + game.slug + "/" + url,
+    itemImageSrc:
+      config.BASE_API_URL +
+      "/static/" +
+      game.basepath +
+      "/" +
+      game.slug +
+      "/" +
+      url,
     thumbnailImageSrc:
-      config.BASE_API_URL + "/static/" + game.basepath + "/" + game.slug + "/" + url,
+      config.BASE_API_URL +
+      "/static/" +
+      game.basepath +
+      "/" +
+      game.slug +
+      "/" +
+      url,
   });
 });
 
@@ -75,7 +87,13 @@ let rom_endpoint = "";
 game.files.forEach((file) => {
   if (file.playable) {
     rom_endpoint =
-      config.BASE_API_URL + "/static/" + game.basepath + "/" + game.slug + "/" + file.filename;
+      config.BASE_API_URL +
+      "/static/" +
+      game.basepath +
+      "/" +
+      game.slug +
+      "/" +
+      file.filename;
   }
 });
 
@@ -354,7 +372,6 @@ useHead({
 <script>
 import Dialog from "primevue/dialog";
 
-
 export default {
   name: "Game",
   props: {
@@ -399,9 +416,8 @@ export default {
     };
   },
   mounted: function () {
-    this.touchEnabled = 'ontouchstart' in document.documentElement;
-
-  }
+    this.touchEnabled = "ontouchstart" in document.documentElement;
+  },
 };
 </script>
 <style scoped>
