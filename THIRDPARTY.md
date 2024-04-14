@@ -1,6 +1,6 @@
 # Third Party Notices
 
-Homebrew Hub Virens software incorporates third party material from the projects listed below. The original copyright notice and the license under which such third party material is received are set forth below. 
+Homebrew Hub Virens software incorporates third party material from the projects listed below. The original copyright notice and the license under which such third party material is received are set forth below.
 
 Third Party Code Components:
 
@@ -94,7 +94,7 @@ Mozilla Public License Version 2.0
     means any form of the work other than Source Code Form.
 
 1.7. "Larger Work"
-    means a work that combines Covered Software with other material, in 
+    means a work that combines Covered Software with other material, in
     a separate file or files, that is not Covered Software.
 
 1.8. "License"
@@ -432,4 +432,3 @@ Exhibit B - "Incompatible With Secondary Licenses" Notice
   defined by the Mozilla Public License, v. 2.0.
 
 ```
-

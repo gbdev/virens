@@ -23,13 +23,16 @@ useHead({
     The <i>games archive</i> is maintained and built by the community through
     public git repositories and the datasets are released as open data. Come
     contribute!<br />
-    The GB/GBC emulation is provided by <a href="https://github.com/binji/binjgb" target="_blank">Binjgb</a>,
+    The GB/GBC emulation is provided by
+    <a href="https://github.com/binji/binjgb" target="_blank">Binjgb</a>,
     running in the browser through a webassembly build. <br />
-    The GBA emulation is provided by <a href="https://mgba.io/" target="_blank">mGBA</a>,
-    running in the browser through a webassembly build. <br /><br />
-    
-    Everything just listed is released as open source software. Go check out the github
-    repository, contribute and show your support to their awesome maintainers.
+    The GBA emulation is provided by
+    <a href="https://mgba.io/" target="_blank">mGBA</a>, running in the browser
+    through a webassembly build. <br /><br />
+
+    Everything just listed is released as open source software. Go check out the
+    github repository, contribute and show your support to their awesome
+    maintainers.
 
     <h3>Games</h3>
     Each entry and related asset is owned by the respective developers and

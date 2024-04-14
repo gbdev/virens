@@ -22,7 +22,10 @@
         /></a>
       </li>
       <li>
-        <Button disabled="disabled" label="//" class="p-button-text mr-2 mb-2"
+        <Button
+          disabled="disabled"
+          label="//"
+          class="p-button-text mr-2 mb-2"
         />
       </li>
       <li>
@@ -31,7 +34,10 @@
         /></a>
       </li>
       <li>
-        <Button disabled="disabled" label="//" class="disabled p-button-text mr-2 mb-2"
+        <Button
+          disabled="disabled"
+          label="//"
+          class="disabled p-button-text mr-2 mb-2"
         />
       </li>
       <li>
@@ -55,7 +61,10 @@
         /></a>
       </li>
       <li>
-        <Button disabled="disabled" label="//" class="disabled p-button-text mr-2 mb-2"
+        <Button
+          disabled="disabled"
+          label="//"
+          class="disabled p-button-text mr-2 mb-2"
         />
       </li>
       <li>
@@ -92,5 +101,4 @@ export default {
   letter-spacing: 0.1rem;
   font-weight: 500;
 }
-
 </style>

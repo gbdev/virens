@@ -5,7 +5,6 @@ import { SitemapStream, streamToPromise } from "sitemap";
 import { defineNuxtModule, createResolver } from "@nuxt/kit";
 import axios from "axios";
 
-
 export default defineNuxtModule({
   meta: {
     name: "sitemap",
@@ -36,7 +35,7 @@ export default defineNuxtModule({
       // https://github.com/ekalinin/sitemap.js#generate-a-one-time-sitemap-from-a-list-of-urls
       const stream = new SitemapStream({ hostname: options.hostname });
       return streamToPromise(Readable.from(sitemapRoutes).pipe(stream)).then(
-        (data) => data.toString()
+        (data) => data.toString(),
       );
     }
 
@@ -49,7 +48,7 @@ export default defineNuxtModule({
     const resolver = createResolver(import.meta.url);
     const filePath = resolver.resolve(
       nuxt.options.srcDir,
-      "node_modules/.cache/.sitemap/sitemap.xml"
+      "node_modules/.cache/.sitemap/sitemap.xml",
     );
 
     nuxt.options.nitro.publicAssets = nuxt.options.nitro.publicAssets || [];

@@ -13,12 +13,15 @@ const config = useRuntimeConfig().public;
               -->
               <img
                 :src="
-                  slotProps.data.screenshots.length > 0 ?
-                  config.BASE_API_URL +
-                  '/static/' + slotProps.data.basepath + '/' +
-                  slotProps.data.slug +
-                  '/' +
-                  slotProps.data.screenshots[0] : 'https://raw.githubusercontent.com/gbdev/database/master/placeholder.png'
+                  slotProps.data.screenshots.length > 0
+                    ? config.BASE_API_URL +
+                      '/static/' +
+                      slotProps.data.basepath +
+                      '/' +
+                      slotProps.data.slug +
+                      '/' +
+                      slotProps.data.screenshots[0]
+                    : 'https://raw.githubusercontent.com/gbdev/database/master/placeholder.png'
                 "
                 class="product-image"
                 :alt="slotProps.data.title"
@@ -77,7 +80,9 @@ export default {
 .card {
   background: var(--surface-e);
   padding: 0rem;
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow:
+    0 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 1px 3px 0 rgba(0, 0, 0, 0.12);
   border-radius: 4px;
 }
@@ -141,7 +146,9 @@ a {
 
   img {
     width: 50px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow:
+      0 3px 6px rgba(0, 0, 0, 0.16),
+      0 3px 6px rgba(0, 0, 0, 0.23);
     margin-right: 2rem;
   }
 
