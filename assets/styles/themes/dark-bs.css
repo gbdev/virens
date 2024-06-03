@@ -9,8 +9,9 @@
   --text-color-secondary: rgba(255, 255, 255, 0.6);
   --primary-color: #8dd0ff;
   --primary-color-text: #151515;
-  --font-family: "Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica,
-    Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --font-family: "Inter", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
   --surface-0: #20262e;
   --surface-50: #363c43;
   --surface-100: #4d5158;
