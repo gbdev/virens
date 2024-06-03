@@ -91,11 +91,14 @@ let stats_data = useFetch(stats_url).data;
           <div>
             <h3>Open and accessible</h3>
             <span class="block font-regular text-lg mb-3">
-              The database is maintained on a
-              <a href="https://github.com/gbdev/database"
-                >public git repository</a
-              >. Everyone can contribute and audit. Entries metadata follows a
-              well defined JSON schema and the full dataset is released under a
+              The database is maintained on public git repositories (<a
+                href="https://github.com/gbdev/database"
+                >Game Boy</a
+              >,
+              <a href="https://github.com/gbadev-org/games"> Game Boy Advance</a
+              >, <a href="https://github.com/nesdev-org/homebrew-db"> NES</a>).
+              Everyone can contribute and audit. Entries metadata follows a well
+              defined JSON schema and the full dataset is released under a
               permissive license.
             </span>
           </div>
