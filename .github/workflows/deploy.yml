@@ -28,7 +28,7 @@ jobs:
         working-directory: virens/
 
       - name: Store final build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Build output
           path: virens/.output/public
@@ -49,7 +49,7 @@ jobs:
           rm -vrf virens/*
 
       - name: Unpack build
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: Build output
           path: virens/
