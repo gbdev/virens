@@ -9,9 +9,14 @@ useHead({
 
     Homebrew Hub is the result of a huge commitment and sustained effort started
     in 2015 by the
-    <a href="https://gbdev.io">gbdev</a> community. Here follows a non
-    comprehensive list of who contributed or helped in any way to make this
-    possible.
+    <a href="https://gbdev.io">gbdev</a> community. It is developed and maintained by
+    <a href="https://github.com/avivace">Antonio Vivace</a> and <a href="https://github.com/gbdev/homebrewhub/graphs/contributors">contributors</a>.
+
+    You can support the gbdev community and push the development of Homebrew Hub by donating on 
+    <a href="https://opencollective.com/gbdev"> Open Collective </a> or sponsoring us on <a href="https://github.com/sponsors/gbdev"> GitHub </a>.
+
+    Here follows a non comprehensive list of who contributed or 
+    helped in any way to make this possible.
     <h3>Software</h3>
     <i>Virens</i>, the Homebrew Hub frontend your browser is executing right
     now, is powered by NuxtJS3, VueJS3. The UI is made with PrimeVue, PrimeFlex,
@@ -28,8 +33,9 @@ useHead({
     running in the browser through a webassembly build. <br />
     The GBA emulation is provided by
     <a href="https://mgba.io/" target="_blank">mGBA</a>, running in the browser
-    through a webassembly build. <br /><br />
-
+    through a webassembly build.  <br />
+    The "Developed with" information is provided by <a href="https://github.com/bbbbbr/gbtoolsid" target="_blank">gbtoolsid</a>.
+    <br /><br />
     Everything just listed is released as open source software. Go check out the
     github repository, contribute and show your support to their awesome
     maintainers.
