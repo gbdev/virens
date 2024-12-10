@@ -36,22 +36,7 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-3 xl:col-3"></div>
-    <div class="col-12 lg:col-12 xl:col-12">
-      <div>
-        <div>
-          <div>
-            <div class="card mb-0">
-              <div class="home-cards">
-                <div>
-                  <h3>Games Showcase</h3>
-                  <List :entries="entries" :paginator="false" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <div class="col-12 lg:col-6 xl:col-4">
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">
@@ -101,6 +86,22 @@ let stats_data = useFetch(stats_url).data;
               defined JSON schema and the full dataset is released under a
               permissive license.
             </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 lg:col-12 xl:col-12">
+      <div>
+        <div>
+          <div>
+            <div class="card mb-0">
+              <div class="home-cards">
+                <div>
+                  <h3>Games Showcase</h3>
+                  <List :entries="entries" :paginator="false" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
