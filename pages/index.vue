@@ -36,7 +36,7 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-3 xl:col-3"></div>
-    
+
     <div class="col-12 lg:col-6 xl:col-4">
       <div class="card mb-0">
         <div class="flex justify-content-between mb-6">

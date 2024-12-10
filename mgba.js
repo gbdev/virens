@@ -5543,11 +5543,17 @@ var mGBA = (function () {
       },
       requestAnimationFrame: function (func) {
         if (typeof requestAnimationFrame === "function") {
-          requestAnimationFrame(func);
-          return;
+          var now = Date.now();
+          if (Browser.nextRAF === 0) {
+            Browser.nextRAF = now + 1e3 / 60;
+          } else {
+            while (now + 2 >= Browser.nextRAF) {
+              Browser.nextRAF += 1e3 / 60;
+            }
+          }
+          var delay = Math.max(Browser.nextRAF - now, 0);
+          setTimeout(func, delay);
         }
-        var RAF = Browser.fakeRequestAnimationFrame;
-        RAF(func);
       },
       safeCallback: function (func) {
         return function () {
