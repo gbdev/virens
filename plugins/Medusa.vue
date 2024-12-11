@@ -3,11 +3,17 @@
   build of the mGBA emulator.
 -->
 <template>
-  <div style="text-align: center" v-if="loading">
+  <div style="text-align: center" v-if="loading == 1">
     <ProgressSpinner style="width: 32px; height: 32px" strokeWidth="4" />
-    <Button :label="loading" class="p-button-text" disabled />
+    <Button label="Loading game ROM.." class="p-button-text" disabled />
   </div>
-  <div v-show="loading == ''">
+  <div v-show="loading == 0" @click="start()" style="padding: 75px">
+    <center>
+      <i class="pi pi-play" style="font-size: 5rem"></i> <br />
+      <h4>Click here to start the emulation</h4>
+    </center>
+  </div>
+  <div v-show="loading == 2">
     <Button
       @click="toggleFullscreen"
       label="Fullscreen"
@@ -60,13 +66,13 @@ export default {
   },
   data() {
     return {
-      volume: 0.1,
+      volume: 0.8,
       started: false,
-      loading: "Fetching game ROM file...",
+      loading: 0,
     };
   },
   mounted: function () {
-    this.start();
+    //this.start();
   },
   methods: {
     unmute: function () {
@@ -81,7 +87,7 @@ export default {
 
       fetch(this.romEndpoint).then((response) => {
         let gameblob = response.blob().then((blob) => {
-          this.loading = "Loading emulator..";
+          this.loading = 1;
           mGBA(window.Module).then(() => {
             window.Module.FS.mkdir("/hh-gba-data");
             window.Module.FS.mount(
@@ -96,7 +102,7 @@ export default {
                 new Uint8Array(data),
               );
               window.Module.loadFile("/hh-gba-data/game.gba");
-              this.loading = "";
+              this.loading = 2;
               window.Module._setVolume(0.1);
             });
           });

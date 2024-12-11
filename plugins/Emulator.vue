@@ -5,7 +5,19 @@
 -->
 <template>
   <div>
-    <div ref="gamediv" style="width: 100%">
+    <div v-show="loading == 0" @click="start()">
+      <center>
+        <i class="pi pi-play" style="font-size: 5rem"></i> <br />
+        <h4>Click here to start the emulation</h4>
+      </center>
+    </div>
+
+    <div
+      ref="gamediv"
+      style="width: 100%"
+      @click="start()"
+      v-show="loading == 1"
+    >
       <Button
         @click="toggleFullscreen"
         label="Fullscreen"
@@ -13,7 +25,7 @@
         iconPos="right"
         class="p-button-text"
       /><br />
-      {{ loading }}
+
       <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
       <div id="controller">
         <div id="controller_dpad">
@@ -32,7 +44,7 @@
     <br />
 
     <br />
-    <div class="grid p-fluid">
+    <div class="grid p-fluid" v-show="loading == 1">
       <div class="col-12 md:col-8 vertical-align-bottom">
         <div style="padding: 1rem">
           <Slider
@@ -137,7 +149,7 @@ export default {
         GBC: "The game supports Game Boy Color features",
         SGB: "The game supports Super Game Boy features",
       },
-      loading: "Loading emulator..",
+      loading: 0,
       gamerom: null,
       fps: 60,
       ticks: 0,
@@ -180,33 +192,36 @@ export default {
     Emulator.stop();
   },
   mounted: function () {
-    // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
-    window.vm = this;
-
-    // Download the ROM from the found endpoint
-    fetch(this.romEndpoint).then((response) => {
-      let gameblob = response.blob().then((blob) => {
-        // Get the Blob
-        this.gamerom = blob;
-        this.loading = null;
-        // Lesssssgooooooo
-        this.playROM();
-        // Let's check if there are some query param we should honor
-        if (this.$route.query.palette) {
-          // Set the desired palette
-          let queryvalue = parseInt(this.$route.query.palette);
-          if (queryvalue < 0) {
-            queryvalue = 0;
-          } else if (queryvalue > 85) {
-            queryvalue = 85;
-          }
-          this.pal = queryvalue;
-          this.setPal(queryvalue);
-        }
-      });
-    });
+    //this.start()
   },
   methods: {
+    start: function () {
+      // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
+      window.vm = this;
+
+      // Download the ROM from the found endpoint
+      fetch(this.romEndpoint).then((response) => {
+        let gameblob = response.blob().then((blob) => {
+          // Get the Blob
+          this.gamerom = blob;
+          this.loading = 1;
+          // Lesssssgooooooo
+          this.playROM();
+          // Let's check if there are some query param we should honor
+          if (this.$route.query.palette) {
+            // Set the desired palette
+            let queryvalue = parseInt(this.$route.query.palette);
+            if (queryvalue < 0) {
+              queryvalue = 0;
+            } else if (queryvalue > 85) {
+              queryvalue = 85;
+            }
+            this.pal = queryvalue;
+            this.setPal(queryvalue);
+          }
+        });
+      });
+    },
     togglemute: function () {
       if (this.mute) {
         // If unmuting, set the old volume back
