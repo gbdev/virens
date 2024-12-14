@@ -22,6 +22,12 @@ export default defineNuxtConfig({
   build: {
     transpile: ["primevue"],
   },
+  nitro: {
+    prerender: {
+      ignore: ["/games", "/demos", "/music", "/tools"],
+    },
+  },
+
   hooks: {
     // By default, we use "pages" routing, matching the paths under /pages
     // Here we add some additional routes
