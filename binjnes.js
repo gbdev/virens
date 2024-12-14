@@ -290,7 +290,7 @@ var Binjnes = (() => {
         Module["asm"] = exports;
         wasmMemory = Module["asm"]["h"];
         updateGlobalBufferAndViews(wasmMemory.buffer);
-        wasmTable = Module["asm"]["t"];
+        wasmTable = Module["asm"]["o"];
         addOnInit(Module["asm"]["i"]);
         removeRunDependency("wasm-instantiate");
       }
@@ -457,39 +457,13 @@ var Binjnes = (() => {
       return (_emulator_set_reset = Module["_emulator_set_reset"] =
         Module["asm"]["m"]).apply(null, arguments);
     });
-    var _emulator_read_state = (Module["_emulator_read_state"] = function () {
-      return (_emulator_read_state = Module["_emulator_read_state"] =
-        Module["asm"]["n"]).apply(null, arguments);
-    });
-    var _emulator_write_state = (Module["_emulator_write_state"] = function () {
-      return (_emulator_write_state = Module["_emulator_write_state"] =
-        Module["asm"]["o"]).apply(null, arguments);
-    });
-    var _emulator_was_prg_ram_updated = (Module[
-      "_emulator_was_prg_ram_updated"
-    ] = function () {
-      return (_emulator_was_prg_ram_updated = Module[
-        "_emulator_was_prg_ram_updated"
-      ] =
-        Module["asm"]["p"]).apply(null, arguments);
-    });
-    var _emulator_read_prg_ram = (Module["_emulator_read_prg_ram"] =
-      function () {
-        return (_emulator_read_prg_ram = Module["_emulator_read_prg_ram"] =
-          Module["asm"]["q"]).apply(null, arguments);
-      });
-    var _emulator_write_prg_ram = (Module["_emulator_write_prg_ram"] =
-      function () {
-        return (_emulator_write_prg_ram = Module["_emulator_write_prg_ram"] =
-          Module["asm"]["r"]).apply(null, arguments);
-      });
     var _file_data_delete = (Module["_file_data_delete"] = function () {
       return (_file_data_delete = Module["_file_data_delete"] =
-        Module["asm"]["s"]).apply(null, arguments);
+        Module["asm"]["n"]).apply(null, arguments);
     });
     var _joypad_delete = (Module["_joypad_delete"] = function () {
       return (_joypad_delete = Module["_joypad_delete"] =
-        Module["asm"]["u"]).apply(null, arguments);
+        Module["asm"]["p"]).apply(null, arguments);
     });
     var _joypad_begin_rewind_playback = (Module[
       "_joypad_begin_rewind_playback"
@@ -497,206 +471,136 @@ var Binjnes = (() => {
       return (_joypad_begin_rewind_playback = Module[
         "_joypad_begin_rewind_playback"
       ] =
-        Module["asm"]["v"]).apply(null, arguments);
+        Module["asm"]["q"]).apply(null, arguments);
     });
     var _joypad_end_rewind_playback = (Module["_joypad_end_rewind_playback"] =
       function () {
         return (_joypad_end_rewind_playback = Module[
           "_joypad_end_rewind_playback"
         ] =
-          Module["asm"]["w"]).apply(null, arguments);
+          Module["asm"]["r"]).apply(null, arguments);
       });
     var _rewind_append = (Module["_rewind_append"] = function () {
       return (_rewind_append = Module["_rewind_append"] =
-        Module["asm"]["x"]).apply(null, arguments);
+        Module["asm"]["s"]).apply(null, arguments);
     });
     var _rewind_delete = (Module["_rewind_delete"] = function () {
       return (_rewind_delete = Module["_rewind_delete"] =
-        Module["asm"]["y"]).apply(null, arguments);
+        Module["asm"]["t"]).apply(null, arguments);
     });
     var _emulator_new_simple = (Module["_emulator_new_simple"] = function () {
       return (_emulator_new_simple = Module["_emulator_new_simple"] =
-        Module["asm"]["z"]).apply(null, arguments);
+        Module["asm"]["u"]).apply(null, arguments);
     });
     var _emulator_get_ticks_f64 = (Module["_emulator_get_ticks_f64"] =
       function () {
         return (_emulator_get_ticks_f64 = Module["_emulator_get_ticks_f64"] =
-          Module["asm"]["A"]).apply(null, arguments);
+          Module["asm"]["v"]).apply(null, arguments);
       });
     var _emulator_run_until_f64 = (Module["_emulator_run_until_f64"] =
       function () {
         return (_emulator_run_until_f64 = Module["_emulator_run_until_f64"] =
-          Module["asm"]["B"]).apply(null, arguments);
+          Module["asm"]["w"]).apply(null, arguments);
       });
     var _rewind_get_newest_ticks_f64 = (Module["_rewind_get_newest_ticks_f64"] =
       function () {
         return (_rewind_get_newest_ticks_f64 = Module[
           "_rewind_get_newest_ticks_f64"
         ] =
-          Module["asm"]["C"]).apply(null, arguments);
+          Module["asm"]["x"]).apply(null, arguments);
       });
     var _rewind_get_oldest_ticks_f64 = (Module["_rewind_get_oldest_ticks_f64"] =
       function () {
         return (_rewind_get_oldest_ticks_f64 = Module[
           "_rewind_get_oldest_ticks_f64"
         ] =
-          Module["asm"]["D"]).apply(null, arguments);
+          Module["asm"]["y"]).apply(null, arguments);
       });
     var _joypad_new_simple = (Module["_joypad_new_simple"] = function () {
       return (_joypad_new_simple = Module["_joypad_new_simple"] =
-        Module["asm"]["E"]).apply(null, arguments);
+        Module["asm"]["z"]).apply(null, arguments);
     });
     var _set_joyp_up = (Module["_set_joyp_up"] = function () {
-      return (_set_joyp_up = Module["_set_joyp_up"] = Module["asm"]["F"]).apply(
+      return (_set_joyp_up = Module["_set_joyp_up"] = Module["asm"]["A"]).apply(
         null,
         arguments,
       );
     });
     var _set_joyp_down = (Module["_set_joyp_down"] = function () {
       return (_set_joyp_down = Module["_set_joyp_down"] =
-        Module["asm"]["G"]).apply(null, arguments);
+        Module["asm"]["B"]).apply(null, arguments);
     });
     var _set_joyp_left = (Module["_set_joyp_left"] = function () {
       return (_set_joyp_left = Module["_set_joyp_left"] =
-        Module["asm"]["H"]).apply(null, arguments);
+        Module["asm"]["C"]).apply(null, arguments);
     });
     var _set_joyp_right = (Module["_set_joyp_right"] = function () {
       return (_set_joyp_right = Module["_set_joyp_right"] =
-        Module["asm"]["I"]).apply(null, arguments);
+        Module["asm"]["D"]).apply(null, arguments);
     });
     var _set_joyp_B = (Module["_set_joyp_B"] = function () {
-      return (_set_joyp_B = Module["_set_joyp_B"] = Module["asm"]["J"]).apply(
+      return (_set_joyp_B = Module["_set_joyp_B"] = Module["asm"]["E"]).apply(
         null,
         arguments,
       );
     });
     var _set_joyp_A = (Module["_set_joyp_A"] = function () {
-      return (_set_joyp_A = Module["_set_joyp_A"] = Module["asm"]["K"]).apply(
+      return (_set_joyp_A = Module["_set_joyp_A"] = Module["asm"]["F"]).apply(
         null,
         arguments,
       );
     });
     var _set_joyp_start = (Module["_set_joyp_start"] = function () {
       return (_set_joyp_start = Module["_set_joyp_start"] =
-        Module["asm"]["L"]).apply(null, arguments);
+        Module["asm"]["G"]).apply(null, arguments);
     });
     var _set_joyp_select = (Module["_set_joyp_select"] = function () {
       return (_set_joyp_select = Module["_set_joyp_select"] =
-        Module["asm"]["M"]).apply(null, arguments);
-    });
-    var _set_zapper = (Module["_set_zapper"] = function () {
-      return (_set_zapper = Module["_set_zapper"] = Module["asm"]["N"]).apply(
-        null,
-        arguments,
-      );
-    });
-    var _add_snesmouse_delta = (Module["_add_snesmouse_delta"] = function () {
-      return (_add_snesmouse_delta = Module["_add_snesmouse_delta"] =
-        Module["asm"]["O"]).apply(null, arguments);
-    });
-    var _set_snesmouse_buttons = (Module["_set_snesmouse_buttons"] =
-      function () {
-        return (_set_snesmouse_buttons = Module["_set_snesmouse_buttons"] =
-          Module["asm"]["P"]).apply(null, arguments);
-      });
-    var _set_controller_type = (Module["_set_controller_type"] = function () {
-      return (_set_controller_type = Module["_set_controller_type"] =
-        Module["asm"]["Q"]).apply(null, arguments);
+        Module["asm"]["H"]).apply(null, arguments);
     });
     var _get_frame_buffer_ptr = (Module["_get_frame_buffer_ptr"] = function () {
       return (_get_frame_buffer_ptr = Module["_get_frame_buffer_ptr"] =
-        Module["asm"]["R"]).apply(null, arguments);
+        Module["asm"]["I"]).apply(null, arguments);
     });
     var _get_frame_buffer_size = (Module["_get_frame_buffer_size"] =
       function () {
         return (_get_frame_buffer_size = Module["_get_frame_buffer_size"] =
-          Module["asm"]["S"]).apply(null, arguments);
+          Module["asm"]["J"]).apply(null, arguments);
       });
-    var _emulator_convert_frame_buffer_simple = (Module[
-      "_emulator_convert_frame_buffer_simple"
-    ] = function () {
-      return (_emulator_convert_frame_buffer_simple = Module[
-        "_emulator_convert_frame_buffer_simple"
-      ] =
-        Module["asm"]["T"]).apply(null, arguments);
-    });
-    var _get_rgba_frame_buffer_ptr = (Module["_get_rgba_frame_buffer_ptr"] =
-      function () {
-        return (_get_rgba_frame_buffer_ptr = Module[
-          "_get_rgba_frame_buffer_ptr"
-        ] =
-          Module["asm"]["U"]).apply(null, arguments);
-      });
-    var _get_rgba_frame_buffer_size = (Module["_get_rgba_frame_buffer_size"] =
-      function () {
-        return (_get_rgba_frame_buffer_size = Module[
-          "_get_rgba_frame_buffer_size"
-        ] =
-          Module["asm"]["V"]).apply(null, arguments);
-      });
-    var _get_palette_ptr = (Module["_get_palette_ptr"] = function () {
-      return (_get_palette_ptr = Module["_get_palette_ptr"] =
-        Module["asm"]["W"]).apply(null, arguments);
-    });
-    var _get_palette_size = (Module["_get_palette_size"] = function () {
-      return (_get_palette_size = Module["_get_palette_size"] =
-        Module["asm"]["X"]).apply(null, arguments);
-    });
     var _get_audio_buffer_ptr = (Module["_get_audio_buffer_ptr"] = function () {
       return (_get_audio_buffer_ptr = Module["_get_audio_buffer_ptr"] =
-        Module["asm"]["Y"]).apply(null, arguments);
+        Module["asm"]["K"]).apply(null, arguments);
     });
     var _get_audio_buffer_capacity = (Module["_get_audio_buffer_capacity"] =
       function () {
         return (_get_audio_buffer_capacity = Module[
           "_get_audio_buffer_capacity"
         ] =
-          Module["asm"]["Z"]).apply(null, arguments);
-      });
-    var _state_file_data_new = (Module["_state_file_data_new"] = function () {
-      return (_state_file_data_new = Module["_state_file_data_new"] =
-        Module["asm"]["_"]).apply(null, arguments);
-    });
-    var _prg_ram_file_data_new = (Module["_prg_ram_file_data_new"] =
-      function () {
-        return (_prg_ram_file_data_new = Module["_prg_ram_file_data_new"] =
-          Module["asm"]["$"]).apply(null, arguments);
+          Module["asm"]["L"]).apply(null, arguments);
       });
     var _get_file_data_ptr = (Module["_get_file_data_ptr"] = function () {
       return (_get_file_data_ptr = Module["_get_file_data_ptr"] =
-        Module["asm"]["aa"]).apply(null, arguments);
+        Module["asm"]["M"]).apply(null, arguments);
     });
     var _get_file_data_size = (Module["_get_file_data_size"] = function () {
       return (_get_file_data_size = Module["_get_file_data_size"] =
-        Module["asm"]["ba"]).apply(null, arguments);
-    });
-    var _set_file_data_ptr = (Module["_set_file_data_ptr"] = function () {
-      return (_set_file_data_ptr = Module["_set_file_data_ptr"] =
-        Module["asm"]["ca"]).apply(null, arguments);
-    });
-    var _set_file_data_size = (Module["_set_file_data_size"] = function () {
-      return (_set_file_data_size = Module["_set_file_data_size"] =
-        Module["asm"]["da"]).apply(null, arguments);
-    });
-    var _file_data_delete2 = (Module["_file_data_delete2"] = function () {
-      return (_file_data_delete2 = Module["_file_data_delete2"] =
-        Module["asm"]["ea"]).apply(null, arguments);
+        Module["asm"]["N"]).apply(null, arguments);
     });
     var _rewind_new_simple = (Module["_rewind_new_simple"] = function () {
       return (_rewind_new_simple = Module["_rewind_new_simple"] =
-        Module["asm"]["fa"]).apply(null, arguments);
+        Module["asm"]["O"]).apply(null, arguments);
     });
     var _rewind_begin = (Module["_rewind_begin"] = function () {
       return (_rewind_begin = Module["_rewind_begin"] =
-        Module["asm"]["ga"]).apply(null, arguments);
+        Module["asm"]["P"]).apply(null, arguments);
     });
     var _rewind_to_ticks_wrapper = (Module["_rewind_to_ticks_wrapper"] =
       function () {
         return (_rewind_to_ticks_wrapper = Module["_rewind_to_ticks_wrapper"] =
-          Module["asm"]["ha"]).apply(null, arguments);
+          Module["asm"]["Q"]).apply(null, arguments);
       });
     var _rewind_end = (Module["_rewind_end"] = function () {
-      return (_rewind_end = Module["_rewind_end"] = Module["asm"]["ia"]).apply(
+      return (_rewind_end = Module["_rewind_end"] = Module["asm"]["R"]).apply(
         null,
         arguments,
       );

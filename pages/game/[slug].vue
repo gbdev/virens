@@ -141,6 +141,9 @@ useHead({
           <template v-if="game.platform == 'GBA'">
             <Medusa :gameData="game" :romEndpoint="rom_endpoint" />
           </template>
+          <template v-else-if="game.platform == 'NES'">
+            <Nes :gameData="game" :romEndpoint="rom_endpoint" />
+          </template>
           <template v-else>
             <Emulator :gameData="game" :romEndpoint="rom_endpoint" />
           </template>
