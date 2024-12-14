@@ -69,8 +69,9 @@ useHead({
         </div>
       </div>
     </div>
+    <br />
     <div v-if="entries != null">
-      <h5>Results</h5>
+      <h5>{{ entries.length }} Results</h5>
       <div v-if="entries.length == 0">
         Welp, it looks like there are no results matching your query
       </div>
@@ -112,7 +113,7 @@ export default {
       if (this.textQuery) {
         params["q"] = this.textQuery;
       }
-      let url = baseurl + new URLSearchParams({ results: 1000, ...params });
+      let url = baseurl + new URLSearchParams({ results: 10000, ...params });
 
       fetch(url).then((response) => {
         let gameblob = response.json().then((data) => {
@@ -139,17 +140,17 @@ export default {
           };
         }
       }
-      if (this.$route.query.type) {
+      if (this.$route.query.typetag) {
         if (
           ["all", "game", "demo", "music", "tool"].includes(
-            this.$route.query.type.toLowerCase(),
+            this.$route.query.typetag.toLowerCase(),
           )
         ) {
           this.selectedType = {
             name:
-              this.$route.query.type.charAt(0).toUpperCase() +
-              this.$route.query.type.slice(1),
-            code: this.$route.query.type.toLowerCase(),
+              this.$route.query.typetag.charAt(0).toUpperCase() +
+              this.$route.query.typetag.slice(1),
+            code: this.$route.query.typetag.toLowerCase(),
           };
         }
       }
@@ -176,7 +177,7 @@ export default {
         { name: "Game", code: "game" },
         { name: "Demo", code: "demo" },
         { name: "Music", code: "music" },
-        { name: "Tool", code: "homebrew" },
+        { name: "Tool", code: "tool" },
       ],
       selectedTags: null,
       groupedCities: [
