@@ -204,6 +204,7 @@ useHead({
                         GBA: "Game Boy Advance",
                         GB: "Game Boy",
                         GBC: "Game Boy Color",
+                        NES: "NES",
                       }[game.platform]
                     }}</Chip
                   >
@@ -503,6 +504,24 @@ export default {
   background-origin: border-box;
   background-clip: content-box, border-box;
   box-shadow: 2px 1000px 1px #3f4b5b inset;
+}
+
+.NES {
+  border-radius: 0 !important; /* No rounded corners for a retro feel */
+  padding: 0.2rem 1rem !important; /* Adjust padding for a boxier look */
+  font-size: 1rem; /* Retain original font size */
+  border: solid 2px red; /* Use a grey border for an NES aesthetic */
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(90deg, black, #1c1c1c); /* Grey tones for background */
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5), /* Subtle shadow for depth */
+              inset 0 0 2px 0 rgba(255, 255, 255, 0.3); /* Inset effect */
+  color: white; /* White text for contrast */
+  text-shadow: 1px 1px 0 #000000; /* Retro pixelated text shadow */
 }
 
 .GBA {
