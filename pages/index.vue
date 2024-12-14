@@ -21,10 +21,22 @@ let stats_data = useFetch(stats_url).data;
             <span class="block font-regular mb-3 main-text">
               Homebrew Hub is a
               <a href="https://gbdev.io">community-led</a> initiative to
-              collect, archive and preserve <i>homebrew</i> software developed
-              for Game Boy (Color) and the Game Boy Advance. We're building an
-              open digital repository providing accurate metadata and emulating
-              capabilities directly in the browser. <br />
+              collect, archive and preserve
+              <a
+                href="https://en.wikipedia.org/wiki/Homebrew_(video_games)"
+                target="_blank"
+                >homebrew</a
+              >
+              and
+              <a href="https://en.wikipedia.org/wiki/Demoscene" target="_blank"
+                >demoscene</a
+              >
+              software developed for Game Boy (Color), Game Boy Advance and NES.
+              <br />
+              We're on a mission to build an open digital repository providing
+              accurate metadata and emulating capabilities directly in the
+              browser.
+              <br />
               <small>
                 <a href="/stats">{{ stats_data.total }}</a>
 
@@ -44,7 +56,11 @@ let stats_data = useFetch(stats_url).data;
             <h3>Emulation</h3>
             <span class="block font-regular text-lg mb-3">
               We use WebAssembly builds of
-              <a href="https://mgba.io/" target="_blank">mGBA</a> and
+              <a href="https://mgba.io/" target="_blank">mGBA</a>,
+              <a href="https://github.com/binji/binjnes" target="_blank"
+                >binjnes</a
+              >
+              and
               <a href="https://github.com/binji/binjgb" target="_blank"
                 >binjgb</a
               >
@@ -61,10 +77,9 @@ let stats_data = useFetch(stats_url).data;
           <div>
             <h3>Digital Preservation</h3>
             <span class="block font-regular text-lg mb-3">
-              We are committed to build a digital memory of the Game Boy
-              homebrew development scene. We salvaged some of the first ever
-              unofficial software from the 90s and we keep working to harvest
-              more.
+              We are committed to build a digital memory of the homebrew
+              development scene. We salvaged some of the first ever unofficial
+              software from the 90s and we keep working to harvest more.
             </span>
           </div>
         </div>
