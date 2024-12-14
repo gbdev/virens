@@ -46,17 +46,22 @@ export default defineNuxtConfig({
         {
           name: "demos",
           path: "/demos",
-          file: resolve(__dirname, "pages/games.vue"),
+          redirect: "/search?typetag=demo",
+        },
+        {
+          name: "games",
+          path: "/games",
+          redirect: "/search?typetag=game",
         },
         {
           name: "tools",
           path: "/tools",
-          file: resolve(__dirname, "pages/games.vue"),
+          redirect: "/search?typetag=tool",
         },
         {
           name: "music",
           path: "/music",
-          file: resolve(__dirname, "pages/games.vue"),
+          redirect: "/search?typetag=music",
         },
       );
     },
