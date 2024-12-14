@@ -518,8 +518,9 @@ export default {
     linear-gradient(90deg, black, #1c1c1c); /* Grey tones for background */
   background-origin: border-box;
   background-clip: content-box, border-box;
-  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5), /* Subtle shadow for depth */
-              inset 0 0 2px 0 rgba(255, 255, 255, 0.3); /* Inset effect */
+  box-shadow:
+    0 0 4px 0 rgba(0, 0, 0, 0.5),
+    /* Subtle shadow for depth */ inset 0 0 2px 0 rgba(255, 255, 255, 0.3); /* Inset effect */
   color: white; /* White text for contrast */
   text-shadow: 1px 1px 0 #000000; /* Retro pixelated text shadow */
 }

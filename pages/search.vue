@@ -92,7 +92,7 @@ export default {
     handlesearch: function () {
       let config = useRuntimeConfig().public;
       let baseurl = config.BASE_API_URL + "/api/search?";
-      let params = { results: 1000 };
+      let params = {};
       let tags = [];
       if (this.selectedTags) {
         this.selectedTags.forEach((tagobj) => {
@@ -112,22 +112,24 @@ export default {
       if (this.textQuery) {
         params["q"] = this.textQuery;
       }
-      let url = baseurl + new URLSearchParams(params);
-      console.log(url);
+      let url = baseurl + new URLSearchParams({ results: 1000, ...params });
+
       fetch(url).then((response) => {
         let gameblob = response.json().then((data) => {
           this.entries = data["entries"];
         });
       });
+
+      this.$router.push({ query: params });
     },
     setSearchParameters: function () {
       // Let's check if there are some query param we should honor
-      if (this.$route.query.title) {
-        this.textQuery = this.$route.query.title;
+      if (this.$route.query.q) {
+        this.textQuery = this.$route.query.q;
       }
       if (this.$route.query.platform) {
         if (
-          ["gb", "gbc", "gba"].includes(
+          ["gb", "gbc", "gba", "nes"].includes(
             this.$route.query.platform.toLowerCase(),
           )
         ) {
@@ -166,6 +168,7 @@ export default {
         { name: "GB", code: "GB" },
         { name: "GBC", code: "GBC" },
         { name: "GBA", code: "GBA" },
+        { name: "NES", code: "NES" },
       ],
       selectedType: { name: "All", code: "all" },
       types: [
