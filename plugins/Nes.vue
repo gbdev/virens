@@ -4,8 +4,13 @@
       <i class="pi pi-play" style="font-size: 5rem"></i> <br />
       <h4>Click here to start the emulation</h4>
     </div>
-    <div v-show="loading == 1">
-      <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
+    <div ref="gamediv" style="width: 100%" v-show="loading == 1">
+      <canvas
+        height="240"
+        width="256"
+        class="shadow-3 gamecanvas"
+        ref="gamecanvas"
+      ></canvas>
     </div>
   </div>
 </template>
@@ -70,8 +75,8 @@ export default {
       gamerom: null,
       fps: 60,
       ticks: 0,
-      height: 432,
-      width: 480,
+      height: 240,
+      width: 256,
       loaded: false,
       loadedFile: null,
       paused: false,
@@ -511,12 +516,13 @@ class WebGLRenderer {
     const gl = (this.gl = el.getContext("webgl2", {
       preserveDrawingBuffer: true,
     }));
+    console.log(gl);
     if (gl === null) {
       throw new Error("unable to create webgl context");
     }
 
-    const w = SCREEN_WIDTH / 256;
-    const h = SCREEN_HEIGHT / 256;
+    const w = 256 / 256;
+    const h = 240 / 256;
     const buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
     gl.bufferData(
@@ -651,7 +657,7 @@ class WebGLRenderer {
 
   /* Fill the available space */
   width: 100%;
-  /* Original resolution ratio */
+  /*  Original resolution ratio */
   aspect-ratio: 256 / 240;
 
   margin: 0; /* binjgb */
