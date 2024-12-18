@@ -25,18 +25,6 @@
         <Button
           disabled="disabled"
           label="//"
-          class="p-button-text mr-2 mb-2"
-        />
-      </li>
-      <li>
-        <a href="/games/gba"
-          ><Button label="GBA" class="p-button-text mr-2 mb-2"
-        /></a>
-      </li>
-      <li>
-        <Button
-          disabled="disabled"
-          label="//"
           class="disabled p-button-text mr-2 mb-2"
         />
       </li>
@@ -47,7 +35,7 @@
       </li>
       <li>
         <a href="/demos"
-          ><Button label="Demos" class="p-button-text mr-2 mb-2"
+          ><Button label="Demoscene" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
       <li>
@@ -68,13 +56,8 @@
         />
       </li>
       <li>
-        <a href="/events/gbcompo21"
-          ><Button label="gb compo 21" class="p-button-text mr-2 mb-2"
-        /></a>
-      </li>
-      <li>
-        <a href="/events/gbajam22"
-          ><Button label="GBA Jam 22" class="p-button-text mr-2 mb-2"
+        <a target="_blank" href="https://github.com/gbdev/homebrewhub-submit"
+          ><Button label="Submit new game" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
     </ul>
