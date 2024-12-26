@@ -6,10 +6,8 @@
 <template>
   <div>
     <div v-show="loading == 0" @click="start()">
-      <center>
-        <i class="pi pi-play" style="font-size: 5rem"></i> <br />
-        <h4>Click here to start the emulation</h4>
-      </center>
+      <i class="pi pi-play" style="font-size: 5rem"></i> <br />
+      <h4>Click here to start the emulation</h4>
     </div>
 
     <div
@@ -196,31 +194,33 @@ export default {
   },
   methods: {
     start: function () {
-      // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
-      window.vm = this;
+      if (this.loading == 0) {
+        // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
+        window.vm = this;
 
-      // Download the ROM from the found endpoint
-      fetch(this.romEndpoint).then((response) => {
-        let gameblob = response.blob().then((blob) => {
-          // Get the Blob
-          this.gamerom = blob;
-          this.loading = 1;
-          // Lesssssgooooooo
-          this.playROM();
-          // Let's check if there are some query param we should honor
-          if (this.$route.query.palette) {
-            // Set the desired palette
-            let queryvalue = parseInt(this.$route.query.palette);
-            if (queryvalue < 0) {
-              queryvalue = 0;
-            } else if (queryvalue > 85) {
-              queryvalue = 85;
+        // Download the ROM from the found endpoint
+        fetch(this.romEndpoint).then((response) => {
+          let gameblob = response.blob().then((blob) => {
+            // Get the Blob
+            this.gamerom = blob;
+            this.loading = 1;
+            // Lesssssgooooooo
+            this.playROM();
+            // Let's check if there are some query param we should honor
+            if (this.$route.query.palette) {
+              // Set the desired palette
+              let queryvalue = parseInt(this.$route.query.palette);
+              if (queryvalue < 0) {
+                queryvalue = 0;
+              } else if (queryvalue > 85) {
+                queryvalue = 85;
+              }
+              this.pal = queryvalue;
+              this.setPal(queryvalue);
             }
-            this.pal = queryvalue;
-            this.setPal(queryvalue);
-          }
+          });
         });
-      });
+      }
     },
     togglemute: function () {
       if (this.mute) {

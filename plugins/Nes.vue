@@ -155,6 +155,9 @@ export default {
   },
   methods: {
     start: function () {
+      if (this.loading == 1) {
+        return;
+      }
       // Expose the context to the non-vue emulator code below so it can access the canvas and the emulator settings.
       window.vm = this;
 
