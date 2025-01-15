@@ -97,8 +97,8 @@ let stats_data = useFetch(stats_url).data;
               >,
               <a href="https://github.com/gbadev-org/games"> Game Boy Advance</a
               >, <a href="https://github.com/nesdev-org/homebrew-db"> NES</a>).
-              Everyone can contribute and audit. Entries metadata follows a well
-              defined JSON schema and the full dataset is released under a
+              Everyone can contribute and audit. Homebrew metadata follows a
+              well defined JSON schema and datasets are released under a
               permissive license.
             </span>
           </div>

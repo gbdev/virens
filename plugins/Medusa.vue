@@ -79,7 +79,7 @@ export default {
       window.Module._unmute();
     },
     start: function () {
-      if (this.started == true){
+      if (this.started == true) {
         return;
       }
       this.started = true;
