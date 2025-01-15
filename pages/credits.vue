@@ -20,28 +20,31 @@ useHead({
     Here follows a non comprehensive list of who contributed or helped in any
     way to make this possible.
     <h3>Software</h3>
-    <i>Virens</i>, the Homebrew Hub frontend your browser is executing right
-    now, is powered by NuxtJS3, VueJS3. The UI is made with PrimeVue, PrimeFlex,
-    PrimeIcons and fragments originally from Sakai Vue. <br />The
-    <i> backend </i>, serving the API feeding content into this UI is a Django
-    Rest Framework application. The API is public and you can find out more
-    about how you can use it in your projects <a href="/developers">here</a>.
+    <a href="https://github.com/gbdev/virens">Virens</a>, the Homebrew Hub
+    frontend your browser is executing right now, is powered by NuxtJS3, VueJS3.
+    The UI is made with PrimeVue, PrimeFlex, PrimeIcons and fragments originally
+    from Sakai Vue. <br />The
+    <a href="https://github.com/gbdev/homebrewhub"> backend </a>, serving the
+    API feeding content into this UI is a Django Rest Framework application. The
+    API is public and you can find out more about how you can use it in your
+    projects <a href="/developers">here</a>. <br /><br />
+    The <i>games archives</i> are maintained and built by the community through
+    public git repositories and the datasets are released as open data:
+    <a href="https://github.com/gbdev/database">Game Boy</a>,
+    <a href="https://github.com/gbadev-org/games"> Game Boy Advance</a>,
+    <a href="https://github.com/nesdev-org/homebrew-db"> NES</a>. <br />
     <br />
-    The <i>games archive</i> is maintained and built by the community through
-    public git repositories and the datasets are released as open data. Come
-    contribute!<br />
-    The GB/GBC emulation is provided by
-    <a href="https://github.com/binji/binjgb" target="_blank">Binjgb</a>,
+    Emulation capabilities are provided by
+    <a href="https://github.com/binji/binjgb" target="_blank">Binjgb</a>
+    (GB/GBC), <a href="https://mgba.io/" target="_blank">mGBA</a> (GBA) and
+    <a href="https://github.com/binji/binjnes" target="_blank">Binjnes</a> (NES)
     running in the browser through a webassembly build. <br />
-    The GBA emulation is provided by
-    <a href="https://mgba.io/" target="_blank">mGBA</a>, running in the browser
-    through a webassembly build. <br />
     The "Developed with" information is provided by
     <a href="https://github.com/bbbbbr/gbtoolsid" target="_blank">gbtoolsid</a>.
     <br /><br />
     Everything just listed is released as open source software. Go check out the
     github repository, contribute and show your support to their awesome
-    maintainers.
+    maintainers!
 
     <h3>Games</h3>
     Each entry and related asset is owned by the respective developers and
