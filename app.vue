@@ -10,7 +10,7 @@ useHead({
     {
       name: "og:description",
       content:
-        "A digital collection of homebrew software produced for Game Boy (Color), playable directly in the browser through an accurate emulator.",
+        "A digital collection of homebrew software produced for Game Boy (Color), Game Boy Advance and NES, playable directly in the browser through accurate emulators.",
     },
     { name: "og:type", content: "website" },
     { name: "og:site_name", content: "Homebrew Hub" },
