@@ -81,13 +81,14 @@ export default {
       const documentStyle = getComputedStyle(document.body);
 
       return {
-        labels: ["GB", "GBC", "GBA"],
+        labels: ["GB", "GBC", "GBA", "NES"],
         datasets: [
           {
             data: [
               this.stats.platforms.gb,
               this.stats.platforms.gbc,
               this.stats.platforms.gba,
+              this.stats.platforms.nes,
             ],
             backgroundColor: [
               documentStyle.getPropertyValue("--blue-500"),
