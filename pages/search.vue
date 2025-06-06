@@ -86,12 +86,12 @@ import List from "../components/list";
 export default {
   methods: {
     extractSelectableTags(value) {
-      let tagOptions = this.tagOptions
+      let tagOptions = this.tagOptions;
       for (const group of tagOptions) {
-        const match = group.items.find(item => item.value === value);
-        if (match) return match;          // { label: "...", value: "..." }
+        const match = group.items.find((item) => item.value === value);
+        if (match) return match; // { label: "...", value: "..." }
       }
-      return null;                        // not found
+      return null; // not found
     },
     resetsearch: function () {
       this.selectedPlatform = null;
@@ -164,19 +164,16 @@ export default {
         }
       }
       if (this.$route.query.tags) {
-        const { tags } = this.$route.query
+        const { tags } = this.$route.query;
         // Normalise to an array, since when only one tag is passed it's a string
-        const tagList = Array.isArray(tags)
-            ? tags
-            : tags ? [tags]
-            : []
+        const tagList = Array.isArray(tags) ? tags : tags ? [tags] : [];
         // Iterate (if any)
-        tagList.forEach(tag => {
-          let selectedTag = this.extractSelectableTags(tag)
+        tagList.forEach((tag) => {
+          let selectedTag = this.extractSelectableTags(tag);
           if (selectedTag) {
             this.selectedTags.push(selectedTag);
           }
-        })
+        });
       }
     },
   },

@@ -196,36 +196,42 @@ useHead({
               <tr v-if="game.platform">
                 <td class="value-title">Platform</td>
                 <td>
-                  <Chip
-                    :class="game.platform + ' tag'"
-                    v-tooltip="tooltip[game.platform]"
-                    >{{
-                      {
-                        GBA: "Game Boy Advance",
-                        GB: "Game Boy",
-                        GBC: "Game Boy Color",
-                        NES: "NES",
-                      }[game.platform]
-                    }}</Chip
-                  >
+                  <a :href="'/search?platform=' + game.platform">
+                    <Chip
+                      :class="game.platform + ' tag'"
+                      v-tooltip="tooltip[game.platform]"
+                      >{{
+                        {
+                          GBA: "Game Boy Advance",
+                          GB: "Game Boy",
+                          GBC: "Game Boy Color",
+                          NES: "NES",
+                        }[game.platform]
+                      }}</Chip
+                    >
+                  </a>
                 </td>
               </tr>
               <tr v-if="game.typetag">
                 <td class="value-title">Type</td>
                 <td>
-                  <Chip :class="'typetag ' + game.typetag">{{
-                    game.typetag
-                  }}</Chip>
+                  <a :href="'/search?typetag=' + game.typetag">
+                    <Chip :class="'typetag ' + game.typetag">{{
+                      game.typetag
+                    }}</Chip>
+                  </a>
                 </td>
               </tr>
               <tr v-if="game.tags">
                 <td class="value-title">Tags</td>
                 <td>
                   <template v-for="tag in game.tags">
-                    <Chip
-                      :class="'tag ' + tag.replace(' ', '-').toLowerCase()"
-                      >{{ tag }}</Chip
-                    >&nbsp;
+                    <a :href="'/search?tags=' + tag">
+                      <Chip
+                        :class="'tag ' + tag.replace(' ', '-').toLowerCase()"
+                        >{{ tag }}</Chip
+                      >&nbsp;
+                    </a>
                   </template>
                 </td>
               </tr>
