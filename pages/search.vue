@@ -33,7 +33,7 @@ useHead({
           <span class="p-inputgroup-addon"> Tags </span>
           <MultiSelect
             v-model="selectedTags"
-            :options="groupedCities"
+            :options="tagOptions"
             optionLabel="label"
             placeholder="Select Tags"
             display="chip"
@@ -72,6 +72,7 @@ useHead({
     <br />
     <div v-if="entries != null">
       <h5>{{ entries.length }} Results</h5>
+
       <div v-if="entries.length == 0">
         Welp, it looks like there are no results matching your query
       </div>
@@ -84,18 +85,26 @@ import List from "../components/list";
 
 export default {
   methods: {
+    extractSelectableTags(value) {
+      let tagOptions = this.tagOptions
+      for (const group of tagOptions) {
+        const match = group.items.find(item => item.value === value);
+        if (match) return match;          // { label: "...", value: "..." }
+      }
+      return null;                        // not found
+    },
     resetsearch: function () {
       this.selectedPlatform = null;
       this.textQuery = null;
       this.selectedType = { name: "All", code: "all" };
-      this.selectedTags = null;
+      this.selectedTags = [];
     },
     handlesearch: function () {
       let config = useRuntimeConfig().public;
       let baseurl = config.BASE_API_URL + "/api/search?";
       let params = {};
       let tags = [];
-      if (this.selectedTags) {
+      if (this.selectedTags.length > 0) {
         this.selectedTags.forEach((tagobj) => {
           tags.push(tagobj["value"]);
         });
@@ -154,6 +163,21 @@ export default {
           };
         }
       }
+      if (this.$route.query.tags) {
+        const { tags } = this.$route.query
+        // Normalise to an array, since when only one tag is passed it's a string
+        const tagList = Array.isArray(tags)
+            ? tags
+            : tags ? [tags]
+            : []
+        // Iterate (if any)
+        tagList.forEach(tag => {
+          let selectedTag = this.extractSelectableTags(tag)
+          if (selectedTag) {
+            this.selectedTags.push(selectedTag);
+          }
+        })
+      }
     },
   },
   mounted: function () {
@@ -179,8 +203,8 @@ export default {
         { name: "Music", code: "music" },
         { name: "Tool", code: "tool" },
       ],
-      selectedTags: null,
-      groupedCities: [
+      selectedTags: [],
+      tagOptions: [
         {
           label: "Gameplay",
           code: "gameplay",
