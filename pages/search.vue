@@ -12,6 +12,7 @@ useHead({
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Platform </span>
           <SelectButton
+            @change="handlesearch"
             v-model="selectedPlatform"
             :options="platforms"
             optionLabel="name"
@@ -22,6 +23,7 @@ useHead({
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Type </span>
           <Dropdown
+            @change="handlesearch"
             v-model="selectedType"
             :options="types"
             optionLabel="name"
@@ -32,6 +34,7 @@ useHead({
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Tags </span>
           <MultiSelect
+            @change="handlesearch"
             v-model="selectedTags"
             :options="tagOptions"
             optionLabel="label"
@@ -46,6 +49,7 @@ useHead({
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Title </span>
           <InputText
+            @input="handlesearch"
             @keyup.enter="handlesearch()"
             v-model="textQuery"
             placeholder="Text query"
@@ -74,7 +78,8 @@ useHead({
       <h5>{{ entries.length }} Results</h5>
 
       <div v-if="entries.length == 0">
-        Welp, it looks like there are no results matching your query
+        Welp, it looks like there are no results matching your query.
+        <a href="#" @click="resetsearch">Reset?</a>
       </div>
       <List :entries="entries" />
     </div>
@@ -98,6 +103,7 @@ export default {
       this.textQuery = null;
       this.selectedType = { name: "All", code: "all" };
       this.selectedTags = [];
+      this.handlesearch();
     },
     handlesearch: function () {
       let config = useRuntimeConfig().public;
