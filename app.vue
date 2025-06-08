@@ -71,7 +71,7 @@ h2,
 }
 @media (max-width: 576px) {
   .layout-main-container {
-    padding: 6rem 0.5rem 2rem 0.5rem;
+    padding: 6rem 0.25rem 2rem 0.25rem;
   }
 }
 </style>

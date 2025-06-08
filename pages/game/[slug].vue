@@ -135,8 +135,8 @@ useHead({
   <div class="grid">
     <div class="col-12 lg:col-0 xl:col-1"></div>
     <div class="col-12 lg:col-6 xl:col-5">
-      <div class="card mb-0">
-        <h3>Emulator</h3>
+      <div class="card mb-0 emulator-card">
+        <h3 class="additional-padding">Emulator</h3>
         <ClientOnly>
           <template v-if="game.platform == 'GBA'">
             <Medusa :gameData="game" :romEndpoint="rom_endpoint" />
@@ -567,5 +567,13 @@ export default {
 .icon {
   width: 18px;
   margin-left: 0.5rem;
+}
+
+.emulator-card {
+  padding: 0;
+}
+
+.additional-padding {
+  padding: 1.5rem 2rem 0.1rem 2rem;
 }
 </style>

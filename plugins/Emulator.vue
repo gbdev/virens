@@ -6,8 +6,12 @@
 <template>
   <div>
     <div v-show="loading == 0" @click="start()">
-      <i class="pi pi-play" style="font-size: 5rem"></i> <br />
-      <h4>Click here to start the emulation</h4>
+      <center>
+        <i class="pi pi-play" style="font-size: 5rem"></i> <br />
+        <h4>Click here to start the emulation</h4>
+        <br />
+        <br />
+      </center>
     </div>
 
     <div
@@ -16,13 +20,7 @@
       @click="start()"
       v-show="loading == 1"
     >
-      <Button
-        @click="toggleFullscreen"
-        label="Fullscreen"
-        icon="pi pi-desktop"
-        iconPos="right"
-        class="p-button-text"
-      /><br />
+      <br />
 
       <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
       <div id="controller">
@@ -39,11 +37,8 @@
       </div>
     </div>
 
-    <br />
-
-    <br />
-    <div class="grid p-fluid" v-show="loading == 1">
-      <div class="col-12 md:col-8 vertical-align-bottom">
+    <div class="grid p-fluid additional-padding" v-show="loading == 1">
+      <div class="col-4 md:col-6 sm:col-6 vertical-align-bottom">
         <div style="padding: 1rem">
           <Slider
             orientation="horizontal"
@@ -54,16 +49,17 @@
           />
         </div>
       </div>
-      <div class="col-12 md:col-1">
+      <div class="col-2 md:col-1 sm:col-1">
         <div class="p-inputgroup">
           <Button @click="togglemute" :icon="volume_btn_icon" iconPos="right" />
         </div>
       </div>
-      <div class="col-12 md:col-3">
+      <div class="col-5 md:col-3 sm:col-3">
         <div class="p-inputgroup">
           <div v-if="gameData.platform == 'GB'">
-            DMG Palette:
+            <label for="palette">Palette</label>
             <InputNumber
+              inputId="palette"
               v-model="pal"
               mode="decimal"
               :min="0"
@@ -75,11 +71,46 @@
               incrementButtonIcon="pi pi-plus"
               decrementButtonIcon="pi pi-minus"
               @click="setPal(pal)"
+              size="large"
             />
           </div>
         </div>
       </div>
+      <div class="col-12 md:col-2 sm:col-2 vertical-align-bottom">
+        <Button
+          @click="toggleFullscreen"
+          variant="outlined"
+          size="small"
+          style="width: 42px"
+        >
+          <svg
+            height="24px"
+            viewBox="0 0 21 21"
+            width="100%"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g
+              fill="none"
+              fill-rule="evenodd"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              transform="translate(2 2)"
+            >
+              <path d="m16.5 5.5v-4.978l-5.5.014" />
+              <path d="m16.5.522-6 5.907" />
+              <path d="m11 16.521 5.5.002-.013-5.5" />
+              <path d="m16.5 16.429-6-5.907" />
+              <path d="m.5 5.5v-5h5.5" />
+              <path d="m6.5 6.429-6-5.907" />
+              <path d="m6 16.516-5.5.007v-5.023" />
+              <path d="m6.5 10.5-6 6" />
+            </g>
+          </svg>
+        </Button>
+      </div>
     </div>
+    <br />
   </div>
 </template>
 
@@ -1418,6 +1449,11 @@ class Rewind {
 </script>
 
 <style scoped>
+.additional-padding {
+  padding: 1.5rem 1em 0.1rem 1rem;
+  display: flex;
+  align-items: flex-end;
+}
 .gamecanvas {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
