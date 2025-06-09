@@ -3,7 +3,7 @@ const route = useRoute();
 const a = route.params;
 const config = useRuntimeConfig().public;
 
-let url = config.BASE_API_URL + "/api/all?results=2000";
+let url = config.BASE_API_URL + "/api/search?results=2000";
 
 var pagetitle = "HH - Music";
 

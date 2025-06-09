@@ -1,7 +1,7 @@
 <script setup>
 const config = useRuntimeConfig().public;
 
-const { data } = await useFetch(config.BASE_API_URL + "/api/all?results=2000");
+const { data } = await useFetch(config.BASE_API_URL + "/api/search?results=2000");
 
 const entries = data.value["entries"];
 const total_entries = data.value["results"];

@@ -24,7 +24,7 @@ export default defineNuxtModule({
       await axios
         /* this should use "useRuntimeConfig" but it's not available here and
         I couldn't figure out how to import it */
-        .get(process.env.BASE_API_URL + "/api/all?results=2000")
+        .get(process.env.BASE_API_URL + "/api/search?results=2000")
         .then(function (response) {
           let entries = response.data.entries;
           entries.forEach((element) => {
