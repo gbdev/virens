@@ -3,7 +3,7 @@ name: CD
 on:
   workflow_dispatch:
   push:
-    branches: [master]
+    branches: [ master ]
   schedule:
     - cron: "0 5 * * *"
 
@@ -37,32 +37,15 @@ jobs:
           if-no-files-found: error
 
   deploy:
+    name: Deploy to GitHub pages
+    # Do not run this unless *pushing* to `master`.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Checkout virens/gh-pages
-        uses: actions/checkout@v2
-        with:
-          path: virens
-          ref: gh-pages
-
-      - name: Delete all current files
-        run: |
-          rm -vrf virens/*
-
-      - name: Unpack build
-        uses: actions/download-artifact@v4
-        with:
-          name: Build output
-          path: virens/
-
-      - name: Deploy to hh2.gbdev.io
-        working-directory: virens/
-        run: |
-          git config --local user.name "GitHub Action"
-          git config --global user.email "community@gbdev.io"
-          git remote -v
-          git branch -v
-          git add -A
-          git commit -am 'Update build'
-          git push -v
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
