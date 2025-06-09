@@ -3,7 +3,7 @@ name: CD
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [master]
   schedule:
     - cron: "0 5 * * *"
 
@@ -36,11 +36,9 @@ jobs:
         working-directory: virens/
 
       - name: Store final build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: Build output
           path: virens/.output/public
-          if-no-files-found: error
 
   deploy:
     name: Deploy to GitHub pages
