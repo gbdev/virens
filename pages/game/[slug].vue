@@ -17,7 +17,7 @@ data.value.screenshots.forEach((url) => {
       config.BASE_API_URL +
       "/static/" +
       game.basepath +
-      "/" +
+      "/entries/" +
       game.slug +
       "/" +
       url,
@@ -25,7 +25,7 @@ data.value.screenshots.forEach((url) => {
       config.BASE_API_URL +
       "/static/" +
       game.basepath +
-      "/" +
+      "/entries/" +
       game.slug +
       "/" +
       url,
@@ -90,7 +90,7 @@ game.files.forEach((file) => {
       config.BASE_API_URL +
       "/static/" +
       game.basepath +
-      "/" +
+      "/entries/" +
       game.slug +
       "/" +
       file.filename;
