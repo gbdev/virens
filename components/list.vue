@@ -17,7 +17,7 @@ const config = useRuntimeConfig().public;
                     ? config.BASE_API_URL +
                       '/static/' +
                       slotProps.data.basepath +
-                      '/' +
+                      '/entries/' +
                       slotProps.data.slug +
                       '/' +
                       slotProps.data.screenshots[0]
