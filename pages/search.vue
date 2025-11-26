@@ -233,6 +233,7 @@ export default {
             { label: "GBAX2003", value: "event:gbax2003" },
             { label: "2004Mbit", value: "2004Mbit" },
             { label: "GB Compo 23", value: "event:gbcompo23" },
+            { label: "GB Compo 25", value: "event:gbcompo25" },
           ],
         },
       ],
