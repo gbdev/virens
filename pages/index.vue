@@ -140,7 +140,7 @@ export default {
       });
 
     let showcased_games = [
-      "dangan",
+      "snorpung_dangan-gb2",
       "unearthed",
       "rhythm-land",
       "gbamicrojam23",
@@ -148,7 +148,7 @@ export default {
       "dango-dash",
       "varooom3d",
       "skyland",
-      "inheritors-of-the-oubliette",
+      "benjelter_ormblok",
       "inky-and-the-alien-aquarium-demo",
       "sym-merged",
       "hero-core-gba-port",
@@ -157,7 +157,7 @@ export default {
       "patmorita__hermano-game-boy",
       "apotris",
       "sips",
-      "porklike-gb",
+      "videogamestorytime_fortune-and-glory",
     ];
 
     showcased_games.forEach((gameslug) => {
