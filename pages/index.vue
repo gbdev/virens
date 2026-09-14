@@ -106,51 +106,57 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
-      <div>
-        <div>
-          <div>
-            <div class="card mb-0">
-              <div class="home-cards">
-                <div>
-                  <h3>Games Showcase</h3>
-                  <List :entries="entries" :paginator="false" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h2 style="text-align: center">Showcase</h2>
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
-      <div>
-        <div>
-          <div>
-            <div class="card mb-0">
-              <div class="home-cards">
-                <div>
-                  <h3>Demoscene Showcase</h3>
-                  <List :entries="demoscene_entries" :paginator="false" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+        "
+      >
+        <h3>Games</h3>
+        <a href="/search?typetag=game" style="font-size: 0.9rem"
+          >Browse all</a
+        >
+      </div>
+      <div class="home-cards">
+        <List :entries="entries" :paginator="false" />
       </div>
     </div>
-    <div class="col-12 lg:col-12 xl:col-12">
-      <div>
-        <div>
-          <div>
-            <div class="card mb-0">
-              <div class="home-cards">
-                <div>
-                  <h3>Music Cartridges</h3>
-                  <List :entries="music_entries" :paginator="false" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="col-12 lg:col-12 xl:col-12" style="margin-top: 2rem">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+        "
+      >
+        <h3>Demoscene</h3>
+        <a href="/search?typetag=demo" style="font-size: 0.9rem"
+          >Browse all</a
+        >
+      </div>
+      <div class="home-cards">
+        <List :entries="demoscene_entries" :paginator="false" />
+      </div>
+    </div>
+    <div class="col-12 lg:col-12 xl:col-12" style="margin-top: 2rem">
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+        "
+      >
+        <h3>Music Cartridges</h3>
+        <a href="/search?typetag=music" style="font-size: 0.9rem"
+          >Browse all</a
+        >
+      </div>
+      <div class="home-cards">
+        <List :entries="music_entries" :paginator="false" />
       </div>
     </div>
   </div>
