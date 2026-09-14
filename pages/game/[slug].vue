@@ -64,11 +64,19 @@ if (game.typetag) {
   type = game;
 }
 
+const platformName =
+  {
+    GB: "Game Boy",
+    GBC: "Game Boy Color",
+    GBA: "Game Boy Advance",
+    NES: "NES",
+  }[game.platform] || "Game Boy";
+
 let gamedescription = "";
 if (type == "music") {
-  gamedescription = `A Game Boy music cartridge by ${developer}. Listen online for free.`;
+  gamedescription = `A ${platformName} music cartridge by ${developer}. Listen online for free.`;
 } else {
-  gamedescription = `A Game Boy homebrew ${type} by ${developer}. Play online for free.`;
+  gamedescription = `A ${platformName} homebrew ${type} by ${developer}. Play online for free.`;
 }
 
 let screenshot_url = "";
