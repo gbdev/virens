@@ -84,8 +84,10 @@ let screenshot_url = "";
 if (game.screenshots[0]) {
   screenshot_url =
     config.BASE_API_URL +
+    "/static/" +
+    game.basepath +
     "/entries/" +
-    route.params.slug +
+    game.slug +
     "/" +
     game.screenshots[0];
 }
