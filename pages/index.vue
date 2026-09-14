@@ -119,9 +119,7 @@ let stats_data = useFetch(stats_url).data;
         "
       >
         <h3>Games</h3>
-        <a href="/search?typetag=game" style="font-size: 0.9rem"
-          >Browse all</a
-        >
+        <a href="/search?typetag=game" style="font-size: 0.9rem">Browse all</a>
       </div>
       <div class="home-cards">
         <List :entries="entries" :paginator="false" />
@@ -136,9 +134,7 @@ let stats_data = useFetch(stats_url).data;
         "
       >
         <h3>Demoscene</h3>
-        <a href="/search?typetag=demo" style="font-size: 0.9rem"
-          >Browse all</a
-        >
+        <a href="/search?typetag=demo" style="font-size: 0.9rem">Browse all</a>
       </div>
       <div class="home-cards">
         <List :entries="demoscene_entries" :paginator="false" />
@@ -153,9 +149,7 @@ let stats_data = useFetch(stats_url).data;
         "
       >
         <h3>Music Cartridges</h3>
-        <a href="/search?typetag=music" style="font-size: 0.9rem"
-          >Browse all</a
-        >
+        <a href="/search?typetag=music" style="font-size: 0.9rem">Browse all</a>
       </div>
       <div class="home-cards">
         <List :entries="music_entries" :paginator="false" />
@@ -216,7 +210,7 @@ export default {
       "knark",
       "is-that-a-demo-in-your-pocket",
       "oh",
-      "space-waste"
+      "space-waste",
     ];
 
     showcased_demos.forEach((gameslug) => {

@@ -8,7 +8,7 @@ useHead({
   <div>
     <h5>Filters</h5>
     <div class="grid p-fluid">
-      <div class="col-12 md:col-4 xl:col-2">
+      <div class="col-12 md:col-4 xl:col-3">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Platform </span>
           <SelectButton
@@ -45,7 +45,7 @@ useHead({
           />
         </div>
       </div>
-      <div class="col-12 md:col-3">
+      <div class="col-12 md:col-3 xl:col-2">
         <div class="p-inputgroup">
           <span class="p-inputgroup-addon"> Title </span>
           <InputText
@@ -243,3 +243,73 @@ export default {
   components: { List },
 };
 </script>
+<style scoped>
+/* p-fluid forces the SelectButton's buttons to flex:1, which otherwise
+   squeezes the addon label down to its min-width and truncates it. */
+.p-inputgroup-addon {
+  flex-shrink: 0;
+}
+
+/* Platform buttons share the same border color as their background, so
+   adjacent buttons visually merge. A painted divider (box-shadow, not a
+   layout border) reliably shows a seam regardless of border-collapsing. */
+:deep(.p-selectbutton .p-button:not(:last-child)) {
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.3);
+}
+/* ...but not right next to the selected button, so its color isn't
+   interrupted by the divider on either side. */
+:deep(.p-selectbutton .p-button:has(+ .p-highlight)) {
+  box-shadow: none;
+}
+
+/* Color each platform button when selected, matching the platform tag
+   colors used on the game page. Order follows the "platforms" options. */
+:deep(.p-selectbutton .p-button:nth-child(1).p-highlight) {
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(101deg, #9bbc0f, #447144);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #3f4b5b inset;
+}
+:deep(.p-selectbutton .p-button:nth-child(2).p-highlight) {
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(101deg, #6d6b9e, #9a2257);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #3f4b5b inset;
+}
+:deep(.p-selectbutton .p-button:nth-child(3).p-highlight) {
+  border: solid 2px transparent;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(101deg, #5e48ff, #1e00ff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow: 2px 1000px 1px #3f4b5b inset;
+}
+:deep(.p-selectbutton .p-button:nth-child(4).p-highlight) {
+  border: solid 2px red;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0)
+    ),
+    linear-gradient(90deg, black, #1c1c1c);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  box-shadow:
+    0 0 4px 0 rgba(0, 0, 0, 0.5),
+    inset 0 0 2px 0 rgba(255, 255, 255, 0.3);
+  color: white;
+  text-shadow: 1px 1px 0 #000000;
+}
+</style>
