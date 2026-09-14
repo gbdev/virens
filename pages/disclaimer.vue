@@ -6,7 +6,7 @@ useHead({
 
 <template>
   <div class="text-lg">
-    <h1>Disclaimer</h1>
+    <h1 style="text-align: center">Disclaimer</h1>
 
     All the ROMs, playable games, homebrew and tools at Homebrew Hub are free
     software, published under different licenses. Homebrew Hub does NOT, to the
