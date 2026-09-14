@@ -259,6 +259,14 @@ useHead({
                 <td class="value-title">License</td>
                 <td>{{ game.license }}</td>
               </tr>
+              <tr v-if="game.gameLicense">
+                <td class="value-title">Game License</td>
+                <td>{{ game.gameLicense }}</td>
+              </tr>
+              <tr v-if="game.assetsLicense">
+                <td class="value-title">Assets License</td>
+                <td>{{ game.assetsLicense }}</td>
+              </tr>
               <tr v-if="dateString != 'Invalid Date' && game.date">
                 <td class="value-title">Release Date</td>
                 <td>{{ dateString }}</td>
