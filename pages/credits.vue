@@ -5,7 +5,7 @@ useHead({
 </script>
 <template>
   <div class="text-lg">
-    <h1>Credits</h1>
+    <h1 style="text-align: center">Credits</h1>
 
     Homebrew Hub is the result of a huge commitment and sustained effort started
     in 2015 by the
