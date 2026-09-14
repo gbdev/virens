@@ -61,6 +61,8 @@ h2,
 }
 .layout-main-container {
   padding: 7rem 2rem 2rem 2rem;
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .card {
