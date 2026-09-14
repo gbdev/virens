@@ -33,9 +33,11 @@ let stats_data = useFetch(stats_url).data;
               >
               software developed for Game Boy (Color), Game Boy Advance and NES.
               <br />
+              <br />
               We're on a mission to build an open digital repository providing
               accurate metadata and emulating capabilities directly in the
               browser.
+              <br />
               <br />
               <small>
                 <a href="/stats">{{ stats_data.total }}</a>
@@ -50,11 +52,11 @@ let stats_data = useFetch(stats_url).data;
     <div class="col-12 lg:col-3 xl:col-3"></div>
 
     <div class="col-12 lg:col-6 xl:col-4">
-      <div class="card mb-0">
-        <div class="flex justify-content-between mb-6">
+      <div class="card mb-0" style="height: 100%">
+        <div class="flex justify-content-between" style="margin-bottom: 1rem">
           <div>
             <h3>Emulation</h3>
-            <span class="block font-regular text-lg mb-3">
+            <span class="block font-regular text-lg">
               We use WebAssembly builds of
               <a href="https://mgba.io/" target="_blank">mGBA</a>,
               <a href="https://github.com/binji/binjnes" target="_blank"
@@ -72,11 +74,11 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-4">
-      <div class="card mb-0">
-        <div class="flex justify-content-between mb-6">
+      <div class="card mb-0" style="height: 100%">
+        <div class="flex justify-content-between" style="margin-bottom: 1rem">
           <div>
             <h3>Digital Preservation</h3>
-            <span class="block font-regular text-lg mb-3">
+            <span class="block font-regular text-lg">
               We are committed to build a digital memory of the homebrew
               development scene. We salvaged some of the first ever unofficial
               software from the 90s and we keep working to harvest more.
@@ -86,11 +88,11 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-4">
-      <div class="card mb-0">
-        <div class="flex justify-content-between mb-6">
+      <div class="card mb-0" style="height: 100%">
+        <div class="flex justify-content-between" style="margin-bottom: 1rem">
           <div>
             <h3>Open and accessible</h3>
-            <span class="block font-regular text-lg mb-3">
+            <span class="block font-regular text-lg">
               The database is maintained on public git repositories (<a
                 href="https://github.com/gbdev/database"
                 >Game Boy</a
@@ -106,7 +108,7 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
-      <h2 style="text-align: center">Showcase</h2>
+      <h2 style="text-align: center; margin-top: 2rem">Showcase</h2>
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
       <div
