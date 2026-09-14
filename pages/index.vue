@@ -137,6 +137,22 @@ let stats_data = useFetch(stats_url).data;
         </div>
       </div>
     </div>
+    <div class="col-12 lg:col-12 xl:col-12">
+      <div>
+        <div>
+          <div>
+            <div class="card mb-0">
+              <div class="home-cards">
+                <div>
+                  <h3>Music Cartridges</h3>
+                  <List :entries="music_entries" :paginator="false" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -146,6 +162,7 @@ export default {
       stats: null,
       entries: [],
       demoscene_entries: [],
+      music_entries: [],
     };
   },
   mounted: function () {
@@ -199,6 +216,23 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.demoscene_entries.push(data);
+        });
+    });
+
+    let showcased_music = [
+      "zilogized",
+      "back-to-space",
+      "freebie-gbs-2019",
+      "xmas2016",
+      "kabcorp__8bit-sunset",
+      "playinstinct_neon-nova",
+    ];
+
+    showcased_music.forEach((gameslug) => {
+      fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
+        .then((response) => response.json())
+        .then((data) => {
+          this.music_entries.push(data);
         });
     });
   },
