@@ -84,18 +84,24 @@ if (game.screenshots[0]) {
 
 let rom_endpoint = "";
 
-game.files.forEach((file) => {
-  if (file.playable) {
-    rom_endpoint =
-      config.BASE_API_URL +
-      "/static/" +
-      game.basepath +
-      "/entries/" +
-      game.slug +
-      "/" +
-      file.filename;
-  }
-});
+// Prefer the file marked "default"; fall back to the first playable
+// file if none is marked default. Also handle manifests omitting "playable"
+// entirely, so fall back to considering all files in that case.
+const playableFiles = game.files.filter((file) => file.playable);
+const candidateFiles = playableFiles.length ? playableFiles : game.files;
+const romFile =
+  candidateFiles.find((file) => file.default) || candidateFiles[0];
+
+if (romFile) {
+  rom_endpoint =
+    config.BASE_API_URL +
+    "/static/" +
+    game.basepath +
+    "/entries/" +
+    game.slug +
+    "/" +
+    romFile.filename;
+}
 
 useHead({
   title: gametitle + " - Homebrew Hub",
