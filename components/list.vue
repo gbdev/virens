@@ -31,11 +31,7 @@ const config = useRuntimeConfig().public;
               </div></router-link
             >
             <div class="product-description">
-              {{
-                Array.isArray(slotProps.data.developer)
-                  ? slotProps.data.developer.join(", ")
-                  : slotProps.data.developer
-              }}
+              {{ developerText(slotProps.data.developer) }}
             </div>
           </div>
           <div class="product-grid-item-bottom"></div>
@@ -77,6 +73,13 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    developerText(developer) {
+      return normalizeDevelopers(developer)
+        .map((dev) => dev.name)
+        .join(", ");
+    },
   },
 };
 </script>

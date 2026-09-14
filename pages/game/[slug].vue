@@ -50,14 +50,13 @@ const dateString = dateObject.toLocaleString("en-US", {
 
 /* Head metadata */
 
-let developer = "";
-
 const gametitle = data.value.title;
-if (Array.isArray(game.developer)) {
-  developer = game.developer.join(", ");
-} else if (game.developer) {
-  developer = game.developer;
-}
+
+const developerList = normalizeDevelopers(game.developer);
+
+const developer = developerList
+  .map((dev) => dev.name + (dev.role ? ` (${dev.role})` : ""))
+  .join(", ");
 
 let type = "";
 if (game.typetag) {
@@ -253,9 +252,23 @@ useHead({
                   </template>
                 </td>
               </tr>
-              <tr v-if="developer">
+              <tr v-if="developerList.length">
                 <td class="value-title">Developer</td>
-                <td>{{ developer }}</td>
+                <td>
+                  <template
+                    v-for="(dev, index) in developerList"
+                    :key="dev.name"
+                  >
+                    <a v-if="dev.link" :href="dev.link" target="_blank">{{
+                      dev.name
+                    }}</a>
+                    <template v-else>{{ dev.name }}</template>
+                    <template v-if="dev.role"> ({{ dev.role }})</template>
+                    <template v-if="index < developerList.length - 1"
+                      >,
+                    </template>
+                  </template>
+                </td>
               </tr>
               <tr v-if="game.license">
                 <td class="value-title">License</td>
