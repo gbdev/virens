@@ -14,10 +14,12 @@ useHead({
           <h3>Entries</h3>
           <div class="stats-total">{{ stats.total }}</div>
           <table class="stats-table">
-            <tr>
-              <td class="stats-label">Open Source</td>
-              <td class="stats-value">{{ stats.tags.oss }}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td class="stats-label">Open Source</td>
+                <td class="stats-value">{{ stats.tags.oss }}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -27,22 +29,24 @@ useHead({
         <div>
           <h3>Platform</h3>
           <table v-if="stats" class="stats-table">
-            <tr>
-              <td class="stats-label">GB</td>
-              <td class="stats-value">{{ stats.platforms.gb }}</td>
-            </tr>
-            <tr>
-              <td class="stats-label">GBC</td>
-              <td class="stats-value">{{ stats.platforms.gbc }}</td>
-            </tr>
-            <tr>
-              <td class="stats-label">GBA</td>
-              <td class="stats-value">{{ stats.platforms.gba }}</td>
-            </tr>
-            <tr>
-              <td class="stats-label">NES</td>
-              <td class="stats-value">{{ stats.platforms.nes }}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td class="stats-label">GB</td>
+                <td class="stats-value">{{ stats.platforms.gb }}</td>
+              </tr>
+              <tr>
+                <td class="stats-label">GBC</td>
+                <td class="stats-value">{{ stats.platforms.gbc }}</td>
+              </tr>
+              <tr>
+                <td class="stats-label">GBA</td>
+                <td class="stats-value">{{ stats.platforms.gba }}</td>
+              </tr>
+              <tr>
+                <td class="stats-label">NES</td>
+                <td class="stats-value">{{ stats.platforms.nes }}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -52,22 +56,24 @@ useHead({
         <div>
           <h3>Type</h3>
           <table v-if="stats" class="stats-table">
-            <tr>
-              <td class="stats-label">Game</td>
-              <td class="stats-value">{{ stats.typetag.game }}</td>
-            </tr>
-            <tr>
-              <td class="stats-label">Demo</td>
-              <td class="stats-value">{{ stats.typetag.demo }}</td>
-            </tr>
-            <tr>
-              <td class="stats-label">Music</td>
-              <td class="stats-value">{{ stats.typetag.music }}</td>
-            </tr>
-            <tr>
-              <td class="stats-label">Tools</td>
-              <td class="stats-value">{{ stats.typetag.tools }}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td class="stats-label">Game</td>
+                <td class="stats-value">{{ stats.typetag.game }}</td>
+              </tr>
+              <tr>
+                <td class="stats-label">Demo</td>
+                <td class="stats-value">{{ stats.typetag.demo }}</td>
+              </tr>
+              <tr>
+                <td class="stats-label">Music</td>
+                <td class="stats-value">{{ stats.typetag.music }}</td>
+              </tr>
+              <tr>
+                <td class="stats-label">Tools</td>
+                <td class="stats-value">{{ stats.typetag.tools }}</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
