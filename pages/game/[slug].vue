@@ -53,7 +53,9 @@ const dateString = dateObject.toLocaleString("en-US", {
 let developer = "";
 
 const gametitle = data.value.title;
-if (game.developer) {
+if (Array.isArray(game.developer)) {
+  developer = game.developer.join(", ");
+} else if (game.developer) {
   developer = game.developer;
 }
 
@@ -251,9 +253,9 @@ useHead({
                   </template>
                 </td>
               </tr>
-              <tr v-if="game.developer">
+              <tr v-if="developer">
                 <td class="value-title">Developer</td>
-                <td>{{ game.developer }}</td>
+                <td>{{ developer }}</td>
               </tr>
               <tr v-if="game.license">
                 <td class="value-title">License</td>

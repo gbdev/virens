@@ -31,7 +31,11 @@ const config = useRuntimeConfig().public;
               </div></router-link
             >
             <div class="product-description">
-              {{ slotProps.data.developer }}
+              {{
+                Array.isArray(slotProps.data.developer)
+                  ? slotProps.data.developer.join(", ")
+                  : slotProps.data.developer
+              }}
             </div>
           </div>
           <div class="product-grid-item-bottom"></div>
