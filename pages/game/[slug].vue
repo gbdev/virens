@@ -58,6 +58,14 @@ const developer = developerList
   .map((dev) => dev.name + (dev.role ? ` (${dev.role})` : ""))
   .join(", ");
 
+const downloadRomTooltip =
+  {
+    GB: "Use an emulator like Emulicious or SameBoy to play downloaded ROMs",
+    GBC: "Use an emulator like Emulicious or SameBoy to play downloaded ROMs",
+    GBA: "Use an emulator like mGBA to play downloaded ROMs",
+    NES: "Use an emulator like Mesen to play downloaded ROMs",
+  }[game.platform] || "Use an emulator to play downloaded ROMs";
+
 let type = "";
 if (game.typetag) {
   type = game.typetag;
@@ -331,9 +339,7 @@ useHead({
 
             <a :href="rom_endpoint"
               ><Button
-                v-tooltip="
-                  'Use an emulator like BGB or Gambatte to play downloaded ROMs'
-                "
+                v-tooltip="downloadRomTooltip"
                 label="Download ROM"
                 icon="pi pi-download"
                 iconPos="right"
