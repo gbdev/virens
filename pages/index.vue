@@ -110,72 +110,21 @@ let stats_data = useFetch(stats_url).data;
     <div class="col-12 lg:col-12 xl:col-12">
       <h1 style="text-align: center; margin-top: 2rem">Showcase</h1>
     </div>
-    <div class="col-12 lg:col-12 xl:col-12">
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        "
-      >
-        <h3>Games</h3>
-        <a href="/search?typetag=game" style="font-size: 0.9rem">Browse all</a>
-      </div>
-      <div class="home-cards">
-        <List :entries="entries" :paginator="false" />
-      </div>
-    </div>
-    <div class="col-12 lg:col-12 xl:col-12" style="margin-top: 2rem">
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        "
-      >
-        <h3>Demoscene</h3>
-        <a href="/search?typetag=demo" style="font-size: 0.9rem">Browse all</a>
-      </div>
-      <div class="home-cards">
-        <List :entries="demoscene_entries" :paginator="false" />
-      </div>
-    </div>
-    <div class="col-12 lg:col-12 xl:col-12" style="margin-top: 2rem">
-      <div
-        style="
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        "
-      >
-        <h3>Music Cartridges</h3>
-        <a href="/search?typetag=music" style="font-size: 0.9rem">Browse all</a>
-      </div>
-      <div class="home-cards">
-        <List :entries="music_entries" :paginator="false" />
-      </div>
-    </div>
+    <Showcase
+      v-for="(showcase, key, index) in showcases"
+      :key="key"
+      :title="showcase.title"
+      :link="'/search?typetag=' + key"
+      :entries="entries[key]"
+      :spaced="index > 0"
+    />
   </div>
 </template>
 <script>
-export default {
-  data() {
-    return {
-      stats: null,
-      entries: [],
-      demoscene_entries: [],
-      music_entries: [],
-    };
-  },
-  mounted: function () {
-    let config = useRuntimeConfig().public;
-    fetch(config.BASE_API_URL + "/api/stats")
-      .then((response) => response.json())
-      .then((data) => {
-        this.stats = data;
-      });
-
-    let showcased_games = [
+const SHOWCASES = {
+  game: {
+    title: "Games",
+    slugs: [
       "snorpung_dangan-gb2",
       "unearthed",
       "rhythm-land",
@@ -194,48 +143,67 @@ export default {
       "apotris",
       "sips",
       "videogamestorytime_fortune-and-glory",
-    ];
-
-    showcased_games.forEach((gameslug) => {
-      fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
-        .then((response) => response.json())
-        .then((data) => {
-          this.entries.push(data);
-        });
-    });
-
-    let showcased_demos = [
+    ],
+  },
+  demo: {
+    title: "Demoscene",
+    slugs: [
       "back-to-color",
       "gejmbaj",
       "knark",
       "is-that-a-demo-in-your-pocket",
       "oh",
       "space-waste",
-    ];
-
-    showcased_demos.forEach((gameslug) => {
-      fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
-        .then((response) => response.json())
-        .then((data) => {
-          this.demoscene_entries.push(data);
-        });
-    });
-
-    let showcased_music = [
+    ],
+  },
+  music: {
+    title: "Music Cartridges",
+    slugs: [
       "zilogized",
       "back-to-space",
       "freebie-gbs-2019",
       "xmas2016",
       "kabcorp__8bit-sunset",
       "playinstinct_neon-nova",
-    ];
+    ],
+  },
+  tool: {
+    title: "Tools",
+    slugs: [
+      "lsdj",
+      "carillon-editor",
+      "oshf_tomato-do",
+      "droneboy",
+      "pearacidic__monster-orc-arina-a-game-boy-tool",
+      "stopwatch-version-1",
+    ],
+  },
+};
 
-    showcased_music.forEach((gameslug) => {
-      fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
-        .then((response) => response.json())
-        .then((data) => {
-          this.music_entries.push(data);
-        });
+export default {
+  data() {
+    return {
+      stats: null,
+      showcases: SHOWCASES,
+      entries: Object.fromEntries(Object.keys(SHOWCASES).map((k) => [k, []])),
+    };
+  },
+  mounted: function () {
+    let config = useRuntimeConfig().public;
+    fetch(config.BASE_API_URL + "/api/stats")
+      .then((response) => response.json())
+      .then((data) => {
+        this.stats = data;
+      });
+
+    Object.entries(this.showcases).forEach(([key, showcase]) => {
+      showcase.slugs.forEach((gameslug) => {
+        fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
+          .then((response) => response.json())
+          .then((data) => {
+            this.entries[key].push(data);
+          });
+      });
     });
   },
 };
