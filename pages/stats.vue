@@ -5,37 +5,70 @@ useHead({
 </script>
 <template>
   <div class="grid">
+    <div class="col-12">
+      <h1 style="text-align: center">Statistics</h1>
+    </div>
     <div class="col-12 md:col-6 lg:col-3 xl:col-3">
-      <div class="card mb-0">
+      <div class="card">
+        <div v-if="stats">
+          <h3>Entries</h3>
+          <div class="stats-total">{{ stats.total }}</div>
+          <table class="stats-table">
+            <tr>
+              <td class="stats-label">Open Source</td>
+              <td class="stats-value">{{ stats.tags.oss }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 md:col-6 lg:col-3 xl:col-3">
+      <div class="card">
         <div>
           <h3>Platform</h3>
-          <span class="block font-regular mb-3 main-text">
-            <Chart type="doughnut" :data="chartData" :options="chartOptions" />
-          </span>
+          <table v-if="stats" class="stats-table">
+            <tr>
+              <td class="stats-label">GB</td>
+              <td class="stats-value">{{ stats.platforms.gb }}</td>
+            </tr>
+            <tr>
+              <td class="stats-label">GBC</td>
+              <td class="stats-value">{{ stats.platforms.gbc }}</td>
+            </tr>
+            <tr>
+              <td class="stats-label">GBA</td>
+              <td class="stats-value">{{ stats.platforms.gba }}</td>
+            </tr>
+            <tr>
+              <td class="stats-label">NES</td>
+              <td class="stats-value">{{ stats.platforms.nes }}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
     <div class="col-12 md:col-6 lg:col-3 xl:col-3">
-      <div class="card mb-0">
+      <div class="card">
         <div>
           <h3>Type</h3>
-          <span class="block font-regular mb-3 main-text">
-            <Chart
-              type="doughnut"
-              :data="chartTypeData"
-              :options="chartOptions"
-            />
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 md:col-6 lg:col-3 xl:col-3">
-      <div class="card mb-0">
-        <div>
-          <h3>Tags</h3>
-          <span class="block font-regular mb-3 main-text">
-            <Chart type="bar" :data="chartTagsData" :options="chartOptions" />
-          </span>
+          <table v-if="stats" class="stats-table">
+            <tr>
+              <td class="stats-label">Game</td>
+              <td class="stats-value">{{ stats.typetag.game }}</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Demo</td>
+              <td class="stats-value">{{ stats.typetag.demo }}</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Music</td>
+              <td class="stats-value">{{ stats.typetag.music }}</td>
+            </tr>
+            <tr>
+              <td class="stats-label">Tools</td>
+              <td class="stats-value">{{ stats.typetag.tools }}</td>
+            </tr>
+          </table>
         </div>
       </div>
     </div>
@@ -47,10 +80,6 @@ export default {
     return {
       stats: null,
       entries: [],
-      chartData: null,
-      chartTypeData: null,
-      chartTagsData: null,
-      chartOptions: null,
     };
   },
   mounted: function () {
@@ -59,116 +88,34 @@ export default {
       .then((response) => response.json())
       .then((data) => {
         this.stats = data;
-        this.chartData = this.setChartData();
-        this.chartTypeData = this.setchartTypeData();
-        this.chartTagsData = this.setchartTagsData();
-        this.chartOptions = this.setChartOptions();
       });
-  },
-  methods: {
-    setChartOptions() {
-      return {
-        plugins: {
-          legend: {
-            labels: {
-              usePointStyle: true,
-            },
-          },
-        },
-      };
-    },
-    setChartData() {
-      const documentStyle = getComputedStyle(document.body);
-
-      return {
-        labels: ["GB", "GBC", "GBA", "NES"],
-        datasets: [
-          {
-            data: [
-              this.stats.platforms.gb,
-              this.stats.platforms.gbc,
-              this.stats.platforms.gba,
-              this.stats.platforms.nes,
-            ],
-            backgroundColor: [
-              documentStyle.getPropertyValue("--blue-500"),
-              documentStyle.getPropertyValue("--yellow-500"),
-              documentStyle.getPropertyValue("--green-500"),
-            ],
-            hoverBackgroundColor: [
-              documentStyle.getPropertyValue("--blue-400"),
-              documentStyle.getPropertyValue("--yellow-400"),
-              documentStyle.getPropertyValue("--green-400"),
-            ],
-          },
-        ],
-      };
-    },
-    setchartTypeData() {
-      const documentStyle = getComputedStyle(document.body);
-
-      return {
-        labels: ["Game", "Demo", "Music", "Tools"],
-        datasets: [
-          {
-            data: [
-              this.stats.typetag.game,
-              this.stats.typetag.demo,
-              this.stats.typetag.music,
-              this.stats.typetag.tools,
-            ],
-            backgroundColor: [
-              documentStyle.getPropertyValue("--blue-500"),
-              documentStyle.getPropertyValue("--yellow-500"),
-              documentStyle.getPropertyValue("--green-500"),
-              documentStyle.getPropertyValue("--red-500"),
-            ],
-            hoverBackgroundColor: [
-              documentStyle.getPropertyValue("--blue-400"),
-              documentStyle.getPropertyValue("--yellow-400"),
-              documentStyle.getPropertyValue("--green-400"),
-              documentStyle.getPropertyValue("--red-400"),
-            ],
-          },
-        ],
-      };
-    },
-    setchartTagsData() {
-      const documentStyle = getComputedStyle(document.body);
-
-      return {
-        labels: ["OSS", "RPG", "Puzzle", "Platform"],
-        datasets: [
-          {
-            data: [
-              this.stats.tags.oss,
-              this.stats.tags.rpg,
-              this.stats.tags.puzzle,
-              this.stats.tags.platform,
-            ],
-            backgroundColor: [
-              documentStyle.getPropertyValue("--blue-500"),
-              documentStyle.getPropertyValue("--yellow-500"),
-              documentStyle.getPropertyValue("--green-500"),
-              documentStyle.getPropertyValue("--red-500"),
-            ],
-            hoverBackgroundColor: [
-              documentStyle.getPropertyValue("--blue-400"),
-              documentStyle.getPropertyValue("--yellow-400"),
-              documentStyle.getPropertyValue("--green-400"),
-              documentStyle.getPropertyValue("--red-400"),
-            ],
-          },
-        ],
-      };
-    },
   },
 };
 </script>
 
-<style type="text/css">
+<style scoped>
 .card {
-  margin: 10px 10px 0px 10px;
+  margin: 10px 10px 20px 10px;
+  height: calc(100% - 20px);
+  padding-bottom: 0.75rem;
+}
+.stats-table {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+.stats-table td {
+  padding: 0.35rem 0;
+}
+.stats-table .stats-value {
+  text-align: right;
+  font-weight: 600;
+  font-family: monospace;
+}
+.stats-total {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-family: monospace;
 }
 .icon-widget {
   width: 105px;
