@@ -108,7 +108,7 @@ let stats_data = useFetch(stats_url).data;
       </div>
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
-      <h2 style="text-align: center; margin-top: 2rem">Showcase</h2>
+      <h1 style="text-align: center; margin-top: 2rem">Showcase</h1>
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
       <div
