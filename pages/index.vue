@@ -218,7 +218,7 @@ export default {
       fetch(config.BASE_API_URL + "/api/event/" + eventslug + ".json")
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
+          console.log(data);
           this.events.push(data);
         });
     });
