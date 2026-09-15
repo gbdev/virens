@@ -26,10 +26,10 @@ yarn dev
 
 By default, the base API is set to `https://hh3.gbdev.io`, you customise this by setting the `BASE_API_URL` environment variable to an instance of the [Homebrew Hub API](https://github.com/gbdev/homebrewhub) (be sure to have CORS [set up correctly](https://github.com/gbdev/homebrewhub/blob/main/hhub/settings.py) on that side).
 
-E.g., if you're running the backend server locally:
+If you're running the backend server locally, with the provided compose setup:
 
 ```
-BASE_API_URL=http://localhost:8000 yarn dev
+BASE_API_URL=http://localhost:8081 yarn dev
 ```
 
 ## Production
