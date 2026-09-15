@@ -110,6 +110,9 @@ let stats_data = useFetch(stats_url).data;
     <div class="col-12 lg:col-12 xl:col-12">
       <h1 style="text-align: center; margin-top: 2rem">Showcase</h1>
     </div>
+    <Showcase title="Events" :spaced="true">
+      <EventList :entries="events" :paginator="false" />
+    </Showcase>
     <Showcase
       v-for="(showcase, key, index) in showcases"
       :key="key"
@@ -180,12 +183,17 @@ const SHOWCASES = {
   },
 };
 
+// No bulk "list events" endpoint exists yet, so fetch each event
+// individually, same as the other showcases.
+const EVENT_SLUGS = ["gbajam21"];
+
 export default {
   data() {
     return {
       stats: null,
       showcases: SHOWCASES,
       entries: Object.fromEntries(Object.keys(SHOWCASES).map((k) => [k, []])),
+      events: [],
     };
   },
   mounted: function () {
@@ -204,6 +212,15 @@ export default {
             this.entries[key].push(data);
           });
       });
+    });
+
+    EVENT_SLUGS.forEach((eventslug) => {
+      fetch(config.BASE_API_URL + "/api/event/" + eventslug + ".json")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+          this.events.push(data);
+        });
     });
   },
 };
