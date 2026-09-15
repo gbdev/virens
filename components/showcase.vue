@@ -1,11 +1,15 @@
 <script setup>
 defineProps({
   title: String,
-  link: String,
+  link: { type: String, default: null },
   entries: Array,
   spaced: {
     type: Boolean,
     default: true,
+  },
+  paginator: {
+    type: Boolean,
+    default: false,
   },
 });
 </script>
@@ -22,10 +26,12 @@ defineProps({
       "
     >
       <h3>{{ title }}</h3>
-      <a :href="link" style="font-size: 0.9rem">Browse all</a>
+      <a v-if="link" :href="link" style="font-size: 0.9rem">Browse all</a>
     </div>
     <div class="home-cards">
-      <List :entries="entries" :paginator="false" />
+      <slot>
+        <List :entries="entries" :paginator="paginator" />
+      </slot>
     </div>
   </div>
 </template>
