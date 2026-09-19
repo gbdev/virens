@@ -40,8 +40,7 @@ const eventdescription =
   (periodString ? ` (${periodString})` : "") +
   ".";
 
-const eventTag =
-  event.slug === "gbajam21" ? "gbajam21" : `event:${event.slug}`;
+const eventTag = event.slug === "gbajam21" ? "gbajam21" : `event:${event.slug}`;
 const entriesUrl =
   config.BASE_API_URL +
   "/api/search?" +

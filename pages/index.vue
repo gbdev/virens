@@ -185,7 +185,7 @@ const SHOWCASES = {
 
 // No bulk "list events" endpoint exists yet, so fetch each event
 // individually, same as the other showcases.
-const EVENT_SLUGS = ["gbajam21"];
+const EVENT_SLUGS = ["gbajam21", "gbajam26"];
 
 export default {
   data() {
