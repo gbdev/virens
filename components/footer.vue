@@ -20,12 +20,6 @@
         - <a href="https://gbdev.io" target="_blank">gbdev community</a></span
       >
     </div>
-    <div class="break"></div>
-    <div>
-      <a href="https://digitalocean.com" target="_blank"
-        ><img class="do-badge" src="/imgs/DO_Powered_by_Badge_white.svg"
-      /></a>
-    </div>
   </div>
 </template>
 <script>
