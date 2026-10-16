@@ -63,13 +63,7 @@ useHead({
   <div class="grid">
     <div class="col-12 lg:col-0 xl:col-1"></div>
     <div class="col-12 lg:col-5 xl:col-5">
-      <div class="card mb-0" v-if="logoUrl">
-        <img
-          :src="logoUrl"
-          :alt="event.name"
-          style="width: 100%; image-rendering: pixelated"
-        />
-      </div>
+      <img v-if="logoUrl" :src="logoUrl" :alt="event.name" class="eventlogo" />
     </div>
     <div class="col-12 lg:col-5 xl:col-5">
       <div class="card mb-0" style="padding-bottom: 1.5rem">
@@ -103,6 +97,12 @@ useHead({
 </template>
 
 <style scoped>
+.eventlogo {
+  width: 100%;
+  image-rendering: pixelated;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
 .value-title {
   font-weight: 600;
 }
