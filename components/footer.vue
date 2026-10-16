@@ -20,6 +20,15 @@
         - <a href="https://gbdev.io" target="_blank">gbdev community</a></span
       >
     </div>
+    <div class="break"></div>
+    Powered by
+    <a href="https://osuosl.org" target="_blank">
+      <img
+        class="osl-badge"
+        src="https://osuosl.org/images/osllogo-white_0.png"
+        alt="Oregon State University Open Source Lab"
+      />
+    </a>
   </div>
 </template>
 <script>
@@ -28,9 +37,9 @@ export default {
 };
 </script>
 <style>
-.do-badge {
-  width: 175px;
-  margin-top: 10px;
+.osl-badge {
+  width: 150px;
+  margin-top: 0px;
 }
 .break {
   flex-basis: 100%;
