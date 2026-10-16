@@ -110,23 +110,36 @@ let stats_data = useFetch(stats_url).data;
     <div class="col-12 lg:col-12 xl:col-12">
       <h1 style="text-align: center; margin-top: 2rem">Showcase</h1>
     </div>
-    <Showcase title="Events" :spaced="true">
-      <EventList :entries="events" :paginator="false" />
-    </Showcase>
     <Showcase
       v-for="(showcase, key, index) in showcases"
       :key="key"
       :title="showcase.title"
-      :link="'/search?typetag=' + key"
-      :entries="entries[key]"
+      :link="showcase.link"
       :spaced="index > 0"
-    />
+    >
+      <EventList
+        v-if="showcase.endpoint == 'event'"
+        :entries="entries[key]"
+        :paginator="false"
+      />
+      <List v-else :entries="entries[key]" :paginator="false" />
+    </Showcase>
   </div>
 </template>
 <script>
+// Every showcase fetches its slugs one by one from
+// /api/<endpoint>/<slug>.json, and links to its own "Browse all" page.
 const SHOWCASES = {
+  event: {
+    title: "Events",
+    link: "/events",
+    endpoint: "event",
+    slugs: ["gbajam21", "gbajam26"],
+  },
   game: {
     title: "Games",
+    link: "/search?typetag=game",
+    endpoint: "entry",
     slugs: [
       "snorpung_dangan-gb2",
       "unearthed",
@@ -150,6 +163,8 @@ const SHOWCASES = {
   },
   demo: {
     title: "Demoscene",
+    link: "/search?typetag=demo",
+    endpoint: "entry",
     slugs: [
       "back-to-color",
       "gejmbaj",
@@ -161,6 +176,8 @@ const SHOWCASES = {
   },
   music: {
     title: "Music Cartridges",
+    link: "/search?typetag=music",
+    endpoint: "entry",
     slugs: [
       "zilogized",
       "back-to-space",
@@ -172,6 +189,8 @@ const SHOWCASES = {
   },
   tool: {
     title: "Tools",
+    link: "/search?typetag=tool",
+    endpoint: "entry",
     slugs: [
       "lsdj",
       "carillon-editor",
@@ -183,17 +202,12 @@ const SHOWCASES = {
   },
 };
 
-// No bulk "list events" endpoint exists yet, so fetch each event
-// individually, same as the other showcases.
-const EVENT_SLUGS = ["gbajam21", "gbajam26"];
-
 export default {
   data() {
     return {
       stats: null,
       showcases: SHOWCASES,
       entries: Object.fromEntries(Object.keys(SHOWCASES).map((k) => [k, []])),
-      events: [],
     };
   },
   mounted: function () {
@@ -205,22 +219,20 @@ export default {
       });
 
     Object.entries(this.showcases).forEach(([key, showcase]) => {
-      showcase.slugs.forEach((gameslug) => {
-        fetch(config.BASE_API_URL + "/api/entry/" + gameslug + ".json")
+      showcase.slugs.forEach((slug) => {
+        fetch(
+          config.BASE_API_URL +
+            "/api/" +
+            showcase.endpoint +
+            "/" +
+            slug +
+            ".json",
+        )
           .then((response) => response.json())
           .then((data) => {
             this.entries[key].push(data);
           });
       });
-    });
-
-    EVENT_SLUGS.forEach((eventslug) => {
-      fetch(config.BASE_API_URL + "/api/event/" + eventslug + ".json")
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          this.events.push(data);
-        });
     });
   },
 };

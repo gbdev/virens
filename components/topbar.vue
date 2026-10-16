@@ -49,6 +49,11 @@
         /></a>
       </li>
       <li>
+        <a href="/events"
+          ><Button label="Events" class="p-button-text mr-2 mb-2"
+        /></a>
+      </li>
+      <li>
         <Button
           disabled="disabled"
           label="//"
