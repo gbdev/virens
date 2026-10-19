@@ -114,21 +114,51 @@ useHead({
     </div>
     <br />
     <div v-if="entries != null">
-      <h5>{{ entries.length }} Results</h5>
+      <div class="results-header">
+        <h5>{{ entries.length }} Results</h5>
+        <div class="view-switcher">
+          <Button
+            icon="pi pi-th-large"
+            v-tooltip.top="'Grid view'"
+            aria-label="Grid view"
+            :class="['p-button-text', { active: view == 'grid' }]"
+            @click="setView('grid')"
+          />
+          <Button
+            icon="pi pi-list"
+            v-tooltip.top="'Table view'"
+            aria-label="Table view"
+            :class="['p-button-text', { active: view == 'table' }]"
+            @click="setView('table')"
+          />
+        </div>
+      </div>
 
       <div v-if="entries.length == 0">
         Welp, it looks like there are no results matching your query.
         <a href="#" @click="resetsearch">Reset?</a>
       </div>
-      <List :entries="entries" />
+      <EntryTable v-if="view == 'table'" :entries="entries" />
+      <List v-else :entries="entries" />
     </div>
   </div>
 </template>
 <script>
 import List from "../components/list";
+import EntryTable from "../components/entry-table";
+
+const VIEW_STORAGE_KEY = "hh-search-view";
 
 export default {
   methods: {
+    setView: function (view) {
+      this.view = view;
+      try {
+        localStorage.setItem(VIEW_STORAGE_KEY, view);
+      } catch (e) {
+        // Storage unavailable (e.g. private mode), the choice just won't stick
+      }
+    },
     extractSelectableTags(value) {
       let tagOptions = this.tagOptions;
       for (const group of tagOptions) {
@@ -223,12 +253,20 @@ export default {
     },
   },
   mounted: function () {
+    try {
+      if (localStorage.getItem(VIEW_STORAGE_KEY) == "table") {
+        this.view = "table";
+      }
+    } catch (e) {
+      // Storage unavailable, keep the default grid view
+    }
     this.setSearchParameters();
     this.handlesearch();
   },
   data() {
     return {
       entries: null,
+      view: "grid",
       selectedPlatform: null,
       textQuery: null,
       platforms: [
@@ -279,10 +317,21 @@ export default {
       ],
     };
   },
-  components: { List },
+  components: { List, EntryTable },
 };
 </script>
 <style scoped>
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.view-switcher .p-button {
+  color: var(--text-color-secondary);
+}
+.view-switcher .p-button.active {
+  color: var(--primary-color);
+}
 /* p-fluid forces the SelectButton's buttons to flex:1, which otherwise
    squeezes the addon label down to its min-width and truncates it. */
 .p-inputgroup-addon {

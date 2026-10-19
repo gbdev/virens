@@ -34,19 +34,7 @@ data.value.screenshots.forEach((url) => {
 
 /* Date conversion */
 
-let dateObject = new Date();
-
-if (isNaN(game.date) != true) {
-  dateObject = new Date(game.date * 1000);
-} else if (typeof game.date == "string") {
-  dateObject = new Date(game.date);
-}
-
-const dateString = dateObject.toLocaleString("en-US", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+const dateString = formatEntryDate(game.date);
 
 /* Head metadata */
 
@@ -299,7 +287,7 @@ useHead({
                 <td class="value-title">Assets License</td>
                 <td>{{ game.assetsLicense }}</td>
               </tr>
-              <tr v-if="dateString != 'Invalid Date' && game.date">
+              <tr v-if="dateString">
                 <td class="value-title">Release Date</td>
                 <td>{{ dateString }}</td>
               </tr>
