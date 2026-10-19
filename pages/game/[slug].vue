@@ -224,9 +224,9 @@ useHead({
       <div class="card mb-0">
         <h3>Homebrew Information</h3>
         <div class="flex justify-content-between mb-6">
-          <div>
+          <div class="w-full">
             <span class="gametitle">{{ game.title }}</span>
-            <table>
+            <table class="info-table">
               <tr v-if="game.platform">
                 <td class="value-title">Platform</td>
                 <td>
@@ -531,8 +531,34 @@ export default {
   padding-top: 10px;
 }
 
+td.value-title.devtoolinfo {
+  white-space: nowrap;
+}
+
 .devtoolinfo p {
   line-height: 1;
+}
+/* Card headings: uppercase label, echoing the topbar */
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  color: var(--text-color-secondary);
+}
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.info-table td {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.info-table td.value-title {
+  padding-right: 1.5rem;
+}
+.info-table tr:not(:last-child) td {
+  border-bottom: 1px solid var(--surface-border);
 }
 .value-title {
   font-weight: 600;
@@ -552,8 +578,9 @@ export default {
 }
 
 .gametitle {
+  display: block;
   font-size: 3rem;
-  margin: 1.5rem 0 1rem;
+  margin: 0 0 1rem;
   overflow-wrap: break-word;
 }
 
