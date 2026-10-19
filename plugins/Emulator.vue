@@ -22,7 +22,14 @@
     >
       <br />
 
-      <canvas class="shadow-3 gamecanvas" ref="gamecanvas"></canvas>
+      <!-- Explicit size so the canvas has the right intrinsic aspect ratio:
+           fullscreen letterboxes it with object-fit: contain based on it -->
+      <canvas
+        class="shadow-3 gamecanvas"
+        ref="gamecanvas"
+        width="160"
+        height="144"
+      ></canvas>
       <div id="controller">
         <div id="controller_dpad">
           <div id="controller_left"></div>
