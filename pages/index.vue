@@ -9,6 +9,21 @@ const config = useRuntimeConfig().public;
 let stats_url = config.BASE_API_URL + "/api/stats";
 
 let stats_data = useFetch(stats_url).data;
+
+const formatCount = (n) => (n ?? 0).toLocaleString("en-US");
+
+// Big numbers shown under the welcome card
+const heroStats = computed(() => {
+  const stats = stats_data.value;
+  if (!stats) return [];
+  return [
+    { value: formatCount(stats.total), label: "Entries" },
+    { value: formatCount(stats.platforms?.gb), label: "Game Boy" },
+    { value: formatCount(stats.platforms?.gbc), label: "Game Boy Color" },
+    { value: formatCount(stats.platforms?.gba), label: "Game Boy Advance" },
+    { value: formatCount(stats.platforms?.nes), label: "NES" },
+  ];
+});
 </script>
 <template>
   <div class="grid">
@@ -37,19 +52,21 @@ let stats_data = useFetch(stats_url).data;
               We're on a mission to build an open digital repository providing
               accurate metadata and emulating capabilities directly in the
               browser.
-              <br />
-              <br />
-              <small>
-                <a href="/stats">{{ stats_data.total }}</a>
-
-                total entries are currently in the database.
-              </small>
             </span>
           </div>
         </div>
       </div>
     </div>
     <div class="col-12 lg:col-3 xl:col-3"></div>
+
+    <div class="col-12">
+      <div v-if="stats_data" class="stats-strip">
+        <div v-for="stat in heroStats" :key="stat.label" class="stat">
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+    </div>
 
     <div class="col-12 lg:col-6 xl:col-4">
       <div class="card mb-0" style="height: 100%">
@@ -107,9 +124,10 @@ let stats_data = useFetch(stats_url).data;
         </div>
       </div>
     </div>
-    <div class="col-12 lg:col-12 xl:col-12">
-      <h1 style="text-align: center; margin-top: 2rem">Showcase</h1>
-    </div>
+    <section class="col-12 section-header">
+      <p class="eyebrow">Curated picks</p>
+      <h2 class="section-title">Showcase</h2>
+    </section>
     <Showcase
       v-for="(showcase, key, index) in showcases"
       :key="key"
@@ -258,5 +276,72 @@ export default {
   transform: rotate(15deg);
   position: relative;
   float: right;
+}
+</style>
+
+<style scoped>
+/* Small uppercase label above a heading */
+.eyebrow {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+
+/* Stats strip: big monospaced numbers with small labels */
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 3rem;
+  padding: 1.5rem 0 1rem;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stat-value {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-color);
+}
+.stat-label {
+  margin-top: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-color-secondary);
+}
+
+/* Showcase section header, with a rule running to the edge */
+/* Centered with rules on both sides, so it reads as a divider for the
+   whole area rather than another row heading like Events or Games */
+.section-header {
+  padding: 3rem 1rem 1.5rem;
+  text-align: center;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.section-title::before,
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: var(--surface-border);
 }
 </style>

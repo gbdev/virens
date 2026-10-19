@@ -45,10 +45,21 @@ export default {
 <style>
 h1,
 h2,
+h3,
+h4,
+h5,
 .product-name,
-.gametitle {
-  font-family: "Eudoxus Sans";
-  font-weight: 400;
+.gametitle,
+.eventtitle {
+  font-family: "Schibsted Grotesk", var(--font-family);
+  letter-spacing: -0.01em;
+}
+h1,
+h2,
+.product-name,
+.gametitle,
+.eventtitle {
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
 }

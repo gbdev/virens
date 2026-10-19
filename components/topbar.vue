@@ -69,8 +69,9 @@ function linkClass(href) {
 .layout-topbar-logo a {
   color: var(--text-color);
   font-size: 1.85rem;
-  font-family: "Eudoxus Sans";
-  font-weight: 500;
+  font-family: "Schibsted Grotesk";
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .p-button-text {
@@ -94,6 +95,7 @@ function linkClass(href) {
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   color: rgba(255, 255, 255, 0.75);
+  font-family: "Schibsted Grotesk", var(--font-family);
   font-size: 1.15rem;
   font-weight: 500;
   text-transform: uppercase;
