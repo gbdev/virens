@@ -546,6 +546,26 @@ td.value-title.devtoolinfo {
   letter-spacing: 0.15rem;
   color: var(--text-color-secondary);
 }
+/* Gallery arrows: the theme draws them on a transparent background, which
+   makes them invisible over bright screenshots (#46) */
+:deep(.p-galleria .p-galleria-item-nav) {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+:deep(.p-galleria .p-galleria-item-nav:not(.p-disabled):hover) {
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+}
+:deep(.p-galleria .p-galleria-item-prev-icon),
+:deep(.p-galleria .p-galleria-item-next-icon) {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1.5rem;
+}
 .info-table {
   width: 100%;
   border-collapse: collapse;
