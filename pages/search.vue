@@ -1,6 +1,45 @@
 <script setup>
+// /games, /demos, /music and /tools all redirect here with a typetag, so
+// the page metadata follows the selected type.
+const route = useRoute();
+
+const PLATFORMS = "Game Boy, Game Boy Color, Game Boy Advance and NES";
+
+const PAGE_META = {
+  all: {
+    title: "Search",
+    description: `Search homebrew games, demos, music and tools for ${PLATFORMS}, playable directly in the browser.`,
+  },
+  game: {
+    title: "Games",
+    description: `Browse homebrew games for ${PLATFORMS}. Play them online for free, directly in the browser.`,
+  },
+  demo: {
+    title: "Demoscene",
+    description: `Browse demoscene productions for ${PLATFORMS}. Watch them run directly in the browser.`,
+  },
+  music: {
+    title: "Music Cartridges",
+    description: `Browse homebrew music cartridges for ${PLATFORMS}. Listen to them online for free, directly in the browser.`,
+  },
+  tool: {
+    title: "Tools",
+    description: `Browse homebrew tools and utilities for ${PLATFORMS}, runnable directly in the browser.`,
+  },
+};
+
+const pageMeta = computed(() => {
+  const typetag = String(route.query.typetag || "all").toLowerCase();
+  return PAGE_META[typetag] || PAGE_META.all;
+});
+
 useHead({
-  title: "HH - Search",
+  title: () => pageMeta.value.title + " - Homebrew Hub",
+  meta: [
+    { name: "description", content: () => pageMeta.value.description },
+    { name: "og:title", content: () => pageMeta.value.title },
+    { name: "og:description", content: () => pageMeta.value.description },
+  ],
 });
 </script>
 

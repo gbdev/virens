@@ -1,6 +1,14 @@
 <script setup>
+const description =
+  "Browse homebrew development events for Game Boy, Game Boy Color, Game Boy Advance and NES: game jams, competitions and their entries.";
+
 useHead({
-  title: "HH - Events",
+  title: "Events - Homebrew Hub",
+  meta: [
+    { name: "description", content: description },
+    { name: "og:title", content: "Events" },
+    { name: "og:description", content: description },
+  ],
 });
 </script>
 
