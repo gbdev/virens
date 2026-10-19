@@ -134,7 +134,14 @@ const SHOWCASES = {
     title: "Events",
     link: "/events",
     endpoint: "event",
-    slugs: ["gbajam21", "gbajam26"],
+    slugs: [
+      "gbajam21",
+      "gbajam26",
+      "gbajam24",
+      "gbcompo25",
+      "gbcompo21",
+      "gbcompo23",
+    ],
   },
   game: {
     title: "Games",

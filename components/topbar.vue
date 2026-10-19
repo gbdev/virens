@@ -61,7 +61,9 @@
         />
       </li>
       <li>
-        <a target="_blank" href="https://github.com/gbdev/homebrewhub-submit/issues/new?template=submit-game.yml"
+        <a
+          target="_blank"
+          href="https://github.com/gbdev/homebrewhub-submit/issues/new?template=submit-game.yml"
           ><Button label="Submit new game" class="p-button-text mr-2 mb-2"
         /></a>
       </li>
