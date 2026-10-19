@@ -111,7 +111,10 @@ const candidateFiles = playableFiles.length ? playableFiles : game.files;
 const romFile =
   candidateFiles.find((file) => file.default) || candidateFiles[0];
 
-if (romFile) {
+// Some entries ship no ROM at all (e.g. only a link to an external download)
+const hasRom = !!romFile;
+
+if (hasRom) {
   rom_endpoint =
     config.BASE_API_URL +
     "/static/" +
@@ -158,8 +161,8 @@ useHead({
     </p>
   </Dialog>
   <div class="grid">
-    <div class="col-12 lg:col-0 xl:col-1"></div>
-    <div class="col-12 lg:col-6 xl:col-5">
+    <div v-if="hasRom" class="col-12 lg:col-0 xl:col-1"></div>
+    <div v-if="hasRom" class="col-12 lg:col-6 xl:col-5">
       <div class="card mb-0 emulator-card">
         <h3 class="additional-padding">Emulator</h3>
         <ClientOnly>
@@ -211,7 +214,13 @@ useHead({
         </DataTable>
       </div>
     </div>
-    <div class="col-12 lg:col-6 xl:col-5">
+    <div
+      :class="
+        hasRom
+          ? 'col-12 lg:col-6 xl:col-5'
+          : 'col-12 lg:col-8 lg:col-offset-2 xl:col-6 xl:col-offset-3'
+      "
+    >
       <div class="card mb-0">
         <h3>Homebrew Information</h3>
         <div class="flex justify-content-between mb-6">
@@ -337,7 +346,15 @@ useHead({
 
             <br />
 
-            <a :href="rom_endpoint"
+            <p v-if="!hasRom" class="no-rom">
+              <i class="pi pi-info-circle"></i>
+              No ROM is available for this entry<template
+                v-if="game.website || game.repository"
+                >, check the links for more info</template
+              >.
+            </p>
+
+            <a v-if="hasRom" :href="rom_endpoint"
               ><Button
                 v-tooltip="downloadRomTooltip"
                 label="Download ROM"
@@ -612,6 +629,11 @@ export default {
 .icon {
   width: 18px;
   margin-left: 0.5rem;
+}
+
+.no-rom {
+  font-size: 0.9rem;
+  color: var(--text-color-secondary);
 }
 
 .emulator-card {
