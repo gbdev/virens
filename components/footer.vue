@@ -1,7 +1,7 @@
 <template>
   <div class="layout-footer">
-    <div>
-      <span class="font-medium ml-2">
+    <div class="footer-links">
+      <span class="font-medium">
         <a href="/stats">stats</a> -
         <a href="https://opencollective.com/gbdev" target="_blank">donate</a> -
         <a href="/sitemap">sitemap</a> -
@@ -44,6 +44,9 @@ export default {
 .break {
   flex-basis: 100%;
   height: 0;
+}
+.footer-links {
+  text-align: center;
 }
 .layout-footer {
   flex-wrap: wrap;
