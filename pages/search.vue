@@ -159,13 +159,26 @@ export default {
         // Storage unavailable (e.g. private mode), the choice just won't stick
       }
     },
+    // Find the dropdown option for a tag, ignoring case (tags in the
+    // database aren't consistently cased, and the API matches any case).
+    // Tags without a predefined option get one in an "Other" group, so any
+    // tag can be searched from the URL (e.g. links from the game page).
     extractSelectableTags(value) {
-      let tagOptions = this.tagOptions;
-      for (const group of tagOptions) {
-        const match = group.items.find((item) => item.value === value);
+      const wanted = value.toLowerCase();
+      for (const group of this.tagOptions) {
+        const match = group.items.find(
+          (item) => item.value.toLowerCase() === wanted,
+        );
         if (match) return match; // { label: "...", value: "..." }
       }
-      return null; // not found
+      let other = this.tagOptions.find((group) => group.code === "other");
+      if (!other) {
+        other = { label: "Other", code: "other", items: [] };
+        this.tagOptions.push(other);
+      }
+      const option = { label: value, value: value };
+      other.items.push(option);
+      return option;
     },
     resetsearch: function () {
       this.selectedPlatform = null;
@@ -240,12 +253,15 @@ export default {
       }
       if (this.$route.query.tags) {
         const { tags } = this.$route.query;
-        // Normalise to an array, since when only one tag is passed it's a string
-        const tagList = Array.isArray(tags) ? tags : tags ? [tags] : [];
-        // Iterate (if any)
+        // Normalise to an array, since when only one tag is passed it's a
+        // string, and accept comma-separated tags too (as the API does)
+        const tagList = (Array.isArray(tags) ? tags : [tags])
+          .flatMap((tag) => String(tag).split(","))
+          .map((tag) => tag.trim())
+          .filter((tag) => tag);
         tagList.forEach((tag) => {
-          let selectedTag = this.extractSelectableTags(tag);
-          if (selectedTag) {
+          const selectedTag = this.extractSelectableTags(tag);
+          if (!this.selectedTags.includes(selectedTag)) {
             this.selectedTags.push(selectedTag);
           }
         });
