@@ -22,6 +22,7 @@ const heroStats = computed(() => {
     { value: formatCount(stats.platforms?.gbc), label: "Game Boy Color" },
     { value: formatCount(stats.platforms?.gba), label: "Game Boy Advance" },
     { value: formatCount(stats.platforms?.nes), label: "NES" },
+    { value: formatCount(stats.tags?.oss), label: "Open Source" },
   ];
 });
 </script>
